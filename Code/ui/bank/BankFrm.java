@@ -1,5 +1,7 @@
 package edu.mum.cs.cs525.labs.exercises.project.ui.bank;
 
+import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Log;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
@@ -25,6 +27,7 @@ public class BankFrm extends javax.swing.JFrame
 	public BankFrm()
 	{
 		myframe = this;
+		Log.getLogger().write("Log instance is working here !!!");
 
 		setTitle("Bank Application.");
 		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);

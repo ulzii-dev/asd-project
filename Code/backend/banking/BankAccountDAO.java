@@ -9,8 +9,8 @@ import java.util.Collection;
 public class BankAccountDAO implements AccountDAO {
     private static volatile BankAccountDAO instance;
 
-    public static BankAccountDAO getInstance(){
-        if(instance == null) {
+    public static BankAccountDAO getInstance() {
+        if (instance == null) {
             synchronized (BankAccountDAO.class) {
                 if (instance == null) {
                     instance = new BankAccountDAO();

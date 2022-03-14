@@ -4,10 +4,10 @@ import edu.mum.cs.cs525.labs.exercises.project.framework.AccountService;
 import edu.mum.cs.cs525.labs.exercises.project.framework.Observer;
 
 public class EmailSender implements Observer {
-    private AccountService actsvc;
+    private AccountService accountService;
 
     public EmailSender(AccountService accountService) {
-        this.actsvc = accountService;
+        this.accountService = accountService;
     }
 
     @Override

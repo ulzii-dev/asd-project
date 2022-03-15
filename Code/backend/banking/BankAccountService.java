@@ -2,6 +2,7 @@ package edu.mum.cs.cs525.labs.exercises.project.backend.banking;
 
 import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Account;
 import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Customer;
+import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Log;
 import edu.mum.cs.cs525.labs.exercises.project.backend.creditcard.observer.EmailSender;
 import edu.mum.cs.cs525.labs.exercises.project.framework.AccountService;
 
@@ -31,11 +32,10 @@ public class BankAccountService extends AccountService {
     }
 
     public void withdraw(String accountNumber, double amount) {
-
+        Log.getLogger().write("withdraw");
     }
 
     public void deposit(String accountNumber, double amount) {
-
-
+        Log.getLogger().write("deposit");
     }
 }

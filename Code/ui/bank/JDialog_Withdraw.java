@@ -1,6 +1,6 @@
 package ui.bank;
 
-import backend.banking.commands.DepositCommand;
+import backend.banking.commands.WithdrawCommand;
 
 public class JDialog_Withdraw extends javax.swing.JDialog {
 
@@ -61,7 +61,7 @@ public class JDialog_Withdraw extends javax.swing.JDialog {
 
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
         parentframe.amountDeposit = JTextField_AMT.getText();
-        DepositCommand dc = new DepositCommand(accnr, Integer.parseInt(JTextField_AMT.getText()));
+        WithdrawCommand dc = new WithdrawCommand(accnr, Integer.parseInt(JTextField_AMT.getText()));
         dc.execute();
         dispose();
     }

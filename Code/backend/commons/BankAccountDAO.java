@@ -1,8 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.banking;
-
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Account;
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.AccountDAO;
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Log;
+package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
 
 import java.util.Collection;
 
@@ -22,7 +18,7 @@ public class BankAccountDAO implements AccountDAO {
     }
 
     @Override
-    public void createAccount(Account account) {
+    public void saveAccount(Account account) {
         Log.getLogger().write("Log instance is working here !!!");
     }
 

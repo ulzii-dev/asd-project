@@ -1,7 +1,7 @@
 package edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.banking.CheckingAccounts;
-import edu.mum.cs.cs525.labs.exercises.project.backend.banking.SavingsAccount;
+import edu.mum.cs.cs525.labs.exercises.project.backend.commons.CheckingAccounts;
+import edu.mum.cs.cs525.labs.exercises.project.backend.commons.SavingsAccount;
 
 import java.text.DecimalFormat;
 

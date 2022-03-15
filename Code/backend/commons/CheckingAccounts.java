@@ -1,4 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.banking;
+package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
 
 import edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor.Visitable;
 import edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor.Visitor;

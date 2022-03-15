@@ -1,8 +1,5 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.banking;
+package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Account;
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Customer;
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Log;
 import edu.mum.cs.cs525.labs.exercises.project.backend.creditcard.observer.EmailSender;
 import edu.mum.cs.cs525.labs.exercises.project.framework.AccountService;
 

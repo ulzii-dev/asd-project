@@ -1,6 +1,6 @@
 package edu.mum.cs.cs525.labs.exercises.project.backend.banking.strategy;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.banking.InterestComputationStrategy;
+import edu.mum.cs.cs525.labs.exercises.project.backend.commons.InterestComputationStrategy;
 
 public class PersonSavingsAccountInterestComputation implements InterestComputationStrategy {
 

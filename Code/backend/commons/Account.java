@@ -15,6 +15,10 @@ public abstract class Account {
 
 	private InterestComputationStrategy interestComputationStrategy;
 
+	public Account(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
 	public Account(InterestComputationStrategy interestComputationStrategy) {
 		this.interestComputationStrategy = interestComputationStrategy;
 		this.accountEntries = new ArrayList<>();

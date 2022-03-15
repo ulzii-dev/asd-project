@@ -1,10 +1,10 @@
 package backend.banking.commands;
 
-import backend.commons.BankAccountServiceBak;
+import backend.commons.BankAccountService;
 
 public class WithdrawCommand implements Command {
     @Override
     public void execute() {
-        BankAccountServiceBak.getInstance().withdraw("", 0d);
+        BankAccountService.getInstance().withdraw("", 0d);
     }
 }

@@ -1,10 +1,10 @@
 package backend.banking.commands;
 
-import backend.commons.BankAccountServiceBak;
+import backend.commons.BankAccountService;
 
 public class AddInterestCommand implements Command{
     @Override
     public void execute() {
-        BankAccountServiceBak.getInstance().addInterest();
+        BankAccountService.getInstance().addInterest();
     }
 }

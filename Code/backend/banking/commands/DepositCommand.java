@@ -1,10 +1,10 @@
 package backend.banking.commands;
 
-import backend.commons.BankAccountServiceBak;
+import backend.commons.BankAccountService;
 
 public class DepositCommand implements Command {
     @Override
     public void execute() {
-        BankAccountServiceBak.getInstance().deposit("", 0d);
+        BankAccountService.getInstance().deposit("", 0d);
     }
 }

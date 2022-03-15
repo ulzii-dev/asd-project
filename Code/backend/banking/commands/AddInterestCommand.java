@@ -7,4 +7,5 @@ public class AddInterestCommand implements Command{
     public void execute() {
         BankAccountService.getInstance().addInterest();
     }
+
 }

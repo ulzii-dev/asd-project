@@ -55,6 +55,8 @@ public class BankAccountService implements AccountService, Observable {
     public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
         Log.getLogger().write("transferFunds");
     }
+
+
     //---------------------------------------------------------------------------
 
     // Interest -----------------------------------------------------------------
@@ -78,6 +80,10 @@ public class BankAccountService implements AccountService, Observable {
     @Override
     public void notifyObservers() {
 
+    }
+    @Override
+    public String generateReport(String ID) {
+        return null;
     }
     //---------------------------------------------------------------------------
 }

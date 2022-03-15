@@ -83,4 +83,10 @@ public class AccountServiceImpl implements AccountService {
 		accountDAO.updateAccount(fromAccount);
 		accountDAO.updateAccount(toAccount);
 	}
+
+	@Override
+	public String generateReport(String ID) {
+		return null;
+	}
+
 }

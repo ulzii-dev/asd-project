@@ -6,7 +6,6 @@ public class PersonSavingsAccountInterestComputation implements InterestComputat
 
     @Override
     public double ComputeInterest(double accountBalance) {
-        if (accountBalance < 1000) return accountBalance * .025;
-        else return accountBalance * .050;
+        return (accountBalance < 1000) ? accountBalance * .025 : accountBalance * .050;
     }
 }

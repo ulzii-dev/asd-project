@@ -5,7 +5,6 @@ import edu.mum.cs.cs525.labs.exercises.project.backend.commons.InterestComputati
 public class CompanySavingsAccountComputation implements InterestComputationStrategy {
     @Override
     public double ComputeInterest(double accountBalance) {
-        if (accountBalance < 100000) return accountBalance * .025;
-        else return accountBalance * .035;
+        return (accountBalance < 100000) ? accountBalance * .025 : accountBalance * .035;
     }
 }

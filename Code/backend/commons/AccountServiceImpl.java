@@ -3,8 +3,6 @@ package backend.commons;
 import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor.InterestComputerVisitor;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -21,13 +19,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	public Account createAccount(String accountNumber, String customerName) {
-		Account account = new Account(accountNumber);
-		Customer customer = new Customer(customerName);
-		account.setCustomer(customer);
+//		Account account = new Account(accountNumber);
+//		Customer customer = new Customer(customerName);
+//		account.setCustomer(customer);
+//
+//		accountDAO.saveAccount(account);
 		
-		accountDAO.saveAccount(account);
-		
-		return account;
+		return null;
 	}
 
 	public void deposit(String accountNumber, double amount) {

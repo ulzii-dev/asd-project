@@ -13,6 +13,11 @@ public class CheckingAccounts extends Account {
         return visitor.visit(this);
     }
 
+    @Override
+    public String getAccountType() {
+        return null;
+    }
+
     public String getAccountTypes(){
         return AccountType.Checking.name();
     }

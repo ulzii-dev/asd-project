@@ -8,7 +8,6 @@ public class SavingsAccount extends Account{
         super(accountNumber);
     }
 
-
     public double accept(Visitor visitor) {
         return visitor.visit(this);
     }

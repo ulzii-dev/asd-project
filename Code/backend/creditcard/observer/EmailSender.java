@@ -1,12 +1,13 @@
 package backend.creditcard.observer;
 
+import backend.commons.AccountService;
 import framework.AccountServiceBak;
 import framework.Observer;
 
 public class EmailSender implements Observer {
-    private AccountServiceBak accountService;
+    private final AccountService accountService;
 
-    public EmailSender(AccountServiceBak accountService) {
+    public EmailSender(AccountService accountService) {
         this.accountService = accountService;
     }
 

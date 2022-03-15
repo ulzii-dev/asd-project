@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AccountServiceBak implements Observable {
-    private AccountDAO accountDAO;
-    private List<Observer> observerList;
+    private final AccountDAO accountDAO;
+    private final List<Observer> observerList;
     private Account changedAccount;
     private double changedAmount;
     private String report;

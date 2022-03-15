@@ -11,7 +11,7 @@ public abstract class Account {
 
 	private String accountNumber;
 
-	private List<AccountEntry> entryList = new ArrayList<AccountEntry>();
+	private final List<AccountEntry> entryList = new ArrayList<AccountEntry>();
 
 	private InterestComputationStrategy interestComputationStrategy;
 

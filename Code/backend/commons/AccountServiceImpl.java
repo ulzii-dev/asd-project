@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService {
-	private AccountDAO accountDAO;
+	private final AccountDAO accountDAO;
 	private int noOfAccounts;
 	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
 

@@ -1,6 +1,6 @@
 package backend.commons;
 
-public enum AccountTypes {
+public enum AccountType {
     Checking,
     Saving
 }

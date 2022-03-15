@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Account {
+public abstract class Account {
 	private Customer customer;
 
 	private String accountNumber;
 
-	private List<AccountEntry> entryList = new ArrayList<AccountEntry>();
+	private List<AccountEntry> accountEntries;
 
 	private InterestComputationStrategy interestComputationStrategy;
 
-	public Account(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public Account(InterestComputationStrategy interestComputationStrategy) {
+		this.interestComputationStrategy = interestComputationStrategy;
+		this.accountEntries = new ArrayList<>();
 	}
 
 	public String getAccountNumber() {
@@ -27,7 +28,7 @@ public class Account {
 
 	public double getBalance() {
 		double balance = 0;
-		for (AccountEntry entry : entryList) {
+		for (AccountEntry entry : accountEntries) {
 			balance += entry.getAmount();
 		}
 		return balance;
@@ -35,16 +36,16 @@ public class Account {
 
 	public void deposit(double amount) {
 		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
-		entryList.add(entry);
+		accountEntries.add(entry);
 	}
 
 	public void withdraw(double amount) {
 		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "");
-		entryList.add(entry);
+		accountEntries.add(entry);
 	}
 
 	private void addEntry(AccountEntry entry) {
-		entryList.add(entry);
+		accountEntries.add(entry);
 	}
 
 	public void transferFunds(Account toAccount, double amount, String description) {
@@ -53,7 +54,7 @@ public class Account {
 		AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
 				toAccount.getCustomer().getName());
 		
-		entryList.add(fromEntry);
+		accountEntries.add(fromEntry);
 		
 		toAccount.addEntry(toEntry);
 	}
@@ -61,7 +62,7 @@ public class Account {
 	public void addInterest(){
 		double interest =  interestComputationStrategy.ComputeInterest(getBalance());
 		AccountEntry entry =  new AccountEntry(interest,"interest added","","");
-		entryList.add(entry);
+		accountEntries.add(entry);
 	}
 
 
@@ -73,8 +74,10 @@ public class Account {
 		this.customer = customer;
 	}
 
-	public Collection<AccountEntry> getEntryList() {
-		return entryList;
+	public Collection<AccountEntry> getAccountEntries() {
+		return accountEntries;
 	}
+
+	public abstract String getAccountType();
 
 }

@@ -1,5 +1,7 @@
 package ui.bank;
 
+import backend.banking.commands.DepositCommand;
+
 public class JDialog_Deposit extends javax.swing.JDialog {
 
 
@@ -61,6 +63,8 @@ public class JDialog_Deposit extends javax.swing.JDialog {
 
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
         parentframe.amountDeposit = JTextField_Deposit.getText();
+        DepositCommand dc = new DepositCommand(accnr, Integer.parseInt(JTextField_Deposit.getText()));
+        dc.execute();
         dispose();
     }
 

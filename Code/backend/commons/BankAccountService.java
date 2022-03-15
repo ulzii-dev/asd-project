@@ -49,11 +49,13 @@ public class BankAccountService implements AccountService, Observable {
 
     public void deposit(String accountNumber, double amount) {
         Log.getLogger().write("deposit");
+        notifyObservers();
     }
 
     @Override
     public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
         Log.getLogger().write("transferFunds");
+        notifyObservers();
     }
     //---------------------------------------------------------------------------
 

@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
 
 	public Account createAccount(String accountNumber, String customerName) {
 		Account account = accountFactory.createCheckingAccount();
-		Customer customer = new Customer(customerName);
+		Customer customer = new Customer(1, customerName, "", "", "", 52556, "");
 		account.setCustomer(customer);
 		account.setAccountNumber(accountNumber);
 

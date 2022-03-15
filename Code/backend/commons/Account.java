@@ -39,11 +39,13 @@ public abstract class Account {
 	public void deposit(double amount) {
 		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
 		accountEntries.add(entry);
+		Log.getLogger().write("Deposit into " + accountNumber + " amount: " + amount);
 	}
 
 	public void withdraw(double amount) {
 		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "");
 		accountEntries.add(entry);
+		Log.getLogger().write("Withdraw from " + accountNumber + " amount: " + amount);
 	}
 
 	private void addEntry(AccountEntry entry) {

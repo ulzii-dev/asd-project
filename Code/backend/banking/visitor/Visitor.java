@@ -5,8 +5,8 @@ import backend.commons.SavingsAccount;
 
 public interface Visitor {
 
-    public double visit(SavingsAccount savingsAccount);
+    double visit(SavingsAccount savingsAccount);
 
-    public double visit(CheckingAccounts checkingAccounts);
+    double visit(CheckingAccounts checkingAccounts);
 
 }

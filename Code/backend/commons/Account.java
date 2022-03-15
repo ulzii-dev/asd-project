@@ -1,5 +1,7 @@
 package backend.commons;
 
+import backend.banking.visitor.Visitor;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -60,11 +62,11 @@ public abstract class Account {
 	}
 
 	public void addInterest(){
-		double interest =  interestComputationStrategy.ComputeInterest(getBalance());
+		double interest =  interestComputationStrategy.computeInterest(getBalance());
 		AccountEntry entry =  new AccountEntry(interest,"interest added","","");
 		accountEntries.add(entry);
 	}
-
+	public abstract double accept(Visitor visitor);
 
 	public Customer getCustomer() {
 		return customer;

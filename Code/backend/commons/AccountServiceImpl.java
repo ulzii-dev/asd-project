@@ -1,6 +1,9 @@
 package backend.commons;
 
+import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
+
+import edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor.InterestComputerVisitor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,9 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService {
-	private AccountDAO accountDAO;
+	private final AccountDAO accountDAO;
 	private int noOfAccounts;
-	
+	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
+
 	public AccountServiceImpl(){
 		accountDAO = new AccountDAOImpl();
 	}
@@ -47,6 +51,8 @@ public class AccountServiceImpl implements AccountService {
 
 		for (String accountNumber : getAllAccountNumbers()) {
 			Account account = accountDAO.loadAccount(accountNumber);
+			// adding visitor pattern for adding interest
+			//account.accept(interestComputerVisitor);
 			account.addInterest();
 			accountDAO.updateAccount(account);
 		}

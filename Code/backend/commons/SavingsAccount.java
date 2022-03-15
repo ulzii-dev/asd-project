@@ -12,4 +12,8 @@ public class SavingsAccount extends Account implements Visitable {
     public double accept(Visitor visitor) {
         return visitor.visit(this);
     }
+
+    public String getAccountTypes(){
+        return AccountTypes.Saving.name();
+    }
 }

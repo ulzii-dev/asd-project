@@ -12,4 +12,8 @@ public class CheckingAccounts extends Account implements Visitable {
     public double accept(Visitor visitor) {
         return visitor.visit(this);
     }
+
+    public String getAccountTypes(){
+        return AccountTypes.Checking.name();
+    }
 }

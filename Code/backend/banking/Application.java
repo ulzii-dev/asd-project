@@ -1,6 +1,6 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.banking;
+package backend.banking;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.*;
+import backend.commons.*;
 
 public class Application {
     public static void main(String[] args) {

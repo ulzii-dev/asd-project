@@ -1,4 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor;
+package backend.banking.visitor;
 
 public interface Visitable {
 

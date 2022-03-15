@@ -1,6 +1,6 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.banking.commands;
+package backend.banking.commands;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.BankAccountServiceBak;
+import backend.commons.BankAccountServiceBak;
 
 public class AddInterestCommand implements Command{
     @Override

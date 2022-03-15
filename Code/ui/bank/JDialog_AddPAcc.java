@@ -1,4 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.ui.bank;
+package ui.bank;
 /*
 		A basic implementation of the JDialog class.
 */

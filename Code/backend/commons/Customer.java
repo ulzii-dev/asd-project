@@ -1,4 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
+package backend.commons;
 
 public class Customer {
     private String name;

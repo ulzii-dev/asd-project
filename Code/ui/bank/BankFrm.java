@@ -1,6 +1,6 @@
-package edu.mum.cs.cs525.labs.exercises.project.ui.bank;
+package ui.bank;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Log;
+import backend.commons.Log;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

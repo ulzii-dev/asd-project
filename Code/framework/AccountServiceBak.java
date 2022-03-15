@@ -1,8 +1,8 @@
-package edu.mum.cs.cs525.labs.exercises.project.framework;
+package framework;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Account;
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.AccountDAO;
-import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Customer;
+import backend.commons.Account;
+import backend.commons.AccountDAO;
+import backend.commons.Customer;
 
 import java.util.ArrayList;
 import java.util.List;

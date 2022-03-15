@@ -1,4 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.ui.ccard;
+package ui.ccard;
 /*
 		A basic implementation of the JDialog class.
 */

@@ -1,7 +1,7 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
+package backend.commons;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor.Visitable;
-import edu.mum.cs.cs525.labs.exercises.project.backend.banking.visitor.Visitor;
+import backend.banking.visitor.Visitable;
+import backend.banking.visitor.Visitor;
 
 public class CheckingAccounts extends Account implements Visitable {
     public CheckingAccounts(String accountNumber) {

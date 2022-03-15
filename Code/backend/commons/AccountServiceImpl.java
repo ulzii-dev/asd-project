@@ -1,6 +1,6 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
+package backend.commons;
 
-import edu.mum.cs.cs525.labs.exercises.project.framework.Observable;
+import framework.Observable;
 
 import java.util.ArrayList;
 import java.util.Collection;

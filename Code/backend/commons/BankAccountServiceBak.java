@@ -1,7 +1,7 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
+package backend.commons;
 
-import edu.mum.cs.cs525.labs.exercises.project.backend.creditcard.observer.EmailSender;
-import edu.mum.cs.cs525.labs.exercises.project.framework.AccountServiceBak;
+import backend.creditcard.observer.EmailSender;
+import framework.AccountServiceBak;
 
 public class BankAccountServiceBak extends AccountServiceBak {
     private static volatile BankAccountServiceBak instance;

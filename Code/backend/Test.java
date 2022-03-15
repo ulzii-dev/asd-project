@@ -1,4 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.backend;
+package backend;
 
 public class Test {
 }

@@ -1,7 +1,6 @@
 package backend.creditcard.observer;
 
 import backend.commons.AccountService;
-import framework.AccountServiceBak;
 import framework.Observer;
 
 public class EmailSender implements Observer {

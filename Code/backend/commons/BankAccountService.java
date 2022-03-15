@@ -1,24 +1,23 @@
 package backend.commons;
 
 import backend.creditcard.observer.EmailSender;
-import framework.AccountServiceBak;
 import framework.Observable;
 import framework.Observer;
 
 import java.util.Collection;
 
-public class BankAccountServiceBak implements AccountService, Observable {
-    private static volatile BankAccountServiceBak instance;
+public class BankAccountService implements AccountService, Observable {
+    private static volatile BankAccountService instance;
 
-    private BankAccountServiceBak() {
+    private BankAccountService() {
         this.registerObserver(new EmailSender(this));
     }
 
-    public static BankAccountServiceBak getInstance() {
+    public static BankAccountService getInstance() {
         if (instance == null) {
-            synchronized (BankAccountServiceBak.class) {
+            synchronized (BankAccountService.class) {
                 if (instance == null) {
-                    instance = new BankAccountServiceBak();
+                    instance = new BankAccountService();
                 }
             }
         }

@@ -1,6 +1,6 @@
 package backend.banking.visitor;
 
-import backend.commons.CheckingAccounts;
+import backend.banking.CheckingAccount;
 import backend.commons.SavingsAccount;
 
 import java.text.DecimalFormat;
@@ -20,7 +20,7 @@ public class InterestComputerVisitor implements Visitor {
     }
 
     @Override
-    public double visit(CheckingAccounts checkingAccounts) {
+    public double visit(CheckingAccount checkingAccounts) {
         if (checkingAccounts.getBalance() < 50000) return checkingAccounts.getBalance() * .015;
         else return checkingAccounts.getBalance() * .025;
     }

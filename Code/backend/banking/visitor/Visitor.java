@@ -1,12 +1,12 @@
 package backend.banking.visitor;
 
-import backend.commons.CheckingAccounts;
+import backend.banking.CheckingAccount;
 import backend.commons.SavingsAccount;
 
 public interface Visitor {
 
     double visit(SavingsAccount savingsAccount);
 
-    double visit(CheckingAccounts checkingAccounts);
+    double visit(CheckingAccount checkingAccounts);
 
 }

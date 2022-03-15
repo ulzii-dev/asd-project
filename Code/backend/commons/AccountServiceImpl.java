@@ -22,6 +22,7 @@ public class AccountServiceImpl implements AccountService {
 		Account account = accountFactory.createCheckingAccount();
 		Customer customer = new Customer(customerName);
 		account.setCustomer(customer);
+		account.setAccountNumber(accountNumber);
 
 		accountDAO.createAccount(account);
 		return account;

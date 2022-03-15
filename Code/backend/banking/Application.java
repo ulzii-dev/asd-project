@@ -1,24 +1,27 @@
 package backend.banking;
 
 import backend.commons.*;
+import factory.AccountFactory;
+import factory.PersonalAccountFactory;
 
 public class Application {
     public static void main(String[] args) {
-        AccountService accountService = new AccountServiceImpl();
+        AccountFactory personalAccountFactory = new PersonalAccountFactory();
+        AccountService personalAccountService = new AccountServiceImpl(personalAccountFactory);
 
         // create 2 accounts;
-        accountService.createAccount("1263862", "Frank Brown");
-        accountService.createAccount("4253892", "John Doe");
+        personalAccountService.createAccount("1263862", "Frank Brown");
+        personalAccountService.createAccount("4253892", "John Doe");
         // use account 1;
-        accountService.deposit("1263862", 240);
-        accountService.deposit("1263862", 529);
-        accountService.withdraw("1263862", 230);
+        personalAccountService.deposit("1263862", 240);
+        personalAccountService.deposit("1263862", 529);
+        personalAccountService.withdraw("1263862", 230);
         // use account 2;
-        accountService.deposit("4253892", 12450);
-        accountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
+        personalAccountService.deposit("4253892", 12450);
+        personalAccountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
         // show balances
 
-        for (Account account : accountService.getAllAccounts()) {
+        for (Account account : personalAccountService.getAllAccounts()) {
             Customer customer = account.getCustomer();
             System.out.println("Statement for Account: " + account.getAccountNumber());
             System.out.println("Account Holder: " + customer.getName());

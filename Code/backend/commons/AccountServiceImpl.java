@@ -1,31 +1,31 @@
 package backend.commons;
 
 import backend.banking.visitor.InterestComputerVisitor;
-import framework.Observable;
+import factory.AccountFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService {
+	private AccountFactory accountFactory;
 	private final AccountDAO accountDAO;
 	private int noOfAccounts;
 	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
 
-	public AccountServiceImpl(){
+	public AccountServiceImpl(AccountFactory accountFactory){
+		this.accountFactory = accountFactory;
 		accountDAO = new AccountDAOImpl();
 	}
 
 	public Account createAccount(String accountNumber, String customerName) {
-//		Account account = new Account(accountNumber);
-//		Customer customer = new Customer(customerName);
-//		account.setCustomer(customer);
-//
-//		accountDAO.saveAccount(account);
-		
-		return null;
+		Account account = accountFactory.createCheckingAccount();
+		Customer customer = new Customer(customerName);
+		account.setCustomer(customer);
+		account.setAccountNumber(accountNumber);
+
+		accountDAO.createAccount(account);
+		return account;
 	}
 
 	public void deposit(String accountNumber, double amount) {

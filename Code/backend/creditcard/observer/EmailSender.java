@@ -1,12 +1,12 @@
 package edu.mum.cs.cs525.labs.exercises.project.backend.creditcard.observer;
 
-import edu.mum.cs.cs525.labs.exercises.project.framework.AccountService;
+import edu.mum.cs.cs525.labs.exercises.project.framework.AccountServiceBak;
 import edu.mum.cs.cs525.labs.exercises.project.framework.Observer;
 
 public class EmailSender implements Observer {
-    private AccountService accountService;
+    private AccountServiceBak accountService;
 
-    public EmailSender(AccountService accountService) {
+    public EmailSender(AccountServiceBak accountService) {
         this.accountService = accountService;
     }
 

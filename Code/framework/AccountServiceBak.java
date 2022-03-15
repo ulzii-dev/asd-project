@@ -7,14 +7,14 @@ import edu.mum.cs.cs525.labs.exercises.project.backend.commons.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AccountService implements Observable {
+public abstract class AccountServiceBak implements Observable {
     private AccountDAO accountDAO;
     private List<Observer> observerList;
     private Account changedAccount;
     private double changedAmount;
     private String report;
 
-    public AccountService(AccountDAO accountDAO){
+    public AccountServiceBak(AccountDAO accountDAO){
         this.accountDAO = accountDAO;
         this.observerList = new ArrayList<>();
     }

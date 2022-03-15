@@ -1,21 +1,21 @@
 package edu.mum.cs.cs525.labs.exercises.project.backend.commons;
 
 import edu.mum.cs.cs525.labs.exercises.project.backend.creditcard.observer.EmailSender;
-import edu.mum.cs.cs525.labs.exercises.project.framework.AccountService;
+import edu.mum.cs.cs525.labs.exercises.project.framework.AccountServiceBak;
 
-public class BankAccountService extends AccountService {
-    private static volatile BankAccountService instance;
+public class BankAccountServiceBak extends AccountServiceBak {
+    private static volatile BankAccountServiceBak instance;
 
-    private BankAccountService() {
+    private BankAccountServiceBak() {
         super(BankAccountDAO.getInstance());
         this.registerObserver(new EmailSender(this));
     }
 
-    public static BankAccountService getInstance() {
+    public static BankAccountServiceBak getInstance() {
         if (instance == null) {
-            synchronized (BankAccountService.class) {
+            synchronized (BankAccountServiceBak.class) {
                 if (instance == null) {
-                    instance = new BankAccountService();
+                    instance = new BankAccountServiceBak();
                 }
             }
         }

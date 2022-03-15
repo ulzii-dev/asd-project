@@ -5,13 +5,14 @@ import edu.mum.cs.cs525.labs.exercises.project.backend.commons.SavingsAccount;
 
 import java.text.DecimalFormat;
 
-public class InterestComputerVisitor implements Visitor{
+public class InterestComputerVisitor implements Visitor {
 
     DecimalFormat df = new DecimalFormat("##.##");
 
-    public InterestComputerVisitor(){
+    public InterestComputerVisitor() {
 
     }
+
     @Override
     public double visit(SavingsAccount savingsAccount) {
         if (savingsAccount.getBalance() < 50000) return savingsAccount.getBalance() * .015;

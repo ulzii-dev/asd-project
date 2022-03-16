@@ -38,16 +38,22 @@ public class BankingAccountService extends AccountService {
     public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
         if (customer instanceof PersonalAccount) {
             if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
-                return new CheckingAccount(accountNumber, accountType, customer, new PersonCheckingAccountComputation());
+                return new CheckingAccount(accountNumber,
+                        accountType,
+                        customer,
+                        new PersonCheckingAccountComputation());
             }
-            return new SavingsAccount(accountNumber, accountType, customer, new PersonSavingsAccountInterestComputation());
+            return new SavingsAccount(accountNumber,
+                    accountType,
+                    customer,
+                    new PersonSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
             if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
                 return new CheckingAccount(accountNumber, accountType, customer, new CompanyCheckingAccountComputation());
             }
             return new SavingsAccount(accountNumber, accountType, customer, new CompanySavingsAccountComputation());
         }
-        return null;
+        throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }
 
 }

@@ -29,8 +29,8 @@ public abstract class AccountService implements Observable {
 			accountDAO.create(account);
 			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
-		}catch (NullPointerException n){
-			n.printStackTrace();
+		}catch (UnsupportedOperationException ux){
+			ux.printStackTrace();
 		}
 	}
 

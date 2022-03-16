@@ -114,7 +114,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	private final ActionListener addInterestActionListener = (ActionListener) -> {
 		this.addInterestCommand.execute(this);
-		JOptionPane.showMessageDialog(null, "Add interest to all accounts", "Add interest to all accounts", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Added interest to all accounts", "Added interest to all accounts", JOptionPane.WARNING_MESSAGE);
 	};
 
 	private final ActionListener depositActionListener = (ActionListener) -> {

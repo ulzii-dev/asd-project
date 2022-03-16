@@ -1,6 +1,6 @@
 package framework;
 
-import ui.UIControl;
+import framework.ui.UIControl;
 
 public interface Command {
     void execute(UIControl control);

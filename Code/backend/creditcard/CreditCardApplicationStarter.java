@@ -3,7 +3,7 @@ package backend.creditcard;
 import backend.creditcard.commands.AddCompanyAccountCommand;
 import backend.creditcard.commands.AddPersonalAccountCommand;
 import framework.ui.UIFrame;
-import ui.UIControl;
+import framework.ui.UIControl;
 
 import javax.swing.*;
 

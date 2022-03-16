@@ -3,7 +3,7 @@ package backend.commons;
 import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
-import ui.AccountOperationCategory;
+import framework.AccountOperationCategory;
 import framework.ui.UIFrame;
 
 import java.util.ArrayList;

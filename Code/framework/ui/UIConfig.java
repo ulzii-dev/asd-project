@@ -1,4 +1,4 @@
-package ui;
+package framework.ui;
 
 import backend.commons.Account;
 

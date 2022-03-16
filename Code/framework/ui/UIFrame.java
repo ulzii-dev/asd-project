@@ -7,8 +7,8 @@ import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
+import framework.AccountOperationCategory;
 import framework.Command;
-import ui.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -20,9 +20,9 @@ import java.util.*;
  */
 public class UIFrame extends FormTemplate implements UIControl, framework.Observer
 {
-    /****
-     * init variables in the object
-     ****/
+	/****
+	 * init variables in the object
+	 ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
 
@@ -42,11 +42,11 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	String zip;
 	String state;
 	String amount;
-    boolean newAccount;
+	boolean newAccount;
 
-    private AccountService subject;
-    private UIConfig uiConfig;
-    private static volatile UIFrame uiFrame;
+	private AccountService subject;
+	private UIConfig uiConfig;
+	private static volatile UIFrame uiFrame;
 
 
 	private UIFrame() {
@@ -73,7 +73,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
-		generateForm(title,uiConfig,buttons);
+		formTemplate(title,uiConfig,buttons);
 	}
 
 	public String getAmount() {
@@ -100,9 +100,9 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	void exitApplication(){
 		try {
-		    	this.setVisible(false);    // hide the Frame
-		    	this.dispose();            // free the system resources
-		    	System.exit(0);            // close the application
+			this.setVisible(false);    // hide the Frame
+			this.dispose();            // free the system resources
+			System.exit(0);            // close the application
 		} catch (Exception e) {
 		}
 	}

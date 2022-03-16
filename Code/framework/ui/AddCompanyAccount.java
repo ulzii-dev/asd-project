@@ -1,6 +1,6 @@
 package framework.ui;
 
-import ui.CompanyAccount;
+import framework.domain.CompanyAccount;
 
 import javax.swing.*;
 import java.awt.*;

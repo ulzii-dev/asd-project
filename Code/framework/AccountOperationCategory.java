@@ -1,4 +1,4 @@
-package ui;
+package framework;
 
 public enum AccountOperationCategory {
     ACCOUNT_CREATED,

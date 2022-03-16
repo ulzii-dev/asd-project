@@ -1,4 +1,4 @@
-package ui;
+package framework.ui;
 
 import framework.Command;
 import backend.banking.commands.NoCommand;
@@ -18,7 +18,7 @@ public abstract class FormTemplate extends JFrame {
     protected JScrollPane JScrollPane1;
     protected Object[] rowdata;
 
-    public final void generateForm(String title, UIConfig uiConfig,
+    public final void formTemplate(String title, UIConfig uiConfig,
                                    Map<String, ActionListener> buttons){
         setupJPanel(title,uiConfig.getReportColumnNames());
         pSetSize();

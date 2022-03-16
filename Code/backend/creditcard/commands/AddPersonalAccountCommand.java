@@ -2,7 +2,7 @@ package backend.creditcard.commands;
 
 import framework.Command;
 import backend.creditcard.service.CreditCardAccountService;
-import ui.UIControl;
+import framework.ui.UIControl;
 
 public class AddPersonalAccountCommand implements Command {
     @Override

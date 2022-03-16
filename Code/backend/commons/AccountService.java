@@ -1,6 +1,7 @@
 package backend.commons;
 
 import backend.banking.visitor.InterestComputerVisitor;
+import backend.creditcard.observer.EmailSender;
 import framework.Observable;
 import framework.Observer;
 import framework.AccountOperationConstant;
@@ -29,8 +30,8 @@ public abstract class AccountService implements Observable {
 			accountDAO.create(account);
 			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
-		}catch (UnsupportedOperationException ux){
-			ux.printStackTrace();
+		} catch (UnsupportedOperationException ex){
+			ex.printStackTrace();
 		}
 	}
 

@@ -2,6 +2,7 @@ package backend.creditcard.observer;
 
 import backend.commons.*;
 import framework.Observer;
+import framework.domain.CompanyAccount;
 import framework.domain.PersonalAccount;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class EmailSender implements Observer {
             List<AccountTransaction> transactions = entry.getValue();
 
             int index = 0;
-            if(account.getCustomer() instanceof Company || account.getCustomer() instanceof PersonalAccount) {
+            if(account.getCustomer() instanceof CompanyAccount || account.getCustomer() instanceof PersonalAccount) {
                 if(!emailHeaderAdded) {
                     Log.getLogger().write("");
                     Log.getLogger().write("OBSERVER_PATTERN: Pulling changed accounts from AccountService");
@@ -37,9 +38,10 @@ public class EmailSender implements Observer {
                 for (Iterator<AccountTransaction> it = transactions.iterator(); it.hasNext(); ) {
                     AccountTransaction transaction = it.next();
 
-                    if(account.getCustomer() instanceof Company) {
+                    if(account.getCustomer() instanceof CompanyAccount) {
                         Log.getLogger().write(  "    " + index + ". CompanyAccount");
                         Log.getLogger().write( "       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
+                        Log.getLogger().write( account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
                     } else if((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > 500))
                     {
                         Log.getLogger().write( "    " + index + ". PersonalAccount");

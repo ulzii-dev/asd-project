@@ -2,6 +2,7 @@ package backend.banking.visitor;
 
 import backend.banking.domain.CheckingAccount;
 import backend.banking.domain.SavingsAccount;
+import backend.creditcard.CreditCardAccount;
 
 import java.text.DecimalFormat;
 
@@ -23,5 +24,18 @@ public class InterestComputerVisitor implements Visitor {
     public double visit(CheckingAccount checkingAccounts) {
         if (checkingAccounts.getBalance() < 50000) return checkingAccounts.getBalance() * .015;
         else return checkingAccounts.getBalance() * .025;
+    }
+
+    @Override
+    public double visit(CreditCardAccount creditCardAccount) {
+        String type =  creditCardAccount.getAccountType();
+        return  switch (type) {
+            case "Gold" -> creditCardAccount.getTotalCredit() * 0.06;
+            case "Bronze" -> creditCardAccount.getTotalCredit() * 0.1;
+            case "Silver" -> creditCardAccount.getTotalCredit() * 0.08;
+            default -> 0;
+        };
+
+
     }
 }

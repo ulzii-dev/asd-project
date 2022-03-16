@@ -1,4 +1,4 @@
-package backend.banking.commands;
+package backend.creditcard.commands;
 
 import framework.Command;
 import framework.ui.UIControl;

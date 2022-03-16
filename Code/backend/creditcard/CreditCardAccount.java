@@ -3,8 +3,9 @@ package backend.creditcard;
 import backend.banking.visitor.Visitor;
 import backend.commons.Account;
 import backend.commons.AccountEntry;
-import backend.commons.Customer;
+import backend.creditcard.CreditCardType;
 import backend.creditcard.strategy.CreditCardCalculator;
+import backend.commons.Customer;
 
 import java.time.LocalDate;
 
@@ -17,8 +18,8 @@ public class CreditCardAccount extends Account {
                              String accountType,
                              Customer customer,
                              CreditCardCalculator creditCardCalculator,
-                             CreditCardType creditCardType) {
-        super(null);
+                CreditCardType creditCardType) {
+        super(creditCardCalculator);
         setAccountNumber(accountNumber);
         setAccountType(accountType);
         setCustomer(customer);
@@ -27,7 +28,7 @@ public class CreditCardAccount extends Account {
     }
     @Override
     public double accept(Visitor visitor) {
-        return 0;
+        return visitor.visit(this);
     }
 
 
@@ -89,7 +90,7 @@ public class CreditCardAccount extends Account {
 
     public double getMonthlyInterest(){
         return this.creditCardCalculator.
-                computeMonthlyInterest(getTotalCredit());
+                computeInterest(getTotalCredit());
     }
 
 

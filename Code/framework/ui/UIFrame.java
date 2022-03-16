@@ -27,6 +27,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	 ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
+	private Command addInterestCommand;
 	private Command depositCommand;
 	private Command withdrawCommand;
 
@@ -56,6 +57,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
+		this.addInterestCommand = new NoCommand();
 		this.depositCommand = new DepositCommand();
 		this.withdrawCommand = new WithdrawCommand();
 		this.accountTypes = new ArrayList<>();
@@ -76,8 +78,10 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		Map<String,ActionListener> buttons = new HashMap<>();
 		buttons.put("Add Personal Account", addPersonalAccountActionListener);
 		buttons.put("Add Company Account", addCompanyAccountActionListener);
+		buttons.put("Add Interest", addInterestActionListener);
 		buttons.put("Deposit", depositActionListener);
 		buttons.put("Withdraw", withdrawActionListener);
+
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
@@ -106,16 +110,19 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		}
 	};
 
-	private final ActionListener depositActionListener = (ActionListener) -> {
-		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-		if (selection >= 0) {
-			String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
-			openDialog(new Deposit(uiFrame, accnr));
-			this.depositCommand.execute(this);
-		} else {
-			Log.getLogger().write("Need to select row to DEPOSIT!");
-		}
-	};
+	private final ActionListener addInterestActionListener = (ActionListener) -> {
+		this.addInterestCommand.execute(this);
+		JOptionPane.showMessageDialog(null, "Add interest to all accounts", "Add interest to all accounts", JOptionPane.WARNING_MESSAGE);
+	};private final ActionListener depositActionListener = (ActionListener) -> {
+	int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+	if (selection >= 0) {
+		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
+		openDialog(new Deposit(uiFrame, accnr));
+		this.depositCommand.execute(this);
+	} else {
+		Log.getLogger().write("Need to select row to DEPOSIT!");
+	}
+};
 
 	private final ActionListener withdrawActionListener = (ActionListener) -> {
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
@@ -154,6 +161,8 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void setAddInterestCommand(Command addInterestCommand) {
+
+		this.addInterestCommand = addInterestCommand;
 
 	}
 
@@ -208,22 +217,22 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	protected void panelBounds() {
-		JPanel1.setBounds(0,0,900,610);
+		JPanel1.setBounds(0,0,700,410);
 	}
 
 	@Override
 	protected void pSetSize() {
-		setSize(900,610);
+		setSize(700,410);
 	}
 
 	@Override
 	protected void tableBounds() {
-		JTable1.setBounds(0, 0, 920, 0);
+		JTable1.setBounds(0, 0, 420, 0);
 	}
 
 	@Override
 	protected void scrollPanelBounds() {
-		JScrollPane1.setBounds(22,44,444,190);
+		JScrollPane1.setBounds(12,24,444,190);
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import java.util.*;
 public abstract class AccountService implements Observable {
 	private final AccountDAO accountDAO;
 	private int noOfAccounts;
-	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
 	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
 	private Map<Account, ArrayList<AccountTransaction>> changedAccountList = new HashMap<>();
@@ -89,8 +88,6 @@ public abstract class AccountService implements Observable {
 
 		for (String accountNumber : getAllAccountNumbers()) {
 			Account account = accountDAO.loadAccount(accountNumber);
-			// adding visitor pattern for adding interest
-			//account.accept(interestComputerVisitor);
 			account.addInterest();
 			accountDAO.updateAccount(account);
 		}
@@ -105,7 +102,6 @@ public abstract class AccountService implements Observable {
 		return listOfAccountNumbers;
 	}
 
-	//copied and the same
 	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
 		Account fromAccount = accountDAO.loadAccount(fromAccountNumber);
 		Account toAccount = accountDAO.loadAccount(toAccountNumber);

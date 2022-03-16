@@ -3,6 +3,7 @@ package framework.ui;
 		A basic implementation of the JDialog class.
 */
 
+import backend.creditcard.CreditCardType;
 import ui.PersonalAccount;
 
 import javax.swing.*;
@@ -59,7 +60,12 @@ public class AddPersonalAccount extends javax.swing.JDialog {
         }
         getContentPane().add(JTextField_ACCOUNT_NUMBER);
         JTextField_ACCOUNT_NUMBER.setBounds(84,yOffset + 60,156,20);
-        JLabel8.setText("Acc Nr");
+
+        if(parentframe.getAccountTypes().contains(CreditCardType.GOLD.name())){
+            JLabel8.setText("CC No.");
+        }else{
+            JLabel8.setText("Acc No.");
+        }
         getContentPane().add(JLabel8);
         JLabel8.setForeground(Color.black);
         JLabel8.setBounds(12,yOffset + 60,48,24);

@@ -1,10 +1,10 @@
 package framework.ui;
 
 
+import backend.commons.Log;
 import backend.creditcard.service.CreditCardAccountService;
 import framework.Command;
 import backend.banking.commands.NoCommand;
-import backend.banking.service.BankingAccountService;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
@@ -26,7 +26,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
 
-	protected AccountOperationCategory operationCategory;
+	protected AccountOperationCategory accountOperationCategory;
 
 	private Collection<String> accountTypes;
 	private Customer customer;
@@ -209,7 +209,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		System.out.println("Updating the table on the UI.");
+		Log.instance.write("Update table in the MainForm");
 	}
 
 	public void setSubject(AccountService subject) {
@@ -258,7 +258,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 		jDialog.show();
 	}
 
-	public AccountOperationCategory getOperationCategory() {
-		return operationCategory;
+	public AccountOperationCategory getAccountOperationCategory() {
+		return accountOperationCategory;
 	}
 }

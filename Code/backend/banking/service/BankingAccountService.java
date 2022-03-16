@@ -1,5 +1,6 @@
 package backend.banking.service;
 
+import backend.banking.BankingAccountType;
 import backend.banking.CheckingAccount;
 import backend.banking.SavingsAccount;
 import backend.banking.dao.BankingAccountDAO;
@@ -36,12 +37,12 @@ public class BankingAccountService extends AccountService {
     @Override
     public Account createAccountFactory(String accountType, Customer customer) {
         if (customer instanceof PersonalAccount) {
-            if (AccountType.valueOf(accountType) == AccountType.CHECKING) {
+            if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
                 return new CheckingAccount(new PersonCheckingAccountComputation());
             }
             return new SavingsAccount(new PersonSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
-            if (AccountType.valueOf(accountType) == AccountType.CHECKING) {
+            if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
                 return new CheckingAccount(new CompanyCheckingAccountComputation());
             }
             return new SavingsAccount(new CompanySavingsAccountComputation());

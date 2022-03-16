@@ -1,5 +1,13 @@
 package backend.creditcard;
 
 public enum CreditCardType {
-    BRONZE,SILVER,GOLD
+    GOLD ("Gold"),
+    SILVER ("Silver"),
+    BRONZE ("Bronze");
+
+    public final String name;
+    private CreditCardType(String name){
+        this.name = name;
+    }
 }
+

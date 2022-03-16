@@ -31,7 +31,7 @@ public class AddPersonalAccount extends javax.swing.JDialog {
     JTextField JTextField_BIRTH_DATE = new JTextField();
     JTextField JTextField_EMAIL = new JTextField();
     JButton JButton_OK = new JButton();
-    JButton JButton_Cancel = new JButton();
+    JButton JButton_CANCEL = new JButton();
     JLabel JLabel8 = new JLabel();
 
     public AddPersonalAccount(MainForm parent) {
@@ -43,7 +43,7 @@ public class AddPersonalAccount extends javax.swing.JDialog {
         setModal(true);
         getContentPane().setLayout(null);
         setVisible(false);
-        setSize(283,303);
+        setSize(383,503);
         int yOffset = 0;
         SymMouse aSymMouse = new SymMouse();
         for (String actType: parentframe.getAccountTypes()) {
@@ -57,6 +57,12 @@ public class AddPersonalAccount extends javax.swing.JDialog {
             btnAccountTyps.add(chk);
             yOffset += 24;
         }
+        getContentPane().add(JTextField_ACCOUNT_NUMBER);
+        JTextField_ACCOUNT_NUMBER.setBounds(84,yOffset + 60,156,20);
+        JLabel8.setText("Acc Nr");
+        getContentPane().add(JLabel8);
+        JLabel8.setForeground(Color.black);
+        JLabel8.setBounds(12,yOffset + 60,48,24);
         JLabel1.setText("Name");
         getContentPane().add(JLabel1);
         JLabel1.setForeground(Color.black);
@@ -103,22 +109,16 @@ public class AddPersonalAccount extends javax.swing.JDialog {
         JButton_OK.setActionCommand("OK");
         getContentPane().add(JButton_OK);
         JButton_OK.setBounds(48,yOffset + 264,84,24);
-        JButton_Cancel.setText("Cancel");
-        JButton_Cancel.setActionCommand("Cancel");
-        getContentPane().add(JButton_Cancel);
-        JButton_Cancel.setBounds(156,yOffset + 264,84,24);
-        getContentPane().add(JTextField_ACCOUNT_NUMBER);
-        JTextField_ACCOUNT_NUMBER.setBounds(84,yOffset + 60,156,20);
-        JLabel8.setText("Acc Nr");
-        getContentPane().add(JLabel8);
-        JLabel8.setForeground(Color.black);
-        JLabel8.setBounds(12,yOffset + 60,48,24);
+        JButton_CANCEL.setText("Cancel");
+        JButton_CANCEL.setActionCommand("Cancel");
+        getContentPane().add(JButton_CANCEL);
+        JButton_CANCEL.setBounds(156,yOffset + 264,84,24);
         //}}
 
         //{{REGISTER_LISTENERS
         SymAction lSymAction = new SymAction();
         JButton_OK.addActionListener(lSymAction);
-        JButton_Cancel.addActionListener(lSymAction);
+        JButton_CANCEL.addActionListener(lSymAction);
         //}}
     }
 
@@ -137,7 +137,7 @@ public class AddPersonalAccount extends javax.swing.JDialog {
             Object object = event.getSource();
             if (object == JButton_OK)
                 JButtonOK_actionPerformed(event);
-            else if (object == JButton_Cancel)
+            else if (object == JButton_CANCEL)
                 JButtonCANCEL_actionPerformed(event);
         }
     }

@@ -1,6 +1,6 @@
 package ui;
 
-import backend.banking.commands.Command;
+import framework.Command;
 import backend.banking.commands.NoCommand;
 
 import javax.swing.*;

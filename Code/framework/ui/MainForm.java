@@ -1,7 +1,8 @@
 package framework.ui;
 
 
-import backend.banking.commands.Command;
+import backend.creditcard.service.CreditCardAccountService;
+import framework.Command;
 import backend.banking.commands.NoCommand;
 import backend.banking.service.BankingAccountService;
 import backend.commons.Account;
@@ -54,10 +55,9 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 		this.accountTypes = new ArrayList<>();
 	}
 
-	//TODO:Why -> Why?
 	public static MainForm getInstance() {
 		if (myframe == null) {
-			synchronized (BankingAccountService.class) {
+			synchronized (CreditCardAccountService.class) {
 				if (myframe == null) {
 					myframe = new MainForm();
 				}
@@ -251,7 +251,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	}
 
 	public void openDialog(JDialog jDialog){
-		openDialog(jDialog, 450, 20, 300, 330);
+		openDialog(jDialog, 450, 20, 300, 430);
 	}
 	public void openDialog(JDialog jDialog, int x, int y, int width, int height){
 		jDialog.setBounds(x, y, width, height);

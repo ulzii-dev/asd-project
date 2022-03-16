@@ -1,11 +1,11 @@
-package backend.commons;
+package backend.banking;
 
-public enum AccountType {
+public enum BankingAccountType {
     CHECKING ("Checking"),
     SAVINGS ("Savings");
 
     public final String name;
-    private AccountType(String name){
+    private BankingAccountType(String name){
         this.name = name;
     }
 }

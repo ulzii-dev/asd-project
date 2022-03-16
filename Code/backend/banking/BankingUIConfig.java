@@ -1,7 +1,6 @@
 package backend.banking;
 
 import backend.commons.Account;
-import backend.commons.AccountType;
 import ui.PersonalAccount;
 import ui.UIConfig;
 
@@ -12,7 +11,7 @@ import java.util.Collection;
 public class BankingUIConfig implements UIConfig {
     @Override
     public Collection<String> getAccountTypes() {
-        return Arrays.asList(AccountType.CHECKING.name(), AccountType.SAVINGS.name());
+        return Arrays.asList(BankingAccountType.CHECKING.name(), BankingAccountType.SAVINGS.name());
     }
 
     @Override

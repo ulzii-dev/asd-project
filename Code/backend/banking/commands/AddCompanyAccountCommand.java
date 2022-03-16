@@ -1,9 +1,10 @@
 package backend.banking.commands;
 
 import backend.banking.service.BankingAccountService;
+import framework.Command;
 import ui.UIControl;
 
-public class AddCompanyAccountCommand implements Command{
+public class AddCompanyAccountCommand implements Command {
     public void execute(UIControl control) {
         BankingAccountService.getInstance()
                 .createAccount(

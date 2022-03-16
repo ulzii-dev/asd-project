@@ -1,19 +1,19 @@
-package framework.ui;
+package backend.creditcard;
 
 import backend.banking.BankingUIConfig;
-import backend.banking.commands.AddCompanyAccountCommand;
-import backend.banking.commands.AddPersonalAccountCommand;
+import backend.creditcard.commands.AddCompanyAccountCommand;
+import backend.creditcard.commands.AddPersonalAccountCommand;
 import framework.ui.MainForm;
 import ui.UIControl;
 
 import javax.swing.*;
 
-public class ApplicationStarter {
+public class CreditCardApplicationStarter {
     public static void main(String[] args){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             UIControl mainForm = MainForm.getInstance();
-            mainForm.init("MIU Banking Application", new BankingUIConfig());
+            mainForm.init("MIU CreditCard Application", new CreditCardUIConfig());
 
             //commands
             mainForm.setAddPersonalAccountCommand(new AddPersonalAccountCommand());

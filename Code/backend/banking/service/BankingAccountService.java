@@ -10,8 +10,8 @@ import backend.banking.strategy.PersonCheckingAccountComputation;
 import backend.banking.strategy.PersonSavingsAccountInterestComputation;
 import backend.commons.*;
 import backend.creditcard.observer.EmailSender;
-import ui.CompanyAccount;
-import ui.PersonalAccount;
+import framework.domain.CompanyAccount;
+import framework.domain.PersonalAccount;
 
 public class BankingAccountService extends AccountService {
     private static volatile BankingAccountService instance;

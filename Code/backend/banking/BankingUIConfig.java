@@ -1,8 +1,8 @@
 package backend.banking;
 
 import backend.commons.Account;
-import ui.PersonalAccount;
-import ui.UIConfig;
+import framework.domain.PersonalAccount;
+import framework.ui.UIConfig;
 
 import java.util.Arrays;
 import java.util.Collection;

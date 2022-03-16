@@ -2,8 +2,8 @@ package backend.banking;
 
 import backend.banking.commands.AddCompanyAccountCommand;
 import backend.banking.commands.AddPersonalAccountCommand;
-import framework.ApplicationContext;
-import ui.UIControl;
+import framework.ui.UIFrame;
+import framework.ui.UIControl;
 
 import javax.swing.*;
 
@@ -11,7 +11,7 @@ public class BankingApplicationStarter {
     public static void main(String[] args){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIControl mainForm = ApplicationContext.getInstance();
+            UIControl mainForm = UIFrame.getInstance();
             mainForm.init("MIU Banking Application", new BankingUIConfig());
 
             //commands

@@ -1,4 +1,4 @@
-package framework;
+package framework.ui;
 
 
 import backend.commons.Log;
@@ -7,9 +7,8 @@ import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
-import framework.ui.AddCompanyAccount;
-import framework.ui.AddPersonalAccount;
-import ui.*;
+import framework.AccountOperationCategory;
+import framework.Command;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -19,11 +18,11 @@ import java.util.*;
 /**
  * A basic JFC based application.
  */
-public class ApplicationContext extends FormTemplate implements UIControl, framework.Observer
+public class UIFrame extends FormTemplate implements UIControl, framework.Observer
 {
-    /****
-     * init variables in the object
-     ****/
+	/****
+	 * init variables in the object
+	 ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
 
@@ -43,28 +42,28 @@ public class ApplicationContext extends FormTemplate implements UIControl, frame
 	String zip;
 	String state;
 	String amount;
-    boolean newAccount;
+	boolean newAccount;
 
-    private AccountService subject;
-    private UIConfig uiConfig;
-    private static volatile ApplicationContext applicationContext;
+	private AccountService subject;
+	private UIConfig uiConfig;
+	private static volatile UIFrame uiFrame;
 
 
-	private ApplicationContext() {
+	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
-	public static ApplicationContext getInstance() {
-		if (applicationContext == null) {
+	public static UIFrame getInstance() {
+		if (uiFrame == null) {
 			synchronized (CreditCardAccountService.class) {
-				if (applicationContext == null) {
-					applicationContext = new ApplicationContext();
+				if (uiFrame == null) {
+					uiFrame = new UIFrame();
 				}
 			}
 		}
-		return applicationContext;
+		return uiFrame;
 	}
 
 	public void init(String title, UIConfig uiConfig) {
@@ -74,7 +73,7 @@ public class ApplicationContext extends FormTemplate implements UIControl, frame
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
-		generateForm(title,uiConfig,buttons);
+		formTemplate(title,uiConfig,buttons);
 	}
 
 	public String getAmount() {
@@ -86,14 +85,14 @@ public class ApplicationContext extends FormTemplate implements UIControl, frame
 	};
 
 	private final ActionListener addPersonalAccountActionListener = (ActionListener) -> {
-		openDialog(new AddPersonalAccount(applicationContext));
+		openDialog(new AddPersonalAccount(uiFrame));
 		if (newAccount) {
 			this.addPersonalAccountCommand.execute(this);
 		}
 	};
 
 	private final ActionListener addCompanyAccountActionListener = (ActionListener) -> {
-		openDialog(new AddCompanyAccount(applicationContext));
+		openDialog(new AddCompanyAccount(uiFrame));
 		if (newAccount) {
 			this.addCompanyAccountCommand.execute(this);
 		}
@@ -101,9 +100,9 @@ public class ApplicationContext extends FormTemplate implements UIControl, frame
 
 	void exitApplication(){
 		try {
-		    	this.setVisible(false);    // hide the Frame
-		    	this.dispose();            // free the system resources
-		    	System.exit(0);            // close the application
+			this.setVisible(false);    // hide the Frame
+			this.dispose();            // free the system resources
+			System.exit(0);            // close the application
 		} catch (Exception e) {
 		}
 	}
@@ -226,7 +225,7 @@ public class ApplicationContext extends FormTemplate implements UIControl, frame
 		public void windowClosing(WindowEvent event)
 		{
 			Object object = event.getSource();
-			if (object == ApplicationContext.this)
+			if (object == UIFrame.this)
 				MainFrm_windowClosing(event);
 		}
 	}

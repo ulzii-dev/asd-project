@@ -17,4 +17,5 @@ public interface UIControl {
     String getAccountNumber();
     Customer getCustomer();
     String getAmount();
+    String generateReport(String accountNumber);
 }

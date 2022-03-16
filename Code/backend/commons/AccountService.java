@@ -11,6 +11,7 @@ import java.util.*;
 public abstract class AccountService implements Observable {
 	private final AccountDAO accountDAO;
 	private int noOfAccounts;
+
 	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
 	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
@@ -114,6 +115,10 @@ public abstract class AccountService implements Observable {
 	}
 
 
+	public void generateReport(){
+		System.out.println("Generating Reports");
+	}
+
 
 	public abstract Account createAccountFactory(String accountNumber, String accountType, Customer customer);
 
@@ -135,4 +140,9 @@ public abstract class AccountService implements Observable {
 	public void notifyObservers() {
 		this.observerList.forEach(Observer::update);
 	}
+
+
+
+
+
 }

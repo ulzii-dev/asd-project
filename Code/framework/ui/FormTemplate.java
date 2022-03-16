@@ -11,15 +11,15 @@ import java.util.Collection;
 import java.util.Map;
 
 public abstract class FormTemplate extends JFrame {
-    protected boolean newaccount;
+    protected boolean newAccount;
     protected DefaultTableModel model;
     protected JTable JTable1;
     protected JPanel JPanel1;
     protected JScrollPane JScrollPane1;
-    protected Object[] rowdata;
+    protected Object[] rowData;
 
-    public final void formTemplate(String title, UIConfig uiConfig,
-                                   Map<String, ActionListener> buttons){
+    public final void generateFormTemplate(String title, UIConfig uiConfig,
+                                           Map<String, ActionListener> buttons){
         setupJPanel(title,uiConfig.getReportColumnNames());
         pSetSize();
         panelBounds();
@@ -45,8 +45,8 @@ public abstract class FormTemplate extends JFrame {
             model.addColumn(cols);
         }
 
-        rowdata = new Object[columns.size()];
-        newaccount=false;
+        rowData = new Object[columns.size()];
+        newAccount =false;
         JPanel1.add(JScrollPane1);
         JScrollPane1.getViewport().add(JTable1);
 

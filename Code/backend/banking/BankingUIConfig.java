@@ -1,5 +1,7 @@
 package backend.banking;
 
+import backend.banking.constant.BankReportColumnConstant;
+import backend.banking.constant.BankingAccountType;
 import backend.commons.Account;
 import framework.domain.PersonalAccount;
 import framework.ui.UIConfig;
@@ -7,7 +9,6 @@ import framework.ui.UIConfig;
 import java.util.Arrays;
 import java.util.Collection;
 
-//TODO: WHAT DOES THIS DO?
 public class BankingUIConfig implements UIConfig {
     @Override
     public Collection<String> getAccountTypes() {
@@ -16,7 +17,7 @@ public class BankingUIConfig implements UIConfig {
 
     @Override
     public Collection<String> getReportColumnNames() {
-        return Arrays.asList("AccountNumber","Name","City","P/C","Ch/S","Amount");
+        return Arrays.asList(BankReportColumnConstant.get());
     }
 
     @Override
@@ -26,14 +27,14 @@ public class BankingUIConfig implements UIConfig {
 
     @Override
     public Object[] buildRow(Account account) {
-        Object[] rowdata = new Object[6];
-        rowdata[0] = account.getAccountNumber();
-		rowdata[1] = account.getCustomer().getName();
-		rowdata[2] = account.getCustomer().getCity();
-		rowdata[3] = account.getCustomer() instanceof PersonalAccount ? "P" : "C";
-		rowdata[4] = account.getAccountType();
-		rowdata[5] = String.valueOf(account.getBalance());
-        return rowdata;
+        Object[] rowData = new Object[6];
+        rowData[0] = account.getAccountNumber();
+		rowData[1] = account.getCustomer().getName();
+		rowData[2] = account.getCustomer().getCity();
+		rowData[3] = account.getCustomer() instanceof PersonalAccount ? "Personal Ac" : "Company Ac";
+		rowData[4] = account.getAccountType();
+		rowData[5] = String.valueOf(account.getBalance());
+        return rowData;
     }
 
     @Override

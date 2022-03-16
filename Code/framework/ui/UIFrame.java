@@ -7,7 +7,7 @@ import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
-import framework.AccountOperationCategory;
+import framework.AccountOperationConstant;
 import framework.Command;
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private Command addCompanyAccountCommand;
 	private Command addInterestCommand;
 
-	protected AccountOperationCategory accountOperationCategory;
+	protected AccountOperationConstant accountOperationCategory;
 
 	private Collection<String> accountTypes;
 	private Customer customer;
@@ -59,7 +59,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	public static UIFrame getInstance() {
 		if (uiFrame == null) {
-			synchronized (CreditCardAccountService.class) {
+			synchronized (AccountService.class) {
 				if (uiFrame == null) {
 					uiFrame = new UIFrame();
 				}
@@ -70,14 +70,14 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	public void init(String title, UIConfig uiConfig) {
 		Map<String,ActionListener> buttons = new HashMap<>();
-		buttons.put("Add personal account", addPersonalAccountActionListener);
-		buttons.put("Add company account", addCompanyAccountActionListener);
+		buttons.put("Add Personal Account", addPersonalAccountActionListener);
+		buttons.put("Add Company Account", addCompanyAccountActionListener);
 		buttons.put("Add Interest", addInterestActionListener);
 
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
-		formTemplate(title,uiConfig,buttons);
+		generateFormTemplate(title,uiConfig,buttons);
 	}
 
 	public String getAmount() {
@@ -209,7 +209,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void update() {
-		if (this.subject.getAccountOperationCategory() == AccountOperationCategory.REPORT) {
+		if (this.subject.getAccountOperationConstant() == AccountOperationConstant.REPORT) {
 			return;
 		}
 		// reload accounts to view
@@ -219,7 +219,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		Log.instance.write("Update table in the MainForm");
+		Log.getLogger().write("Updating the UIFrame dataset!!");
 	}
 
 	public void setSubject(AccountService subject) {
@@ -268,7 +268,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		jDialog.show();
 	}
 
-	public AccountOperationCategory getAccountOperationCategory() {
+	public AccountOperationConstant getAccountOperationCategory() {
 		return accountOperationCategory;
 	}
 }

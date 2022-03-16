@@ -12,6 +12,8 @@ public abstract class Account {
 
 	private String accountNumber;
 
+	private String accountType;
+
 	InterestComputerVisitor visitor = new InterestComputerVisitor();
 
 	private List<AccountEntry> accountEntries;
@@ -88,5 +90,9 @@ public abstract class Account {
 	}
 
 	public abstract String getAccountType();
+
+	public void setAccountType(String accountType){
+		this.accountType = accountType;
+	}
 
 }

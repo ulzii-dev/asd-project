@@ -3,7 +3,7 @@ package backend.commons;
 import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
-import framework.AccountOperationCategory;
+import framework.AccountOperationConstant;
 import framework.ui.UIFrame;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public abstract class AccountService implements Observable {
 	private final AccountDAO accountDAO;
 	private int noOfAccounts;
 	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
-	protected AccountOperationCategory accountOperationCategory;
+	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
 
 	public AccountService(AccountDAO accountDAO){
@@ -27,14 +27,12 @@ public abstract class AccountService implements Observable {
 
 	public final void createAccount(String accountNumber, Customer customer, String accountType) {
 		try {
-			Account account = this.createAccountFactory(accountType, customer);
-			account.setCustomer(customer);
-			account.setAccountNumber(accountNumber);
-			accountDAO.createAccount(account);
-			this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
+			Account account = this.createAccountFactory(accountNumber, accountType, customer);
+			accountDAO.create(account);
+			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
-		}catch (NullPointerException n){
-			n.printStackTrace();
+		}catch (UnsupportedOperationException ex){
+			ex.printStackTrace();
 		}
 	}
 
@@ -89,10 +87,10 @@ public abstract class AccountService implements Observable {
 
 
 
-	public abstract Account createAccountFactory(String accountType, Customer customer);
+	public abstract Account createAccountFactory(String accountNumber, String accountType, Customer customer);
 
-	public AccountOperationCategory getAccountOperationCategory() {
-		return accountOperationCategory;
+	public AccountOperationConstant getAccountOperationConstant() {
+		return accountOperationConstant;
 	}
 
 	@Override

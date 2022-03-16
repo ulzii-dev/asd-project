@@ -5,17 +5,24 @@ import backend.commons.Account;
 import backend.commons.AccountEntry;
 import backend.creditcard.CreditCardType;
 import backend.creditcard.strategy.CreditCardCalculator;
+import backend.commons.Customer;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class CreditCardAccount extends Account {
-    LocalDate todaydate = LocalDate.now();
+    LocalDate todayDate = LocalDate.now();
     CreditCardCalculator creditCardCalculator;
     CreditCardType creditCardType;
-    public CreditCardAccount(CreditCardCalculator creditCardCalculator, CreditCardType creditCardType) {
-        super(creditCardCalculator);
 
+    public CreditCardAccount(String accountNumber,
+                             String accountType,
+                             Customer customer,
+                             CreditCardCalculator creditCardCalculator,
+                CreditCardCalculator creditCardType) {
+        super(creditCardCalculator);
+        setAccountNumber(accountNumber);
+        setAccountType(accountType);
+        setCustomer(customer);
         this.creditCardCalculator =  creditCardCalculator;
         this.creditCardType =  creditCardType;
     }
@@ -28,7 +35,7 @@ public class CreditCardAccount extends Account {
     public double getPreviousBalance() {
         double prevBalance = 0;
         for (AccountEntry accountEntry : getAccountEntries()) {
-            if (accountEntry.getDate().isBefore(todaydate.withDayOfMonth(1))) {
+            if (accountEntry.getDate().isBefore(todayDate.withDayOfMonth(1))) {
                 prevBalance += accountEntry.getAmount();
 
             }
@@ -42,7 +49,7 @@ public class CreditCardAccount extends Account {
         double totalCredit = 0;
 
         for (AccountEntry accountEntry : getAccountEntries()) {
-            if (accountEntry.getDate().isAfter(todaydate.withDayOfMonth(1))) {
+            if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
                 if (accountEntry.getAmount()<0){
                     totalCredit += accountEntry.getAmount();
                 }
@@ -57,7 +64,7 @@ public class CreditCardAccount extends Account {
         double totalCredit = 0;
 
         for (AccountEntry accountEntry : getAccountEntries()) {
-            if (accountEntry.getDate().isAfter(todaydate.withDayOfMonth(1))) {
+            if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
                 if (accountEntry.getAmount()>=0){
                     totalCredit += accountEntry.getAmount();
                 }

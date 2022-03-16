@@ -33,13 +33,13 @@ public class CreditCardAccountService extends AccountService {
     public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
         CreditCardType type = CreditCardType.valueOf(accountType);
         if(type.equals(CreditCardType.BRONZE)){
-            return new CreditCardAccount(new BronzeCreditCardCaluclator(), type);
+            return new CreditCardAccount(accountNumber, accountType, customer, new BronzeCreditCardCaluclator(), type);
         }
         if(type.equals(CreditCardType.SILVER)){
-            return new CreditCardAccount(new SilverCreditCardCalculator(),type);
+            return new CreditCardAccount(accountNumber, accountType, customer,new SilverCreditCardCalculator(),type);
         }
         if(type.equals(CreditCardType.GOLD)){
-            return new CreditCardAccount(new GoldCreditCardcalculator(), type);
+            return new CreditCardAccount(accountNumber, accountType, customer,new GoldCreditCardcalculator(), type);
         }
         throw new UnsupportedOperationException("Invalid Credit Card Type!");
     }

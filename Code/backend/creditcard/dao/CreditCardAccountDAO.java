@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class CreditCardAccountDAO implements AccountDAO {
     private static volatile CreditCardAccountDAO instance;
-    Collection<Account> accountlist = new ArrayList<>();
+    Collection<Account> accountList = new ArrayList<>();
 
     public static CreditCardAccountDAO getInstance() {
         if (instance == null) {
@@ -23,23 +23,23 @@ public class CreditCardAccountDAO implements AccountDAO {
 
     @Override
     public void create(Account account) {
-        accountlist.add(account);
+        accountList.add(account);
         System.out.println("Saving account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }
 
     @Override
     public void updateAccount(Account account) {
-        Account accountexist = loadAccount(account.getAccountNumber());
-        if (accountexist != null) {
-            accountlist.remove(accountexist); // remove the old
-            accountlist.add(account); // add the new
+        Account isAccountExist = loadAccount(account.getAccountNumber());
+        if (isAccountExist != null) {
+            accountList.remove(isAccountExist); // remove the old
+            accountList.add(account); // add the new
         }
         System.out.println("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }
 
     @Override
     public Account loadAccount(String accountNumber) {
-        for (Account account : accountlist) {
+        for (Account account : accountList) {
             if (account.getAccountNumber() == accountNumber) {
                 return account;
             }
@@ -50,6 +50,6 @@ public class CreditCardAccountDAO implements AccountDAO {
 
     @Override
     public Collection<Account> getAccounts() {
-        return accountlist;
+        return accountList;
     }
 }

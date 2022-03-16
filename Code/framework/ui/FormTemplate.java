@@ -54,6 +54,7 @@ public abstract class FormTemplate extends JFrame {
     private void setUpButtons(Map<String, ActionListener> buttons){
         int y = getInitialY();
         for (Map.Entry<String,ActionListener> button : buttons.entrySet()) {
+            System.out.println("-->" + button.getKey());
             JButton btn = new JButton();
             btn.setText(button.getKey());
             JPanel1.add(btn);

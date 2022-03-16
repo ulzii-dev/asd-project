@@ -1,7 +1,5 @@
 package backend.commons;
 
-import backend.banking.visitor.InterestComputerVisitor;
-import backend.creditcard.observer.EmailSender;
 import framework.Observable;
 import framework.Observer;
 import framework.AccountOperationConstant;

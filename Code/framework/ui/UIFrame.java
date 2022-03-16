@@ -1,14 +1,12 @@
 package framework.ui;
 
 
-import backend.banking.commands.DepositCommand;
-import backend.banking.commands.WithdrawCommand;
 import backend.commons.Log;
-import backend.creditcard.service.CreditCardAccountService;
 import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
+import com.sun.source.tree.Tree;
 import framework.AccountOperationConstant;
 import framework.Command;
 
@@ -77,12 +75,12 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	}
 
 	public void init(String title, UIConfig uiConfig) {
-		Map<String,ActionListener> buttons = new HashMap<>();
+		Map<String,ActionListener> buttons = new LinkedHashMap<>();
 		buttons.put("Add Personal Account", addPersonalAccountActionListener);
 		buttons.put("Add Company Account", addCompanyAccountActionListener);
-		buttons.put("Add Interest", addInterestActionListener);
 		buttons.put("Deposit", depositActionListener);
 		buttons.put("Withdraw", withdrawActionListener);
+		buttons.put("Add Interest", addInterestActionListener);
 
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
@@ -118,7 +116,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	};
 
 	private final ActionListener depositActionListener = (ActionListener) -> {
-	int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+	int selection = JTable1.getSelectionModel().getSelectedIndices()[0];
 	if (selection >= 0) {
 		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
 		openDialog(new Deposit(uiFrame, accnr));

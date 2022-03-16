@@ -17,6 +17,6 @@ public class CheckingAccount extends Account {
 
     @Override
     public String getAccountType() {
-        return AccountType.Checking.name();
+        return AccountType.CHECKING.name();
     }
 }

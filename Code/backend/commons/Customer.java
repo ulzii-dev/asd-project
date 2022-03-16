@@ -1,5 +1,6 @@
 package backend.commons;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,10 @@ public class Customer {
     private String email;
     private Set<Account> accountList;
 
-    public Customer(int customerId, String name, String street, String city, String state, int zip, String email) {
+    public Customer(int customerId, String name,
+                    String street, String city,
+                    String state, int zip,
+                    String email) {
         this.customerId = customerId;
         this.name = name;
         this.street = street;
@@ -22,6 +26,18 @@ public class Customer {
         this.zip = zip;
         this.email = email;
         this.accountList = new HashSet<>();
+    }
+
+    public void addAccount(Account account) {
+        this.accountList.add(account);
+    }
+
+    public void removeAccount(Account account) {
+        this.accountList.remove(account);
+    }
+
+    public Collection<Account> getAccountList() {
+        return accountList;
     }
 
     public int getCustomerId() {
@@ -78,13 +94,5 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<Account> getAccountList() {
-        return accountList;
-    }
-
-    public void setAccountList(Set<Account> accountList) {
-        this.accountList = accountList;
     }
 }

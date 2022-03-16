@@ -1,115 +1,107 @@
 package backend.commons;
 
+import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
+import ui.AccountOperationCategory;
+import ui.bank.MainForm;
 
-import java.util.*;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public abstract class AccountService implements Observable {
-    private AccountDAO accountDAO;
-    private List<Observer> observerList;
-    private Map<Account, ArrayList<AccountTransaction>> changedAccountList = new HashMap<>();
-    private String report;
+	private final AccountDAO accountDAO;
+	private int noOfAccounts;
+	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
+	protected AccountOperationCategory accountOperationCategory;
+	private List<Observer> observerList;
 
-    public AccountService(AccountDAO accountDAO){
-        this.accountDAO = accountDAO;
-        this.observerList = new ArrayList<>();
-    }
+	public AccountService(AccountDAO accountDAO){
+		this.accountDAO = accountDAO;
+		this.observerList = new ArrayList<Observer>();
+		this.registerObserver(MainForm.getInstance());
+		MainForm.getInstance().setSubject(this);
+	}
 
-    public final void createAccount(String accountNumber, Customer customer, String accountType) {
-        Account account = this.initAccount(accountType, customer);
-        account.setCustomer(customer);
-        account.setAccountNumber(accountNumber);
-        accountDAO.createAccount(account);
 
-        notifyObservers();
-    }
+	public final void createAccount(String accountNumber, Customer customer, String accountType) {
+		Account account = this.accountFactory(accountType, customer);
+		account.setCustomer(customer);
+		account.setAccountNumber(accountNumber);
+		accountDAO.createAccount(account);
+		this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
+		notifyObservers();
+	}
 
-    public abstract Account initAccount(String accountType, Customer customer);
+	public void deposit(String accountNumber, double amount) {
+		Account account = accountDAO.loadAccount(accountNumber);
+		account.deposit(amount);
 
-    public void deposit(String accountNumber, double amount) {
-        Account account = accountDAO.loadAccount(accountNumber);
-        if(account != null) {
-            account.deposit(amount);
-            accountDAO.updateAccount(account);
+		accountDAO.updateAccount(account);
+	}
 
-            addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
-        } else{
-            System.out.println("deposited");
-        }
-        notifyObservers();
-    }
+	public Account getAccount(String accountNumber) {
+		Account account = accountDAO.loadAccount(accountNumber);
+		return account;
+	}
 
-    public void withdraw(String accountNumber, double amount) {
-        Account account = accountDAO.loadAccount(accountNumber);
-        account.withdraw(amount);
-        accountDAO.updateAccount(account);
+	public Collection<Account> getAllAccounts() {
+		return accountDAO.getAccounts();
+	}
 
-        addToChangedAccountList(account, new AccountTransaction(Action.WITHDRAW, amount));
-        notifyObservers();
-    }
+	public void addInterest() {
 
-    public void addInterest() {
-        Collection<String> actNums = getAllAccounts().stream().map(Account::getAccountNumber).collect(Collectors.toList());
-        for (String actNum : actNums) {
-            Account account = accountDAO.loadAccount(actNum);
-            accountDAO.updateAccount(account);
-        }
-        notifyObservers();
-    }
+		for (String accountNumber : getAllAccountNumbers()) {
+			Account account = accountDAO.loadAccount(accountNumber);
+			// adding visitor pattern for adding interest
+			//account.accept(interestComputerVisitor);
+			account.addInterest();
+			accountDAO.updateAccount(account);
+		}
 
-    @Override
-    public void registerObserver(Observer observer) {
-        Log.getLogger().write("Registering Observer " + observer.getClass().getSimpleName());
-        this.observerList.add(observer);
-    }
+	}
 
-    @Override
-    public void removeObserver(Observer observer) {
-        Log.getLogger().write("Removing Observer " + observer.getClass().getSimpleName());
-        this.observerList.remove(observer);
-    }
+	public void withdraw(String accountNumber, double amount) {
+		Account account = accountDAO.loadAccount(accountNumber);
+		account.withdraw(amount);
+		accountDAO.updateAccount(account);
+	}
 
-    @Override
-    public void notifyObservers() {
-        Log.getLogger().write("Notifying to observers!");
-        this.observerList.forEach(Observer::update);
-    }
 
-    public Map<Account, ArrayList<AccountTransaction>> getAccountTransactions() {
-        return changedAccountList;
-    }
+    public List<String> getAllAccountNumbers(){
+		ArrayList<String> listOfAccountNumbers = new ArrayList<String>();
+		for (Account value : getAllAccounts()) {
+			listOfAccountNumbers.add(value.getAccountNumber());
+		}
+		return listOfAccountNumbers;
+	}
+	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
+		Account fromAccount = accountDAO.loadAccount(fromAccountNumber);
+		Account toAccount = accountDAO.loadAccount(toAccountNumber);
+		fromAccount.transferFunds(toAccount, amount, description);
+		accountDAO.updateAccount(fromAccount);
+		accountDAO.updateAccount(toAccount);
+	}
 
-    public void addToChangedAccountList(Account account, AccountTransaction accTranx) {
-        ArrayList<AccountTransaction> transactions;
-        if(changedAccountList.containsKey(account)) {
-            transactions = changedAccountList.get(account);
-        } else {
-            transactions = new ArrayList<>();
-        }
-        transactions.add(accTranx);
-        changedAccountList.put(account, transactions);
-    }
+	public abstract Account accountFactory(String accountType, Customer customer);
 
-    public void clearChangedAccountList(){
-        changedAccountList.clear();
-    }
+	public AccountOperationCategory getAccountOperationCategory() {
+		return accountOperationCategory;
+	}
 
-    public Account getAccount(String accountNumber) {
-        return accountDAO.loadAccount(accountNumber);
-    }
+	@Override
+	public void registerObserver(Observer observer) {
+		this.observerList.add(observer);
+	}
 
-    public Collection<Account> getAllAccounts() {
-        return accountDAO.getAccounts();
-    }
+	@Override
+	public void removeObserver(Observer observer) {
+		this.observerList.remove(observer);
+	}
 
-    public String getReport() {
-        return report;
-    }
-
-    public void setReport(String report) {
-        this.report = report;
-    }
+	@Override
+	public void notifyObservers() {
+		this.observerList.forEach(Observer::update);
+	}
 }

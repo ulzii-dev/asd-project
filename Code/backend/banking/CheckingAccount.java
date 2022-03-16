@@ -11,7 +11,7 @@ public class CheckingAccount extends Account {
 
     @Override
     public double accept(Visitor visitor) {
-        return 0;
+        return visitor.visit(this);
     }
 
     @Override

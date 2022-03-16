@@ -1,5 +1,6 @@
 package backend.commons;
 
+import backend.banking.visitor.InterestComputerVisitor;
 import backend.banking.visitor.Visitor;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ public abstract class Account {
 	private Customer customer;
 
 	private String accountNumber;
+
+	InterestComputerVisitor visitor = new InterestComputerVisitor();
 
 	private List<AccountEntry> accountEntries;
 
@@ -62,9 +65,13 @@ public abstract class Account {
 	}
 
 	public void addInterest(){
-		double interest =  interestComputationStrategy.computeInterest(getBalance());
-		AccountEntry entry =  new AccountEntry(interest,"interest added","","");
+		// will be and can be used interchangebaly with visitor pattern
+		//double interest =  interestComputationStrategy.computeInterest(getBalance());
+		double interestVistor = this.accept(visitor);
+		AccountEntry entry =  new AccountEntry(interestVistor,"interest added","","");
 		accountEntries.add(entry);
+
+
 	}
 	public abstract double accept(Visitor visitor);
 

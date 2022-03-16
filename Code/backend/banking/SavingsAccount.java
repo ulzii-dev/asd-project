@@ -5,7 +5,7 @@ import backend.banking.visitor.Visitor;
 import backend.commons.Account;
 import backend.commons.InterestComputationStrategy;
 
-public class SavingsAccount extends Account implements Visitable {
+public class SavingsAccount extends Account  {
     public SavingsAccount(InterestComputationStrategy interestComputationStrategy) {
         super(interestComputationStrategy);
     }

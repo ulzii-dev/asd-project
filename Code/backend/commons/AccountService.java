@@ -41,9 +41,15 @@ public abstract class AccountService implements Observable {
 	public void deposit(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
-
 		accountDAO.updateAccount(account);
 	}
+
+	public void withdraw(String accountNumber, double amount) {
+		Account account = accountDAO.loadAccount(accountNumber);
+		account.withdraw(amount);
+		accountDAO.updateAccount(account);
+	}
+
 
 	public Account getAccount(String accountNumber) {
 		Account account = accountDAO.loadAccount(accountNumber);
@@ -66,13 +72,6 @@ public abstract class AccountService implements Observable {
 
 	}
 
-	public void withdraw(String accountNumber, double amount) {
-		Account account = accountDAO.loadAccount(accountNumber);
-		account.withdraw(amount);
-		accountDAO.updateAccount(account);
-	}
-
-
 	public List<String> getAllAccountNumbers(){
 		ArrayList<String> listOfAccountNumbers = new ArrayList<String>();
 		for (Account value : getAllAccounts()) {
@@ -80,6 +79,8 @@ public abstract class AccountService implements Observable {
 		}
 		return listOfAccountNumbers;
 	}
+
+	//copied and the same
 	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
 		Account fromAccount = accountDAO.loadAccount(fromAccountNumber);
 		Account toAccount = accountDAO.loadAccount(toAccountNumber);
@@ -87,6 +88,8 @@ public abstract class AccountService implements Observable {
 		accountDAO.updateAccount(fromAccount);
 		accountDAO.updateAccount(toAccount);
 	}
+
+
 
 	public abstract Account createAccountFactory(String accountType, Customer customer);
 

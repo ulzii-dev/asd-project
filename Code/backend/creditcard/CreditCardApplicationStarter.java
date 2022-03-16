@@ -1,16 +1,16 @@
 package backend.creditcard;
 
-import backend.creditcard.commands.DepositCommand;
-import backend.creditcard.commands.WithdrawCommand;
 import backend.creditcard.commands.AddCompanyAccountCommand;
 import backend.creditcard.commands.AddPersonalAccountCommand;
-import framework.ui.UIFrame;
+import backend.creditcard.commands.DepositCommand;
+import backend.creditcard.commands.WithdrawCommand;
 import framework.ui.UIControl;
+import framework.ui.UIFrame;
 
 import javax.swing.*;
 
 public class CreditCardApplicationStarter {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             UIControl uIControl = UIFrame.getInstance();

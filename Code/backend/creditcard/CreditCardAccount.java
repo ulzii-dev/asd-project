@@ -3,9 +3,8 @@ package backend.creditcard;
 import backend.banking.visitor.Visitor;
 import backend.commons.Account;
 import backend.commons.AccountEntry;
-import backend.creditcard.CreditCardType;
-import backend.creditcard.strategy.CreditCardCalculator;
 import backend.commons.Customer;
+import backend.creditcard.strategy.CreditCardCalculator;
 
 import java.time.LocalDate;
 
@@ -18,14 +17,15 @@ public class CreditCardAccount extends Account {
                              String accountType,
                              Customer customer,
                              CreditCardCalculator creditCardCalculator,
-                CreditCardType creditCardType) {
+                             CreditCardType creditCardType) {
         super(creditCardCalculator);
         setAccountNumber(accountNumber);
         setAccountType(accountType);
         setCustomer(customer);
-        this.creditCardCalculator =  creditCardCalculator;
-        this.creditCardType =  creditCardType;
+        this.creditCardCalculator = creditCardCalculator;
+        this.creditCardType = creditCardType;
     }
+
     @Override
     public double accept(Visitor visitor) {
         return visitor.visit(this);
@@ -50,7 +50,7 @@ public class CreditCardAccount extends Account {
 
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount()<0){
+                if (accountEntry.getAmount() < 0) {
                     totalCredit += accountEntry.getAmount();
                 }
             }
@@ -65,7 +65,7 @@ public class CreditCardAccount extends Account {
 
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount()>=0){
+                if (accountEntry.getAmount() >= 0) {
                     totalCredit += accountEntry.getAmount();
                 }
             }
@@ -74,6 +74,7 @@ public class CreditCardAccount extends Account {
         return totalCredit;
 
     }
+
     public double getNewBalance() {
         return this.creditCardCalculator.computeBalance(getPreviousBalance(),
                 getTotalCredit(), getTotalCharges());
@@ -88,7 +89,7 @@ public class CreditCardAccount extends Account {
         return this.creditCardCalculator.computeMonthlyMinimumPayment(getTotalCredit());
     }
 
-    public double getMonthlyInterest(){
+    public double getMonthlyInterest() {
         return this.creditCardCalculator.
                 computeInterest(getTotalCredit());
     }

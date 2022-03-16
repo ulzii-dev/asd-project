@@ -1,14 +1,16 @@
 package backend.banking.service;
 
 import backend.banking.constant.BankingAccountType;
+import backend.banking.dao.BankingAccountDAO;
 import backend.banking.domain.CheckingAccount;
 import backend.banking.domain.SavingsAccount;
-import backend.banking.dao.BankingAccountDAO;
 import backend.banking.strategy.CompanyCheckingAccountComputation;
 import backend.banking.strategy.CompanySavingsAccountComputation;
 import backend.banking.strategy.PersonCheckingAccountComputation;
 import backend.banking.strategy.PersonSavingsAccountInterestComputation;
-import backend.commons.*;
+import backend.commons.Account;
+import backend.commons.AccountService;
+import backend.commons.Customer;
 import framework.domain.CompanyAccount;
 import framework.domain.PersonalAccount;
 import framework.observer.EmailSender;
@@ -49,8 +51,8 @@ public class BankingAccountService extends AccountService {
                     accountType,
                     customer,
                     new PersonSavingsAccountInterestComputation());
-        } else if(customer instanceof CompanyAccount) {
-            if (bankAccountType== BankingAccountType.CHECKING) {
+        } else if (customer instanceof CompanyAccount) {
+            if (bankAccountType == BankingAccountType.CHECKING) {
                 return new CheckingAccount(
                         accountNumber,
                         accountType,

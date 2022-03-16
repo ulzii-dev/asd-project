@@ -1,7 +1,7 @@
 package backend.creditcard.commands;
 
-import framework.Command;
 import backend.creditcard.service.CreditCardAccountService;
+import framework.Command;
 import framework.ui.UIControl;
 
 public class AddCompanyAccountCommand implements Command {

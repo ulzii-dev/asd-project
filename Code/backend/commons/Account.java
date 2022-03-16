@@ -8,90 +8,86 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class Account {
-	private Customer customer;
+    private final List<AccountEntry> accountEntries;
+    private final InterestComputationStrategy interestComputationStrategy;
+    InterestComputerVisitor visitor = new InterestComputerVisitor();
+    private Customer customer;
+    private String accountNumber;
+    private String accountType;
 
-	private String accountNumber;
+    public Account(InterestComputationStrategy interestComputationStrategy) {
+        this.interestComputationStrategy = interestComputationStrategy;
+        this.accountEntries = new ArrayList<>();
+    }
 
-	private String accountType;
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
-	InterestComputerVisitor visitor = new InterestComputerVisitor();
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
-	private List<AccountEntry> accountEntries;
+    public double getBalance() {
+        double balance = 0;
+        for (AccountEntry entry : accountEntries) {
+            balance += entry.getAmount();
+        }
+        return balance;
+    }
 
-	private InterestComputationStrategy interestComputationStrategy;
+    public void deposit(double amount) {
+        AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
+        accountEntries.add(entry);
+    }
 
-	public Account(InterestComputationStrategy interestComputationStrategy) {
-		this.interestComputationStrategy = interestComputationStrategy;
-		this.accountEntries = new ArrayList<>();
-	}
+    public void withdraw(double amount) {
+        AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "");
+        accountEntries.add(entry);
+    }
 
-	public String getAccountNumber() {
-		return accountNumber;
-	}
+    private void addEntry(AccountEntry entry) {
+        accountEntries.add(entry);
+    }
 
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
+    public void transferFunds(Account toAccount, double amount, String description) {
+        AccountEntry fromEntry = new AccountEntry(-amount, description, toAccount.getAccountNumber(),
+                toAccount.getCustomer().getName());
+        AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
+                toAccount.getCustomer().getName());
 
-	public double getBalance() {
-		double balance = 0;
-		for (AccountEntry entry : accountEntries) {
-			balance += entry.getAmount();
-		}
-		return balance;
-	}
+        accountEntries.add(fromEntry);
 
-	public void deposit(double amount) {
-		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
-		accountEntries.add(entry);
-	}
+        toAccount.addEntry(toEntry);
+    }
 
-	public void withdraw(double amount) {
-		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "");
-		accountEntries.add(entry);
-	}
+    public void addInterest() {
+        // will be and can be used interchangebaly with visitor pattern
+        //double interestStrategy =  interestComputationStrategy.computeInterest(getBalance());
+        double interestVistor = this.accept(visitor);
+        AccountEntry entry = new AccountEntry(interestVistor, "interest added", "", "");
+        accountEntries.add(entry);
 
-	private void addEntry(AccountEntry entry) {
-		accountEntries.add(entry);
-	}
+    }
 
-	public void transferFunds(Account toAccount, double amount, String description) {
-		AccountEntry fromEntry = new AccountEntry(-amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		
-		accountEntries.add(fromEntry);
-		
-		toAccount.addEntry(toEntry);
-	}
+    public abstract double accept(Visitor visitor);
 
-	public void addInterest(){
-		// will be and can be used interchangebaly with visitor pattern
-		//double interestStrategy =  interestComputationStrategy.computeInterest(getBalance());
-		double interestVistor = this.accept(visitor);
-		AccountEntry entry =  new AccountEntry(interestVistor,"interest added","","");
-		accountEntries.add(entry);
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	}
-	public abstract double accept(Visitor visitor);
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-	public Customer getCustomer() {
-		return customer;
-	}
+    public Collection<AccountEntry> getAccountEntries() {
+        return accountEntries;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    public abstract String getAccountType();
 
-	public Collection<AccountEntry> getAccountEntries() {
-		return accountEntries;
-	}
-
-	public abstract String getAccountType();
-
-	public void setAccountType(String accountType){
-		this.accountType = accountType;
-	}
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
 }

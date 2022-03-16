@@ -25,6 +25,7 @@ public class BankFrm extends javax.swing.JFrame {
     javax.swing.JButton JButton_Withdraw = new javax.swing.JButton();
     javax.swing.JButton JButton_Addinterest = new javax.swing.JButton();
     javax.swing.JButton JButton_Exit = new javax.swing.JButton();
+
     public BankFrm() {
         myframe = this;
 

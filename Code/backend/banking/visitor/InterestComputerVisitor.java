@@ -28,8 +28,8 @@ public class InterestComputerVisitor implements Visitor {
 
     @Override
     public double visit(CreditCardAccount creditCardAccount) {
-        String type =  creditCardAccount.getAccountType();
-        return  switch (type) {
+        String type = creditCardAccount.getAccountType();
+        return switch (type) {
             case "Gold" -> creditCardAccount.getTotalCredit() * 0.06;
             case "Bronze" -> creditCardAccount.getTotalCredit() * 0.1;
             case "Silver" -> creditCardAccount.getTotalCredit() * 0.08;

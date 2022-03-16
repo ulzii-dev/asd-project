@@ -4,13 +4,13 @@ import backend.banking.commands.AddCompanyAccountCommand;
 import backend.banking.commands.AddPersonalAccountCommand;
 import backend.banking.commands.DepositCommand;
 import backend.banking.commands.WithdrawCommand;
-import framework.ui.UIFrame;
 import framework.ui.UIControl;
+import framework.ui.UIFrame;
 
 import javax.swing.*;
 
 public class BankingApplicationStarter {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             UIControl uIControl = UIFrame.getInstance();

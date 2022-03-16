@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Customer {
+    private final Set<Account> accountList;
     private int customerId;
     private String name;
     private String street;
@@ -12,7 +13,6 @@ public class Customer {
     private String state;
     private int zip;
     private String email;
-    private Set<Account> accountList;
 
     public Customer(int customerId, String name,
                     String street, String city,

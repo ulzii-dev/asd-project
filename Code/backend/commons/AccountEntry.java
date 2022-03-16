@@ -1,7 +1,6 @@
 package backend.commons;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class AccountEntry {
     private LocalDate date;

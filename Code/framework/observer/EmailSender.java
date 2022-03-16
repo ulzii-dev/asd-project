@@ -1,6 +1,9 @@
 package framework.observer;
 
-import backend.commons.*;
+import backend.commons.Account;
+import backend.commons.AccountService;
+import backend.commons.AccountTransaction;
+import backend.commons.Log;
 import framework.Observer;
 import framework.domain.CompanyAccount;
 import framework.domain.PersonalAccount;
@@ -25,8 +28,8 @@ public class EmailSender implements Observer {
             List<AccountTransaction> transactions = entry.getValue();
 
             int index = 0;
-            if(account.getCustomer() instanceof CompanyAccount || account.getCustomer() instanceof PersonalAccount) {
-                if(!emailHeaderAdded) {
+            if (account.getCustomer() instanceof CompanyAccount || account.getCustomer() instanceof PersonalAccount) {
+                if (!emailHeaderAdded) {
                     Log.getLogger().write("");
                     Log.getLogger().write("OBSERVER_PATTERN: Pulling changed accounts from AccountService");
                     Log.getLogger().write(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Sending transaction emails ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
@@ -38,18 +41,17 @@ public class EmailSender implements Observer {
                 for (Iterator<AccountTransaction> it = transactions.iterator(); it.hasNext(); ) {
                     AccountTransaction transaction = it.next();
 
-                    if(account.getCustomer() instanceof CompanyAccount) {
-                        Log.getLogger().write(  "    " + index + ". CompanyAccount");
-                        Log.getLogger().write( "       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
-                        Log.getLogger().write( account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
-                    } else if((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > 500))
-                    {
-                        Log.getLogger().write( "    " + index + ". PersonalAccount");
-                        Log.getLogger().write( "       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
-                        Log.getLogger().write( account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
+                    if (account.getCustomer() instanceof CompanyAccount) {
+                        Log.getLogger().write("    " + index + ". CompanyAccount" + ": " + account.getCustomer().getName() + " [" + account.getAccountNumber() + "]");
+                        Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
+                        Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
+                    } else if ((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > 500)) {
+                        Log.getLogger().write("    " + index + ". PersonalAccount" + ": " + account.getCustomer().getName() + " [" + account.getAccountNumber() + "]");
+                        Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
+                        Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
                     }
 
-                    if(it.hasNext()) {
+                    if (it.hasNext()) {
                         Log.getLogger().write("|       ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿       |");
                     }
 
@@ -58,7 +60,7 @@ public class EmailSender implements Observer {
             }
         }
 
-        if(emailHeaderAdded) {
+        if (emailHeaderAdded) {
             Log.getLogger().write("⎩＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ SENT ALL EMAILS ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿⎭");
         }
         accountService.clearChangedAccountList();

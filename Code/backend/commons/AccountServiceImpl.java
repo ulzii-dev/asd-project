@@ -1,7 +1,6 @@
 package backend.commons;
 
 import backend.banking.visitor.InterestComputerVisitor;
-import factory.AccountFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;

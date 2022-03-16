@@ -1,13 +1,14 @@
-package framework.ui;
+package framework;
 
 
 import backend.commons.Log;
 import backend.creditcard.service.CreditCardAccountService;
-import framework.Command;
 import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
+import framework.ui.AddCompanyAccount;
+import framework.ui.AddPersonalAccount;
 import ui.*;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ import java.util.*;
 /**
  * A basic JFC based application.
  */
-public class MainForm extends FormTemplate implements UIControl, framework.Observer
+public class ApplicationContext extends FormTemplate implements UIControl, framework.Observer
 {
     /****
      * init variables in the object
@@ -46,24 +47,24 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 
     private AccountService subject;
     private UIConfig uiConfig;
-    private static volatile MainForm myframe;
+    private static volatile ApplicationContext applicationContext;
 
 
-	private MainForm() {
+	private ApplicationContext() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
-	public static MainForm getInstance() {
-		if (myframe == null) {
+	public static ApplicationContext getInstance() {
+		if (applicationContext == null) {
 			synchronized (CreditCardAccountService.class) {
-				if (myframe == null) {
-					myframe = new MainForm();
+				if (applicationContext == null) {
+					applicationContext = new ApplicationContext();
 				}
 			}
 		}
-		return myframe;
+		return applicationContext;
 	}
 
 	public void init(String title, UIConfig uiConfig) {
@@ -85,14 +86,14 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	};
 
 	private final ActionListener addPersonalAccountActionListener = (ActionListener) -> {
-		openDialog(new AddPersonalAccount(myframe));
+		openDialog(new AddPersonalAccount(applicationContext));
 		if (newAccount) {
 			this.addPersonalAccountCommand.execute(this);
 		}
 	};
 
 	private final ActionListener addCompanyAccountActionListener = (ActionListener) -> {
-		openDialog(new AddCompanyAccount(myframe));
+		openDialog(new AddCompanyAccount(applicationContext));
 		if (newAccount) {
 			this.addCompanyAccountCommand.execute(this);
 		}
@@ -134,7 +135,6 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 
 	@Override
 	public void setWithdrawCommand(Command withdrawCommand) {
-
 	}
 
 	@Override
@@ -226,7 +226,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 		public void windowClosing(WindowEvent event)
 		{
 			Object object = event.getSource();
-			if (object == MainForm.this)
+			if (object == ApplicationContext.this)
 				MainFrm_windowClosing(event);
 		}
 	}

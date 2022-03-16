@@ -4,6 +4,7 @@ package framework.ui;
 */
 
 import backend.creditcard.CreditCardType;
+import framework.ApplicationContext;
 import ui.PersonalAccount;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class AddPersonalAccount extends javax.swing.JDialog {
 
-    private MainForm parentframe;
+    private ApplicationContext parentframe;
     List<JRadioButton> btnAccountTyps = new ArrayList<>();
     JLabel JLabel1 = new JLabel();
     JLabel JLabel2 = new JLabel();
@@ -35,7 +36,7 @@ public class AddPersonalAccount extends javax.swing.JDialog {
     JButton JButton_CANCEL = new JButton();
     JLabel JLabel8 = new JLabel();
 
-    public AddPersonalAccount(MainForm parent) {
+    public AddPersonalAccount(ApplicationContext parent) {
         super(parent);
         parentframe=parent;
 

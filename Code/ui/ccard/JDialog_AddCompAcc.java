@@ -1,7 +1,7 @@
 package ui.ccard;
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog {
-    private final CardFrm parentframe;
+    private final CreditCardUIFrame parentframe;
     //{{DECLARE_CONTROLS
     javax.swing.JRadioButton JRadioButton_Chk = new javax.swing.JRadioButton();
     javax.swing.JRadioButton JRadioButton_Sav = new javax.swing.JRadioButton();
@@ -21,7 +21,7 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog {
     javax.swing.JTextField JTextField_EM = new javax.swing.JTextField();
     javax.swing.JButton JButton_OK = new javax.swing.JButton();
     javax.swing.JButton JButton_Calcel = new javax.swing.JButton();
-    public JDialog_AddCompAcc(CardFrm parent) {
+    public JDialog_AddCompAcc(CreditCardUIFrame parent) {
         super(parent);
         parentframe = parent;
 
@@ -115,7 +115,7 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog {
             parentframe.accountType = "Ch";
         else
             parentframe.accountType = "S";
-        parentframe.newaccount = true;
+        parentframe.newAccount = true;
         dispose();
     }
 

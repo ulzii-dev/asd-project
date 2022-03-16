@@ -3,8 +3,8 @@ package ui.ccard;
 		A basic implementation of the JDialog class.
 */
 
-public class JDialog_AddCCAccount extends javax.swing.JDialog {
-    private final CardFrm parentframe;
+public class JDialog_AddCreditCardAccount extends javax.swing.JDialog {
+    private final CreditCardUIFrame parentframe;
     //{{DECLARE_CONTROLS
     javax.swing.JRadioButton JRadioButton_Gold = new javax.swing.JRadioButton();
     javax.swing.JRadioButton JRadioButton_Silver = new javax.swing.JRadioButton();
@@ -27,7 +27,7 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog {
     javax.swing.JRadioButton JRadioButton_Bronze = new javax.swing.JRadioButton();
     javax.swing.JLabel JLabel7 = new javax.swing.JLabel();
     javax.swing.JTextField JTextField_Email = new javax.swing.JTextField();
-    public JDialog_AddCCAccount(CardFrm parent) {
+    public JDialog_AddCreditCardAccount(CreditCardUIFrame parent) {
         super(parent);
         parentframe = parent;
 
@@ -159,7 +159,7 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog {
                 parentframe.accountType = "Bronze";
         }
 
-        parentframe.newaccount = true;
+        parentframe.newAccount = true;
         dispose();
     }
 

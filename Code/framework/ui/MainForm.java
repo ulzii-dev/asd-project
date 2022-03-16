@@ -1,12 +1,12 @@
-package ui.bank;
+package framework.ui;
 
 
 import backend.banking.commands.Command;
 import backend.banking.commands.NoCommand;
+import backend.banking.service.BankingAccountService;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
-import backend.creditcard.service.CreditCardAccountService;
 import ui.*;
 
 import javax.swing.*;
@@ -41,7 +41,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	String zip;
 	String state;
 	String amount;
-    boolean newaccount;
+    boolean newAccount;
 
     private AccountService subject;
     private UIConfig uiConfig;
@@ -57,7 +57,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	//TODO:Why -> Why?
 	public static MainForm getInstance() {
 		if (myframe == null) {
-			synchronized (CreditCardAccountService.class) {
+			synchronized (BankingAccountService.class) {
 				if (myframe == null) {
 					myframe = new MainForm();
 				}
@@ -68,8 +68,8 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 
 	public void init(String title, UIConfig uiConfig) {
 		Map<String,ActionListener> buttons = new HashMap<>();
-		buttons.put("Add personal account",personalAccount);
-		buttons.put("Add company account",companyAccount);
+		buttons.put("Add personal account", addPersonalAccountActionListener);
+		buttons.put("Add company account", addCompanyAccountActionListener);
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
@@ -84,16 +84,16 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 		System.exit(0);
 	};
 
-	private final ActionListener personalAccount = (ActionListener) -> {
-		openDialog(new JDialog_AddPersonalAccount(myframe));
-		if (newaccount) {
+	private final ActionListener addPersonalAccountActionListener = (ActionListener) -> {
+		openDialog(new AddPersonalAccount(myframe));
+		if (newAccount) {
 			this.addPersonalAccountCommand.execute(this);
 		}
 	};
 
-	private final ActionListener companyAccount = (ActionListener) -> {
-		openDialog(new JDialog_AddCompanyAccount(myframe));
-		if (newaccount) {
+	private final ActionListener addCompanyAccountActionListener = (ActionListener) -> {
+		openDialog(new AddCompanyAccount(myframe));
+		if (newAccount) {
 			this.addCompanyAccountCommand.execute(this);
 		}
 	};
@@ -247,7 +247,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	private void tableRow(Account act){
 		model.addRow(this.uiConfig.buildRow(act));
 		JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-		newaccount = false;
+		newAccount = false;
 	}
 
 	public void openDialog(JDialog jDialog){

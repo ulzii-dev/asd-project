@@ -4,7 +4,7 @@ import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
 import ui.AccountOperationCategory;
-import ui.bank.MainForm;
+import framework.ui.MainForm;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,12 +26,16 @@ public abstract class AccountService implements Observable {
 
 
 	public final void createAccount(String accountNumber, Customer customer, String accountType) {
-		Account account = this.accountFactory(accountType, customer);
-		account.setCustomer(customer);
-		account.setAccountNumber(accountNumber);
-		accountDAO.createAccount(account);
-		this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
-		notifyObservers();
+		try {
+			Account account = this.createAccountFactory(accountType, customer);
+			account.setCustomer(customer);
+			account.setAccountNumber(accountNumber);
+			accountDAO.createAccount(account);
+			this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
+			notifyObservers();
+		}catch (NullPointerException n){
+			n.printStackTrace();
+		}
 	}
 
 	public void deposit(String accountNumber, double amount) {
@@ -69,7 +73,7 @@ public abstract class AccountService implements Observable {
 	}
 
 
-    public List<String> getAllAccountNumbers(){
+	public List<String> getAllAccountNumbers(){
 		ArrayList<String> listOfAccountNumbers = new ArrayList<String>();
 		for (Account value : getAllAccounts()) {
 			listOfAccountNumbers.add(value.getAccountNumber());
@@ -84,7 +88,7 @@ public abstract class AccountService implements Observable {
 		accountDAO.updateAccount(toAccount);
 	}
 
-	public abstract Account accountFactory(String accountType, Customer customer);
+	public abstract Account createAccountFactory(String accountType, Customer customer);
 
 	public AccountOperationCategory getAccountOperationCategory() {
 		return accountOperationCategory;

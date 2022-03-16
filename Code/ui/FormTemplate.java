@@ -18,8 +18,8 @@ public abstract class FormTemplate extends JFrame {
     protected JScrollPane JScrollPane1;
     protected Object[] rowdata;
 
-    public final void generateForm(String title, UIConfig uiConfig, Map<String, ActionListener> buttons){
-//        initCommands();
+    public final void generateForm(String title, UIConfig uiConfig,
+                                   Map<String, ActionListener> buttons){
         setupJPanel(title,uiConfig.getReportColumnNames());
         pSetSize();
         panelBounds();

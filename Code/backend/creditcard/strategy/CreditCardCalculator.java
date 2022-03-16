@@ -1,11 +1,14 @@
 package backend.creditcard.strategy;
 
-public interface CreditCardCalculator {
+import backend.commons.InterestComputationStrategy;
 
-    public double computeMonthlyInterest(double totalCredit);
+public interface CreditCardCalculator extends InterestComputationStrategy {
+
+    public double computeInterest(double totalCredit);
     public double computeMonthlyMinimumPayment(double totalCredit);
     public double computeBalance(double previousBalance, double totalCredit,double totalCharges);
     public double computeTotalDue(double newBalance);
+
 
 
 }

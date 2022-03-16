@@ -1,6 +1,5 @@
 package backend.banking;
 
-import backend.banking.visitor.Visitable;
 import backend.banking.visitor.Visitor;
 import backend.commons.Account;
 import backend.commons.InterestComputationStrategy;

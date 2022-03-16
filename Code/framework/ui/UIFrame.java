@@ -25,6 +25,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	 ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
+	private Command addInterestCommand;
 
 	protected AccountOperationCategory accountOperationCategory;
 
@@ -52,6 +53,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
+		this.addInterestCommand = new NoCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
@@ -70,6 +72,8 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		Map<String,ActionListener> buttons = new HashMap<>();
 		buttons.put("Add personal account", addPersonalAccountActionListener);
 		buttons.put("Add company account", addCompanyAccountActionListener);
+		buttons.put("Add Interest", addInterestActionListener);
+
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
@@ -98,6 +102,11 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		}
 	};
 
+	private final ActionListener addInterestActionListener = (ActionListener) -> {
+		this.addInterestCommand.execute(this);
+		JOptionPane.showMessageDialog(null, "Add interest to all accounts", "Add interest to all accounts", JOptionPane.WARNING_MESSAGE);
+	};
+
 	void exitApplication(){
 		try {
 			this.setVisible(false);    // hide the Frame
@@ -124,6 +133,8 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void setAddInterestCommand(Command addInterestCommand) {
+
+		this.addInterestCommand = addInterestCommand;
 
 	}
 

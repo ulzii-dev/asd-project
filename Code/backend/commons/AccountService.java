@@ -64,8 +64,6 @@ public abstract class AccountService implements Observable {
 
 		for (String accountNumber : getAllAccountNumbers()) {
 			Account account = accountDAO.loadAccount(accountNumber);
-			// adding visitor pattern for adding interest
-			//account.accept(interestComputerVisitor);
 			account.addInterest();
 			accountDAO.updateAccount(account);
 		}

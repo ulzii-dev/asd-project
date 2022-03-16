@@ -14,14 +14,14 @@ public class CreditCardAccount extends Account {
     CreditCardCalculator creditCardCalculator;
     CreditCardType creditCardType;
     public CreditCardAccount(CreditCardCalculator creditCardCalculator, CreditCardType creditCardType) {
-        super(null);
+        super(creditCardCalculator);
 
         this.creditCardCalculator =  creditCardCalculator;
         this.creditCardType =  creditCardType;
     }
     @Override
     public double accept(Visitor visitor) {
-        return 0;
+        return visitor.visit(this);
     }
 
 
@@ -83,7 +83,7 @@ public class CreditCardAccount extends Account {
 
     public double getMonthlyInterest(){
         return this.creditCardCalculator.
-                computeMonthlyInterest(getTotalCredit());
+                computeInterest(getTotalCredit());
     }
 
 

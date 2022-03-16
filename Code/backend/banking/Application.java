@@ -11,15 +11,15 @@ public class Application {
         AccountService personalAccountService = new AccountServiceImpl(personalAccountFactory);
 
         // create 2 accounts;
-        personalAccountService.createAccount("1263862", "Frank Brown");
-        personalAccountService.createAccount("4253892", "John Doe");
+//        personalAccountService.createAccount("1263862", "Frank Brown");
+//        personalAccountService.createAccount("4253892", "John Doe");
         // use account 1;
         personalAccountService.deposit("1263862", 240);
         personalAccountService.deposit("1263862", 529);
         personalAccountService.withdraw("1263862", 230);
         // use account 2;
         personalAccountService.deposit("4253892", 12450);
-        personalAccountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
+//        personalAccountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
         // show balances
 
         BankAccountService bs = BankAccountService.getInstance();

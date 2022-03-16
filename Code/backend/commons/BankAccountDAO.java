@@ -1,9 +1,11 @@
 package backend.commons;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class BankAccountDAO implements AccountDAO {
     private static volatile BankAccountDAO instance;
+    Collection<Account> accountlist = new ArrayList<>();
 
     public static BankAccountDAO getInstance() {
         if (instance == null) {
@@ -19,7 +21,8 @@ public class BankAccountDAO implements AccountDAO {
 
     @Override
     public void createAccount(Account account) {
-        Log.getLogger().write("Creating account with AN: " + account.getAccountNumber());
+        accountlist.add(account);
+        Log.getLogger().write("Creating account: " + account.getAccountNumber());
     }
 
     @Override

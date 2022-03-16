@@ -62,15 +62,12 @@ public class AccountServiceImpl implements AccountService {
 		account.withdraw(amount);
 		accountDAO.updateAccount(account);
 	}
-
-
     public List<String> getAllAccountNumbers(){
 		ArrayList<String> listOfAccntNumbers = new ArrayList<String>();
 
 		for (Account value : getAllAccounts()) {
 			listOfAccntNumbers.add(value.getAccountNumber());
 		}
-
 		return listOfAccntNumbers;
 	}
 

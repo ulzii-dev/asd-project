@@ -16,10 +16,6 @@ public class CreditAccount extends Account {
         this.creditCardCalculator =  creditCardCalculator;
     }
 
-
-
-
-
     @Override
     public double accept(Visitor visitor) {
         return 0;
@@ -73,11 +69,13 @@ public class CreditAccount extends Account {
 
     }
     public double getNewBalance() {
-        return this.creditCardCalculator.computeBalance(getPreviousBalance(), getTotalCredit(), getTotalCharges());
+        return this.creditCardCalculator.computeBalance(getPreviousBalance(),
+                getTotalCredit(), getTotalCharges());
     }
 
     public double getTotalDue() {
-        return this.creditCardCalculator.computeTotalDue(getNewBalance());
+        return this.creditCardCalculator.
+                computeTotalDue(getNewBalance());
     }
 
     public double getMonthlyMinimumPayment() {
@@ -85,7 +83,8 @@ public class CreditAccount extends Account {
     }
 
     public double getMonthlyInterest(){
-        return this.creditCardCalculator.computeMonthlyInterest(getTotalCredit());
+        return this.creditCardCalculator.
+                computeMonthlyInterest(getTotalCredit());
     }
 
 

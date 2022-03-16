@@ -35,8 +35,9 @@ public class BankingAccountService extends AccountService {
 
     @Override
     public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
+        BankingAccountType bankAccountType = BankingAccountType.valueOf(accountType);
         if (customer instanceof PersonalAccount) {
-            if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
+            if (bankAccountType == BankingAccountType.CHECKING) {
                 return new CheckingAccount(
                         accountNumber,
                         accountType,
@@ -49,7 +50,7 @@ public class BankingAccountService extends AccountService {
                     customer,
                     new PersonSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
-            if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
+            if (bankAccountType== BankingAccountType.CHECKING) {
                 return new CheckingAccount(
                         accountNumber,
                         accountType,

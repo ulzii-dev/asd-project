@@ -44,7 +44,7 @@ public class AddPersonalAccount extends javax.swing.JDialog {
         setModal(true);
         getContentPane().setLayout(null);
         setVisible(false);
-        setSize(383,503);
+        setSize(583,703);
         int yOffset = 0;
         SymMouse aSymMouse = new SymMouse();
         for (String actType: parentframe.getAccountTypes()) {

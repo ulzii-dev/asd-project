@@ -68,8 +68,8 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	public void init(String title, UIConfig uiConfig) {
 		Map<String,ActionListener> buttons = new HashMap<>();
-		buttons.put("Add personal account", addPersonalAccountActionListener);
-		buttons.put("Add company account", addCompanyAccountActionListener);
+		buttons.put("Add Personal Account", addPersonalAccountActionListener);
+		buttons.put("Add Company Account", addCompanyAccountActionListener);
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
@@ -178,22 +178,22 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	protected void panelBounds() {
-		JPanel1.setBounds(0,0,700,410);
+		JPanel1.setBounds(0,0,900,610);
 	}
 
 	@Override
 	protected void pSetSize() {
-		setSize(700,410);
+		setSize(900,610);
 	}
 
 	@Override
 	protected void tableBounds() {
-		JTable1.setBounds(0, 0, 420, 0);
+		JTable1.setBounds(0, 0, 920, 0);
 	}
 
 	@Override
 	protected void scrollPanelBounds() {
-		JScrollPane1.setBounds(12,24,444,190);
+		JScrollPane1.setBounds(22,44,444,190);
 	}
 
 	@Override

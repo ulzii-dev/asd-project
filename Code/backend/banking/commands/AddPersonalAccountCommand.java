@@ -13,5 +13,4 @@ public class AddPersonalAccountCommand implements Command {
                         control.getCustomer(),
                         control.getAccountType());
     }
-
 }

@@ -9,16 +9,4 @@ public class DepositCommand implements Command {
     public void execute(UIControl uiControl){
         BankingAccountService.getInstance().deposit(uiControl.getAccountNumber(), Double.parseDouble(uiControl.getAmount()));
     }
-//    private String accountNumber;
-//    private double amount;
-//
-//    public DepositCommand(String accNumber, double amount) {
-//        this.accountNumber = accNumber;
-//        this.amount = amount;
-//    }
-//
-//    @Override
-//    public void execute(UIControl uiControl){
-//        BankingAccountService.getInstance().deposit(this.accountNumber, this.amount);
-//    }
 }

@@ -1,7 +1,7 @@
 package backend.creditcard;
 
-import backend.banking.commands.DepositCommand;
-import backend.banking.commands.WithdrawCommand;
+import backend.creditcard.commands.DepositCommand;
+import backend.creditcard.commands.WithdrawCommand;
 import backend.creditcard.commands.AddCompanyAccountCommand;
 import backend.creditcard.commands.AddPersonalAccountCommand;
 import framework.ui.UIFrame;

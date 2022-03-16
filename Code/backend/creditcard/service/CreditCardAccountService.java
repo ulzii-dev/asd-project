@@ -6,10 +6,10 @@ import backend.commons.Customer;
 import backend.creditcard.CreditCardAccount;
 import backend.creditcard.CreditCardType;
 import backend.creditcard.dao.CreditCardAccountDAO;
-import backend.creditcard.observer.EmailSender;
 import backend.creditcard.strategy.BronzeCreditCardCaluclator;
 import backend.creditcard.strategy.GoldCreditCardcalculator;
 import backend.creditcard.strategy.SilverCreditCardCalculator;
+import framework.observer.EmailSender;
 
 public class CreditCardAccountService extends AccountService {
     private static volatile  CreditCardAccountService instance;

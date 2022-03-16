@@ -1,4 +1,4 @@
-package backend.creditcard.observer;
+package framework.observer;
 
 import backend.commons.*;
 import framework.Observer;

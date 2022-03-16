@@ -1,4 +1,4 @@
-package framework;
+package framework.ui;
 
 
 import backend.commons.Log;
@@ -7,8 +7,7 @@ import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
-import framework.ui.AddCompanyAccount;
-import framework.ui.AddPersonalAccount;
+import framework.Command;
 import ui.*;
 
 import javax.swing.*;
@@ -47,7 +46,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
     private AccountService subject;
     private UIConfig uiConfig;
-    private static volatile UIFrame applicationContext;
+    private static volatile UIFrame uiFrame;
 
 
 	private UIFrame() {
@@ -57,14 +56,14 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	}
 
 	public static UIFrame getInstance() {
-		if (applicationContext == null) {
+		if (uiFrame == null) {
 			synchronized (CreditCardAccountService.class) {
-				if (applicationContext == null) {
-					applicationContext = new UIFrame();
+				if (uiFrame == null) {
+					uiFrame = new UIFrame();
 				}
 			}
 		}
-		return applicationContext;
+		return uiFrame;
 	}
 
 	public void init(String title, UIConfig uiConfig) {
@@ -86,14 +85,14 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	};
 
 	private final ActionListener addPersonalAccountActionListener = (ActionListener) -> {
-		openDialog(new AddPersonalAccount(applicationContext));
+		openDialog(new AddPersonalAccount(uiFrame));
 		if (newAccount) {
 			this.addPersonalAccountCommand.execute(this);
 		}
 	};
 
 	private final ActionListener addCompanyAccountActionListener = (ActionListener) -> {
-		openDialog(new AddCompanyAccount(applicationContext));
+		openDialog(new AddCompanyAccount(uiFrame));
 		if (newAccount) {
 			this.addCompanyAccountCommand.execute(this);
 		}

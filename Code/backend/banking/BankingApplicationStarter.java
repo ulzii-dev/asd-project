@@ -2,7 +2,7 @@ package backend.banking;
 
 import backend.banking.commands.AddCompanyAccountCommand;
 import backend.banking.commands.AddPersonalAccountCommand;
-import framework.UIFrame;
+import framework.ui.UIFrame;
 import ui.UIControl;
 
 import javax.swing.*;

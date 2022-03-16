@@ -4,7 +4,7 @@ import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
 import ui.AccountOperationCategory;
-import framework.UIFrame;
+import framework.ui.UIFrame;
 
 import java.util.ArrayList;
 import java.util.Collection;

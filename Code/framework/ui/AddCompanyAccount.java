@@ -1,6 +1,5 @@
 package framework.ui;
 
-import framework.UIFrame;
 import ui.CompanyAccount;
 
 import javax.swing.*;

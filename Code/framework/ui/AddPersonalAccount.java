@@ -4,7 +4,6 @@ package framework.ui;
 */
 
 import backend.creditcard.CreditCardType;
-import framework.UIFrame;
 import ui.PersonalAccount;
 
 import javax.swing.*;

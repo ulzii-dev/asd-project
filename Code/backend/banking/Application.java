@@ -25,10 +25,10 @@ public class Application {
 
         for (Account account : accountService.getAllAccounts()) {
             Customer customer = account.getCustomer();
-            System.out.println("Statement for Account: " + account.getAccountNumber());
-            System.out.println("Account Holder: " + customer.getName());
+            Log.getLogger().write("Statement for Account: " + account.getAccountNumber());
+            Log.getLogger().write("Account Holder: " + customer.getName());
 
-            System.out.println("-Date-------------------------"
+            Log.getLogger().write("-Date-------------------------"
                     + "-Description------------------"
                     + "-Amount-------------");
 
@@ -39,7 +39,7 @@ public class Application {
                         entry.getAmount());
             }
 
-            System.out.println("----------------------------------------" + "----------------------------------------");
+            Log.getLogger().write("----------------------------------------" + "----------------------------------------");
             System.out.printf("%30s%30s%20.2f\n\n", "", "Current Balance:", account.getBalance());
         }
     }

@@ -66,7 +66,7 @@ public abstract class AccountService implements Observable {
 
 			addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
 		} else{
-			System.out.println("deposited");
+			Log.getLogger().write("deposited");
 		}
 		notifyObservers();
 	}

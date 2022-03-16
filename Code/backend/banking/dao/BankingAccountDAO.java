@@ -2,6 +2,7 @@ package backend.banking.dao;
 
 import backend.commons.Account;
 import backend.commons.AccountDAO;
+import backend.commons.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,8 +25,8 @@ public class BankingAccountDAO implements AccountDAO {
     @Override
     public void createAccount(Account account) {
         accountlist.add(account);
-        System.out.println("Creating account with account number: " + account.getAccountNumber() +
-                ", and for customer: " +
+        Log.getLogger().write("Creating account with AccountNumber: " + account.getAccountNumber() +
+                ", CustomerName: " +
                 account.getCustomer().getName());
     }
 
@@ -36,7 +37,7 @@ public class BankingAccountDAO implements AccountDAO {
             accountlist.remove(isAccountExist); // remove the old
             accountlist.add(account); // add the new
         }
-        System.out.println("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
+        Log.getLogger().write("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }
 
     @Override

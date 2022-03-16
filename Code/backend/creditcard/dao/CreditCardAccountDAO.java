@@ -24,7 +24,7 @@ public class CreditCardAccountDAO implements AccountDAO {
     @Override
     public void createAccount(Account account) {
         accountlist.add(account);
-        System.out.println("Saving account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
+        Log.getLogger().write("Saving account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CreditCardAccountDAO implements AccountDAO {
             accountlist.remove(accountexist); // remove the old
             accountlist.add(account); // add the new
         }
-        System.out.println("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
+        Log.getLogger().write("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }
 
     @Override

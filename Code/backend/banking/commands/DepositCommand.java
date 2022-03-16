@@ -1,20 +1,24 @@
 package backend.banking.commands;
 
-import backend.banking.service.BankAccountService;
+import backend.banking.service.BankingAccountService;
+import framework.Command;
 import ui.UIControl;
 
 public class DepositCommand implements Command {
-    private String accountNumber;
-    private double amount;
-
-    public DepositCommand(String accNumber, double amount) {
-        this.accountNumber = accNumber;
-        this.amount = amount;
-    }
-
     @Override
-    public void execute(UIControl uiControl){}
-//    public void execute() {
-//        BankAccountService.getInstance().deposit(this.accountNumber, this.amount);
+    public void execute(UIControl uiControl){
+        BankingAccountService.getInstance().deposit(uiControl.getAccountNumber(), Double.parseDouble(uiControl.getAmount()));
+    }
+//    private String accountNumber;
+//    private double amount;
+//
+//    public DepositCommand(String accNumber, double amount) {
+//        this.accountNumber = accNumber;
+//        this.amount = amount;
+//    }
+//
+//    @Override
+//    public void execute(UIControl uiControl){
+//        BankingAccountService.getInstance().deposit(this.accountNumber, this.amount);
 //    }
 }

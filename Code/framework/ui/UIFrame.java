@@ -1,6 +1,8 @@
 package framework.ui;
 
 
+import backend.banking.commands.DepositCommand;
+import backend.banking.commands.WithdrawCommand;
 import backend.commons.Log;
 import backend.creditcard.service.CreditCardAccountService;
 import backend.banking.commands.NoCommand;
@@ -25,6 +27,8 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
      ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
+	private Command depositCommand;
+	private Command withdrawCommand;
 
 	protected AccountOperationCategory accountOperationCategory;
 
@@ -52,6 +56,8 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
+		this.depositCommand = new DepositCommand();
+		this.withdrawCommand = new WithdrawCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
@@ -70,6 +76,8 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		Map<String,ActionListener> buttons = new HashMap<>();
 		buttons.put("Add personal account", addPersonalAccountActionListener);
 		buttons.put("Add company account", addCompanyAccountActionListener);
+		buttons.put("Deposit", depositActionListener);
+		buttons.put("Withdraw", withdrawActionListener);
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
@@ -95,6 +103,28 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		openDialog(new AddCompanyAccount(uiFrame));
 		if (newAccount) {
 			this.addCompanyAccountCommand.execute(this);
+		}
+	};
+
+	private final ActionListener depositActionListener = (ActionListener) -> {
+		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+		if (selection >= 0) {
+			String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
+			openDialog(new Deposit(uiFrame, accnr));
+			this.depositCommand.execute(this);
+		} else {
+			Log.getLogger().write("Need to select row to DEPOSIT!");
+		}
+	};
+
+	private final ActionListener withdrawActionListener = (ActionListener) -> {
+		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+		if (selection >= 0) {
+			String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
+			openDialog(new Withdraw(uiFrame, accnr));
+			this.withdrawCommand.execute(this);
+		} else {
+			Log.getLogger().write("Need to select row to WITHDRAW!");
 		}
 	};
 
@@ -208,7 +238,6 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		Log.instance.write("Update table in the MainForm");
 	}
 
 	public void setSubject(AccountService subject) {

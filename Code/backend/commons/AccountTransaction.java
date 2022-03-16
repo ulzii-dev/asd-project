@@ -9,6 +9,10 @@ public class AccountTransaction {
         tranxAmount = amount;
     }
 
+    public double getTranxAmount(){
+        return tranxAmount;
+    }
+
     public String toString(){
         return tranxAction + ": [" + tranxAmount +"]";
     }

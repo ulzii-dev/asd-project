@@ -1,7 +1,5 @@
 package ui.bank;
 
-import backend.commons.Log;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -156,9 +154,9 @@ public class BankFrm extends javax.swing.JFrame {
 		 set the boundaries and show it
 		*/
 
-        JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
-        pac.setBounds(450, 20, 300, 330);
-        pac.show();
+//        JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
+//        pac.setBounds(450, 20, 300, 330);
+//        pac.show();
 
         if (newaccount) {
             // add row to table
@@ -181,9 +179,9 @@ public class BankFrm extends javax.swing.JFrame {
 		 show it
 		*/
 
-        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
-        pac.setBounds(450, 20, 300, 330);
-        pac.show();
+//        JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+//        pac.setBounds(450, 20, 300, 330);
+//        pac.show();
 
         if (newaccount) {
             // add row to table
@@ -206,9 +204,9 @@ public class BankFrm extends javax.swing.JFrame {
             String accnr = (String) model.getValueAt(selection, 0);
 
             //Show the dialog for adding deposit amount for the current mane
-            JDialog_Deposit dep = new JDialog_Deposit(myframe, accnr);
-            dep.setBounds(430, 15, 275, 140);
-            dep.show();
+//            JDialog_Deposit dep = new JDialog_Deposit(myframe, accnr);
+//            dep.setBounds(430, 15, 275, 140);
+//            dep.show();
 
             // compute new amount
             long deposit = Long.parseLong(amountDeposit);
@@ -226,9 +224,9 @@ public class BankFrm extends javax.swing.JFrame {
             String accnr = (String) model.getValueAt(selection, 0);
 
             //Show the dialog for adding withdraw amount for the current mane
-            JDialog_Withdraw wd = new JDialog_Withdraw(myframe, accnr);
-            wd.setBounds(430, 15, 275, 140);
-            wd.show();
+//            JDialog_Withdraw wd = new JDialog_Withdraw(myframe, accnr);
+//            wd.setBounds(430, 15, 275, 140);
+//            wd.show();
 
             // compute new amount
             long deposit = Long.parseLong(amountDeposit);

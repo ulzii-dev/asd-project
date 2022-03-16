@@ -30,6 +30,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private Command addInterestCommand;
 	private Command depositCommand;
 	private Command withdrawCommand;
+	private Command reportCommand;
 
 	protected AccountOperationConstant accountOperationCategory;
 
@@ -58,8 +59,9 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
 		this.addInterestCommand = new NoCommand();
-		this.depositCommand = new DepositCommand();
-		this.withdrawCommand = new WithdrawCommand();
+		this.depositCommand = new NoCommand();
+		this.withdrawCommand = new NoCommand();
+		this.reportCommand = new NoCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
@@ -113,7 +115,9 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private final ActionListener addInterestActionListener = (ActionListener) -> {
 		this.addInterestCommand.execute(this);
 		JOptionPane.showMessageDialog(null, "Add interest to all accounts", "Add interest to all accounts", JOptionPane.WARNING_MESSAGE);
-	};private final ActionListener depositActionListener = (ActionListener) -> {
+	};
+
+	private final ActionListener depositActionListener = (ActionListener) -> {
 	int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 	if (selection >= 0) {
 		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
@@ -156,23 +160,22 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void setReportCommand(Command reportCommand) {
-
+		this.reportCommand = reportCommand;
 	}
 
 	@Override
 	public void setAddInterestCommand(Command addInterestCommand) {
-
 		this.addInterestCommand = addInterestCommand;
-
 	}
 
 	@Override
 	public void setDepositCommand(Command depositCommand) {
-
+		this.depositCommand = depositCommand;
 	}
 
 	@Override
 	public void setWithdrawCommand(Command withdrawCommand) {
+		this.withdrawCommand = withdrawCommand;
 	}
 
 	@Override

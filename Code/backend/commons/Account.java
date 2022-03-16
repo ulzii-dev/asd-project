@@ -12,19 +12,11 @@ public abstract class Account {
 
 	private String accountNumber;
 
+	InterestComputerVisitor visitor = new InterestComputerVisitor();
+
 	private List<AccountEntry> accountEntries;
 
 	private InterestComputationStrategy interestComputationStrategy;
-
-	InterestComputerVisitor visitor = new InterestComputerVisitor();
-
-	public Account(){
-
-	}
-
-	public Account(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
 
 	public Account(InterestComputationStrategy interestComputationStrategy) {
 		this.interestComputationStrategy = interestComputationStrategy;

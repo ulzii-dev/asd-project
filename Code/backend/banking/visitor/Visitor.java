@@ -1,7 +1,7 @@
 package backend.banking.visitor;
 
 import backend.banking.CheckingAccount;
-import backend.commons.SavingsAccount;
+import backend.banking.SavingsAccount;
 
 public interface Visitor {
 

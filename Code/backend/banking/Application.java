@@ -1,14 +1,19 @@
 package backend.banking;
 
+import backend.banking.service.BankingAccountService;
 import backend.commons.*;
 
 public class Application {
     public static void main(String[] args) {
-        AccountService accountService = new AccountServiceImpl();
+        AccountService accountService =  BankingAccountService.getInstance();
 
+        Customer renuka = new Customer(1,"Renuka Mohanraj", "1000N Fourth Street",
+                "Fairfield", "Iowa", 52557, "renuka@miu.edu");
+        Customer sabi = new Customer(1,"Sabi Shresthaq", "147 Hillcrest Avenue",
+                "West Hartford", "Connecticut", 06110, "care.sabi@gmail.com");
         // create 2 accounts;
-        accountService.createAccount("1263862", "Frank Brown");
-        accountService.createAccount("4253892", "John Doe");
+        accountService.createAccount("1263862",renuka, "Savings");
+        accountService.createAccount("4253892", sabi, "Checking");
         // use account 1;
         accountService.deposit("1263862", 240);
         accountService.deposit("1263862", 529);

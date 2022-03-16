@@ -18,7 +18,7 @@ public class BankAccountDAO implements AccountDAO {
     }
 
     @Override
-    public void saveAccount(Account account) {
+    public void createAccount(Account account) {
         Log.getLogger().write("Log instance is working here !!!");
     }
 

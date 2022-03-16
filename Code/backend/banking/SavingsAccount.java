@@ -1,7 +1,9 @@
-package backend.commons;
+package backend.banking;
 
 import backend.banking.visitor.Visitable;
 import backend.banking.visitor.Visitor;
+import backend.commons.Account;
+import backend.commons.InterestComputationStrategy;
 
 public class SavingsAccount extends Account  {
     public SavingsAccount(InterestComputationStrategy interestComputationStrategy) {
@@ -9,7 +11,7 @@ public class SavingsAccount extends Account  {
     }
     @Override
     public String getAccountType() {
-        return AccountType.Saving.name();
+        return BankingAccountType.SAVINGS.name();
     }
     public double accept(Visitor visitor) {
         return visitor.visit(this);

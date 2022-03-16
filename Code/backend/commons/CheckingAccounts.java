@@ -3,7 +3,7 @@ package backend.commons;
 import backend.banking.visitor.Visitable;
 import backend.banking.visitor.Visitor;
 
-//public class CheckingAccounts extends Account implements Visitable {
+//public class CHECKING_ACCOUNTAccounts extends Account implements Visitable {
 //    public CheckingAccounts(String accountNumber) {
 //        super(accountNumber);
 //    }

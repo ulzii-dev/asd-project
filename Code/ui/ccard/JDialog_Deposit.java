@@ -3,7 +3,7 @@ package ui.ccard;
 public class JDialog_Deposit extends javax.swing.JDialog {
 
 
-    private final CardFrm parentframe;
+    private final CreditCardUIFrame parentframe;
     private final String name;
     //{{DECLARE_CONTROLS
     javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
@@ -12,7 +12,7 @@ public class JDialog_Deposit extends javax.swing.JDialog {
     javax.swing.JButton JButton_OK = new javax.swing.JButton();
     javax.swing.JButton JButton_Cancel = new javax.swing.JButton();
     javax.swing.JTextField JTextField_Deposit = new javax.swing.JTextField();
-    public JDialog_Deposit(CardFrm parent, String aname) {
+    public JDialog_Deposit(CreditCardUIFrame parent, String aname) {
         super(parent);
         parentframe = parent;
         name = aname;

@@ -18,4 +18,8 @@ public class Log {
     public void write(String stringToLog) {
         System.out.println(stringToLog);
     }
+
+    public void error(String errorToLog) {
+        System.err.println(errorToLog);
+    }
 }

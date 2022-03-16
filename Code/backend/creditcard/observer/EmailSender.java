@@ -1,6 +1,6 @@
 package backend.creditcard.observer;
 
-import backend.commons.AccountService;
+import backend.commons.*;
 import framework.Observer;
 
 public class EmailSender implements Observer {
@@ -12,6 +12,11 @@ public class EmailSender implements Observer {
 
     @Override
     public void update() {
-
+        for (Account account : accountService.getAllAccounts()) {
+            if(account.getCustomer() instanceof Company || (account.getCustomer() instanceof Personal)) {
+                Log.getLogger().write("Sending email to :" + account.getCustomer().getEmail());
+                accountService.clearChangedAccountList();
+            }
+        }
     }
 }

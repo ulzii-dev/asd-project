@@ -74,13 +74,21 @@ public class AccountServiceImpl implements AccountService {
 		return listOfAccntNumbers;
 	}
 
-
-
 	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
 		Account fromAccount = accountDAO.loadAccount(fromAccountNumber);
 		Account toAccount = accountDAO.loadAccount(toAccountNumber);
 		fromAccount.transferFunds(toAccount, amount, description);
 		accountDAO.updateAccount(fromAccount);
 		accountDAO.updateAccount(toAccount);
+	}
+
+	@Override
+	public void addToChangedAccountList(Account account) {
+
+	}
+
+	@Override
+	public void clearChangedAccountList() {
+
 	}
 }

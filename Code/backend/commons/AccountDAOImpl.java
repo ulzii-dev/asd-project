@@ -20,6 +20,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     public Account loadAccount(String accountNumber) {
+        System.out.println(accountlist);
         for (Account account : accountlist) {
             if (account.getAccountNumber() == accountNumber) {
                 return account;

@@ -10,4 +10,7 @@ public interface AccountService {
     void deposit (String accountNumber, double amount);
     void withdraw (String accountNumber, double amount);
     void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description);
+
+    void addToChangedAccountList(Account account);
+    void clearChangedAccountList();
 }

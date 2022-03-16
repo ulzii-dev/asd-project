@@ -1,6 +1,7 @@
 package backend.banking;
 
 import backend.commons.*;
+import backend.creditcard.observer.EmailSender;
 import factory.AccountFactory;
 import factory.PersonalAccountFactory;
 
@@ -20,6 +21,11 @@ public class Application {
         personalAccountService.deposit("4253892", 12450);
         personalAccountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
         // show balances
+
+        BankAccountService bs = BankAccountService.getInstance();
+        bs.registerObserver(new EmailSender(bs));
+        bs.deposit("1263862", 529);
+        bs.withdraw("1263862", 230);
 
         for (Account account : personalAccountService.getAllAccounts()) {
             Customer customer = account.getCustomer();

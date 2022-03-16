@@ -1,27 +1,29 @@
 package backend.banking;
 
+import backend.banking.service.BankAccountService;
 import backend.commons.*;
-import factory.AccountFactory;
-import factory.PersonalAccountFactory;
 
 public class Application {
     public static void main(String[] args) {
-        AccountFactory personalAccountFactory = new PersonalAccountFactory();
-        AccountService personalAccountService = new AccountServiceImpl(personalAccountFactory);
+        AccountService accountService =  BankAccountService.getInstance();
 
+        Customer renuka = new Customer(1,"Renuka Mohanraj", "1000N Fourth Street",
+                "Fairfield", "Iowa", 52557, "renuka@miu.edu");
+        Customer sabi = new Customer(1,"Sabi Shresthaq", "147 Hillcrest Avenue",
+                "West Hartford", "Connecticut", 06110, "care.sabi@gmail.com");
         // create 2 accounts;
-        personalAccountService.createAccount("1263862", "Frank Brown");
-        personalAccountService.createAccount("4253892", "John Doe");
+        accountService.createAccount("1263862",renuka, "Savings");
+        accountService.createAccount("4253892", sabi, "Checking");
         // use account 1;
-        personalAccountService.deposit("1263862", 240);
-        personalAccountService.deposit("1263862", 529);
-        personalAccountService.withdraw("1263862", 230);
+        accountService.deposit("1263862", 240);
+        accountService.deposit("1263862", 529);
+        accountService.withdraw("1263862", 230);
         // use account 2;
-        personalAccountService.deposit("4253892", 12450);
-        personalAccountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
+        accountService.deposit("4253892", 12450);
+        accountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
         // show balances
 
-        for (Account account : personalAccountService.getAllAccounts()) {
+        for (Account account : accountService.getAllAccounts()) {
             Customer customer = account.getCustomer();
             System.out.println("Statement for Account: " + account.getAccountNumber());
             System.out.println("Account Holder: " + customer.getName());

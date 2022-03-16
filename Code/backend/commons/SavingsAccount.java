@@ -9,7 +9,7 @@ public class SavingsAccount extends Account implements Visitable {
     }
     @Override
     public String getAccountType() {
-        return AccountType.Saving.name();
+        return AccountType.SAVINGS.name();
     }
     public double accept(Visitor visitor) {
         return visitor.visit(this);

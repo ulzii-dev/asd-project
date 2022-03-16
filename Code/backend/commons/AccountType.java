@@ -1,6 +1,11 @@
 package backend.commons;
 
 public enum AccountType {
-    Checking,
-    Saving
+    CHECKING ("Checking"),
+    SAVINGS ("Savings");
+
+    public final String name;
+    private AccountType(String name){
+        this.name = name;
+    }
 }

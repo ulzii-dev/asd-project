@@ -161,9 +161,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void setAddInterestCommand(Command addInterestCommand) {
-
 		this.addInterestCommand = addInterestCommand;
-
 	}
 
 	@Override

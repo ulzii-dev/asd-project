@@ -2,6 +2,8 @@ package backend.banking;
 
 import backend.banking.commands.AddCompanyAccountCommand;
 import backend.banking.commands.AddPersonalAccountCommand;
+import backend.banking.commands.DepositCommand;
+import backend.banking.commands.WithdrawCommand;
 import framework.ui.UIFrame;
 import framework.ui.UIControl;
 
@@ -17,6 +19,8 @@ public class BankingApplicationStarter {
             //commands
             uIControl.setAddPersonalAccountCommand(new AddPersonalAccountCommand());
             uIControl.setAddCompanyAccountCommand(new AddCompanyAccountCommand());
+            uIControl.setDepositCommand(new DepositCommand());
+            uIControl.setWithdrawCommand(new WithdrawCommand());
             //Create a new instance of our application's frame, and make it visible.
             uIControl.setVisible(true);
         } catch (Throwable t) {

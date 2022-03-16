@@ -1,9 +1,10 @@
 package backend.commons;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class AccountEntry {
-    private Date date;
+    private LocalDate date;
     private double amount;
     private String description;
     private String fromAccountNumber;
@@ -14,7 +15,7 @@ public class AccountEntry {
 
     public AccountEntry(double amount, String description, String fromAccountNumber, String fromPersonName) {
         super();
-        this.date = new Date();
+        this.date = LocalDate.now();
         this.amount = amount;
         this.description = description;
         this.fromAccountNumber = fromAccountNumber;
@@ -29,11 +30,11 @@ public class AccountEntry {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -1,4 +1,4 @@
-package backend.banking;
+package backend.banking.constant;
 
 public enum BankingAccountType {
     CHECKING ("Checking"),

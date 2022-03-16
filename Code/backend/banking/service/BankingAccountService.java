@@ -1,8 +1,8 @@
 package backend.banking.service;
 
-import backend.banking.BankingAccountType;
-import backend.banking.CheckingAccount;
-import backend.banking.SavingsAccount;
+import backend.banking.constant.BankingAccountType;
+import backend.banking.domain.CheckingAccount;
+import backend.banking.domain.SavingsAccount;
 import backend.banking.dao.BankingAccountDAO;
 import backend.banking.strategy.CompanyCheckingAccountComputation;
 import backend.banking.strategy.CompanySavingsAccountComputation;
@@ -35,17 +35,17 @@ public class BankingAccountService extends AccountService {
 
 
     @Override
-    public Account createAccountFactory(String accountType, Customer customer) {
+    public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
         if (customer instanceof PersonalAccount) {
             if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
-                return new CheckingAccount(new PersonCheckingAccountComputation());
+                return new CheckingAccount(accountNumber, accountType, customer, new PersonCheckingAccountComputation());
             }
-            return new SavingsAccount(new PersonSavingsAccountInterestComputation());
+            return new SavingsAccount(accountNumber, accountType, customer, new PersonSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
             if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
-                return new CheckingAccount(new CompanyCheckingAccountComputation());
+                return new CheckingAccount(accountNumber, accountType, customer, new CompanyCheckingAccountComputation());
             }
-            return new SavingsAccount(new CompanySavingsAccountComputation());
+            return new SavingsAccount(accountNumber, accountType, customer, new CompanySavingsAccountComputation());
         }
         return null;
     }

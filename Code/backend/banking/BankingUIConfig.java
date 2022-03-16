@@ -1,6 +1,7 @@
 package backend.banking;
 
-import backend.banking.utils.BankReportColumnConstant;
+import backend.banking.constant.BankReportColumnConstant;
+import backend.banking.constant.BankingAccountType;
 import backend.commons.Account;
 import framework.domain.PersonalAccount;
 import framework.ui.UIConfig;

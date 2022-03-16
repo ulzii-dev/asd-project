@@ -30,7 +30,7 @@ public class CreditCardAccountService extends AccountService {
         return instance;
     }
     @Override
-    public Account createAccountFactory(String accountType, Customer customer) {
+    public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
         CreditCardType type = CreditCardType.valueOf(accountType);
         if(type.equals(CreditCardType.BRONZE)){
             return new CreditCardAccount(new BronzeCreditCardCaluclator(), type);

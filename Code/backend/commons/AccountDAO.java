@@ -3,7 +3,7 @@ package backend.commons;
 import java.util.Collection;
 
 public interface AccountDAO {
-    void createAccount(Account account);
+    void create(Account account);
 
     void updateAccount(Account account);
 

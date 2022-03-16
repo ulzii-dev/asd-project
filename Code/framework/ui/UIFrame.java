@@ -208,7 +208,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		System.out.println("Update table in the MainForm");
+		Log.getLogger().write("Updating the UIFrame dataset!!");
 	}
 
 	public void setSubject(AccountService subject) {

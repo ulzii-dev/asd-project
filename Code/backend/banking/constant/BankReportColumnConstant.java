@@ -1,4 +1,4 @@
-package backend.banking.utils;
+package backend.banking.constant;
 
 public class BankReportColumnConstant {
     public static String[] get() {

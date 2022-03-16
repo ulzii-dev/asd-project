@@ -27,10 +27,8 @@ public abstract class AccountService implements Observable {
 
 	public final void createAccount(String accountNumber, Customer customer, String accountType) {
 		try {
-			Account account = this.createAccountFactory(accountType, customer);
-			account.setCustomer(customer);
-			account.setAccountNumber(accountNumber);
-			accountDAO.createAccount(account);
+			Account account = this.createAccountFactory(accountNumber, accountType, customer);
+			accountDAO.create(account);
 			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
 		}catch (NullPointerException n){
@@ -91,7 +89,7 @@ public abstract class AccountService implements Observable {
 
 
 
-	public abstract Account createAccountFactory(String accountType, Customer customer);
+	public abstract Account createAccountFactory(String accountNumber, String accountType, Customer customer);
 
 	public AccountOperationConstant getAccountOperationConstant() {
 		return accountOperationConstant;

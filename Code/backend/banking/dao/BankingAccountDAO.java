@@ -22,7 +22,7 @@ public class BankingAccountDAO implements AccountDAO {
     }
 
     @Override
-    public void createAccount(Account account) {
+    public void create(Account account) {
         accountlist.add(account);
         System.out.println("Creating account with account number: " + account.getAccountNumber() +
                 ", and for customer: " +

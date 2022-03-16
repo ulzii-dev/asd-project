@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * A basic JFC based application.
  */
-public class ApplicationContext extends FormTemplate implements UIControl, framework.Observer
+public class UIFrame extends FormTemplate implements UIControl, framework.Observer
 {
     /****
      * init variables in the object
@@ -47,20 +47,20 @@ public class ApplicationContext extends FormTemplate implements UIControl, frame
 
     private AccountService subject;
     private UIConfig uiConfig;
-    private static volatile ApplicationContext applicationContext;
+    private static volatile UIFrame applicationContext;
 
 
-	private ApplicationContext() {
+	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
-	public static ApplicationContext getInstance() {
+	public static UIFrame getInstance() {
 		if (applicationContext == null) {
 			synchronized (CreditCardAccountService.class) {
 				if (applicationContext == null) {
-					applicationContext = new ApplicationContext();
+					applicationContext = new UIFrame();
 				}
 			}
 		}
@@ -226,7 +226,7 @@ public class ApplicationContext extends FormTemplate implements UIControl, frame
 		public void windowClosing(WindowEvent event)
 		{
 			Object object = event.getSource();
-			if (object == ApplicationContext.this)
+			if (object == UIFrame.this)
 				MainFrm_windowClosing(event);
 		}
 	}

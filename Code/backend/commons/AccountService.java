@@ -4,7 +4,7 @@ import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
 import ui.AccountOperationCategory;
-import framework.ApplicationContext;
+import framework.UIFrame;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,8 +20,8 @@ public abstract class AccountService implements Observable {
 	public AccountService(AccountDAO accountDAO){
 		this.accountDAO = accountDAO;
 		this.observerList = new ArrayList<Observer>();
-		this.registerObserver(ApplicationContext.getInstance());
-		ApplicationContext.getInstance().setSubject(this);
+		this.registerObserver(UIFrame.getInstance());
+		UIFrame.getInstance().setSubject(this);
 	}
 
 

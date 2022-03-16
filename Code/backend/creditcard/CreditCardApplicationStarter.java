@@ -2,7 +2,7 @@ package backend.creditcard;
 
 import backend.creditcard.commands.AddCompanyAccountCommand;
 import backend.creditcard.commands.AddPersonalAccountCommand;
-import framework.ApplicationContext;
+import framework.UIFrame;
 import ui.UIControl;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ public class CreditCardApplicationStarter {
     public static void main(String[] args){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIControl mainForm = ApplicationContext.getInstance();
+            UIControl mainForm = UIFrame.getInstance();
             mainForm.init("MIU CreditCard Application", new CreditCardUIConfig());
 
             //commands

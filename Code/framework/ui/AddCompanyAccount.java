@@ -1,6 +1,6 @@
 package framework.ui;
 
-import framework.ApplicationContext;
+import framework.UIFrame;
 import ui.CompanyAccount;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddCompanyAccount extends javax.swing.JDialog {
-    private ApplicationContext parentframe;
+    private UIFrame parentframe;
     List<JRadioButton> btnAccountTyps = new ArrayList<>();
 
     //{{DECLARE_CONTROLS
@@ -34,7 +34,7 @@ public class AddCompanyAccount extends javax.swing.JDialog {
     JLabel JLabel8 = new JLabel();
     JTextField JTextField_ACCOUNT_NUMBER = new JTextField();
     //}}
-    public AddCompanyAccount(ApplicationContext parent)
+    public AddCompanyAccount(UIFrame parent)
     {
         super(parent);
         parentframe=parent;

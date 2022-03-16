@@ -3,14 +3,9 @@ package framework.ui;
 		A basic implementation of the JDialog class.
 */
 
-import backend.creditcard.CreditCardType;
-import ui.PersonalAccount;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Withdraw extends JDialog {
 

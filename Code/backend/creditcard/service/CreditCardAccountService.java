@@ -7,8 +7,9 @@ import backend.creditcard.CreditCardAccount;
 import backend.creditcard.CreditCardType;
 import backend.creditcard.dao.CreditCardAccountDAO;
 import backend.creditcard.observer.EmailSender;
-
-import java.time.LocalDate;
+import backend.creditcard.strategy.BronzeCreditCardCaluclator;
+import backend.creditcard.strategy.GoldCreditCardcalculator;
+import backend.creditcard.strategy.SilverCreditCardCalculator;
 
 public class CreditCardAccountService extends AccountService {
     private static volatile  CreditCardAccountService instance;
@@ -29,16 +30,16 @@ public class CreditCardAccountService extends AccountService {
         return instance;
     }
     @Override
-    public Account createAccountFactory(String accountType, Customer customer) {
+    public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
         CreditCardType type = CreditCardType.valueOf(accountType);
         if(type.equals(CreditCardType.BRONZE)){
-            return new CreditCardAccount(type);
+            return new CreditCardAccount(new BronzeCreditCardCaluclator(), type);
         }
         if(type.equals(CreditCardType.SILVER)){
-            return new CreditCardAccount(type);
+            return new CreditCardAccount(new SilverCreditCardCalculator(),type);
         }
         if(type.equals(CreditCardType.GOLD)){
-            return new CreditCardAccount( type);
+            return new CreditCardAccount(new GoldCreditCardcalculator(), type);
         }
         throw new UnsupportedOperationException("Invalid Credit Card Type!");
     }

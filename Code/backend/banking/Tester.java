@@ -3,7 +3,7 @@ package backend.banking;
 import backend.banking.service.BankingAccountService;
 import backend.commons.*;
 
-public class Application {
+public class Tester {
     public static void main(String[] args) {
         AccountService accountService =  BankingAccountService.getInstance();
 

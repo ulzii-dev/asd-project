@@ -2,7 +2,7 @@ package backend.banking.commands;
 
 import backend.banking.service.BankingAccountService;
 import framework.Command;
-import ui.UIControl;
+import framework.ui.UIControl;
 
 public class WithdrawCommand implements Command {
 //    private String accountNumber;

@@ -23,7 +23,7 @@ public class CreditCardAccountDAO implements AccountDAO {
     }
 
     @Override
-    public void createAccount(Account account) {
+    public void create(Account account) {
         accountlist.add(account);
         Log.getLogger().write("Saving account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }

@@ -9,8 +9,8 @@ import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
+import framework.AccountOperationConstant;
 import framework.Command;
-import ui.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -22,15 +22,15 @@ import java.util.*;
  */
 public class UIFrame extends FormTemplate implements UIControl, framework.Observer
 {
-    /****
-     * init variables in the object
-     ****/
+	/****
+	 * init variables in the object
+	 ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
 	private Command depositCommand;
 	private Command withdrawCommand;
 
-	protected AccountOperationCategory accountOperationCategory;
+	protected AccountOperationConstant accountOperationCategory;
 
 	private Collection<String> accountTypes;
 	private Customer customer;
@@ -46,11 +46,11 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	String zip;
 	String state;
 	String amount;
-    boolean newAccount;
+	boolean newAccount;
 
-    private AccountService subject;
-    private UIConfig uiConfig;
-    private static volatile UIFrame uiFrame;
+	private AccountService subject;
+	private UIConfig uiConfig;
+	private static volatile UIFrame uiFrame;
 
 
 	private UIFrame() {
@@ -63,7 +63,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	public static UIFrame getInstance() {
 		if (uiFrame == null) {
-			synchronized (CreditCardAccountService.class) {
+			synchronized (AccountService.class) {
 				if (uiFrame == null) {
 					uiFrame = new UIFrame();
 				}
@@ -81,7 +81,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
-		generateForm(title,uiConfig,buttons);
+		generateFormTemplate(title,uiConfig,buttons);
 	}
 
 	public String getAmount() {
@@ -130,9 +130,9 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	void exitApplication(){
 		try {
-		    	this.setVisible(false);    // hide the Frame
-		    	this.dispose();            // free the system resources
-		    	System.exit(0);            // close the application
+			this.setVisible(false);    // hide the Frame
+			this.dispose();            // free the system resources
+			System.exit(0);            // close the application
 		} catch (Exception e) {
 		}
 	}
@@ -228,7 +228,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void update() {
-		if (this.subject.getAccountOperationCategory() == AccountOperationCategory.REPORT) {
+		if (this.subject.getAccountOperationConstant() == AccountOperationConstant.REPORT) {
 			return;
 		}
 		// reload accounts to view
@@ -238,6 +238,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
+		Log.getLogger().write("Updating the UIFrame dataset!!");
 	}
 
 	public void setSubject(AccountService subject) {
@@ -286,7 +287,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		jDialog.show();
 	}
 
-	public AccountOperationCategory getAccountOperationCategory() {
+	public AccountOperationConstant getAccountOperationCategory() {
 		return accountOperationCategory;
 	}
 }

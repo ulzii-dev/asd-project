@@ -1,4 +1,4 @@
-package ui;
+package framework.domain;
 
 import backend.commons.Customer;
 

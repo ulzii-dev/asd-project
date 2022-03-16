@@ -1,7 +1,7 @@
 package backend.creditcard;
 
 import backend.commons.Account;
-import ui.UIConfig;
+import framework.ui.UIConfig;
 
 import java.util.Arrays;
 import java.util.Collection;

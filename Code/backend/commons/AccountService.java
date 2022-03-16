@@ -3,7 +3,7 @@ package backend.commons;
 import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
-import ui.AccountOperationCategory;
+import framework.AccountOperationConstant;
 import framework.ui.UIFrame;
 
 import java.util.*;
@@ -12,7 +12,7 @@ public abstract class AccountService implements Observable {
 	private final AccountDAO accountDAO;
 	private int noOfAccounts;
 	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
-	protected AccountOperationCategory accountOperationCategory;
+	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
 	private Map<Account, ArrayList<AccountTransaction>> changedAccountList = new HashMap<>();
 
@@ -23,39 +23,15 @@ public abstract class AccountService implements Observable {
 		UIFrame.getInstance().setSubject(this);
 	}
 
-
 	public final void createAccount(String accountNumber, Customer customer, String accountType) {
 		try {
-			Account account = this.createAccountFactory(accountType, customer);
-			account.setCustomer(customer);
-			account.setAccountNumber(accountNumber);
-			accountDAO.createAccount(account);
-			this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
+			Account account = this.createAccountFactory(accountNumber, accountType, customer);
+			accountDAO.create(account);
+			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
 		}catch (NullPointerException n){
 			n.printStackTrace();
 		}
-	}
-
-	public Account getAccount(String accountNumber) {
-		Account account = accountDAO.loadAccount(accountNumber);
-		return account;
-	}
-
-	public Collection<Account> getAllAccounts() {
-		return accountDAO.getAccounts();
-	}
-
-	public void addInterest() {
-
-		for (String accountNumber : getAllAccountNumbers()) {
-			Account account = accountDAO.loadAccount(accountNumber);
-			// adding visitor pattern for adding interest
-			//account.accept(interestComputerVisitor);
-			account.addInterest();
-			accountDAO.updateAccount(account);
-		}
-
 	}
 
 	public void deposit(String accountNumber, double amount) {
@@ -99,6 +75,26 @@ public abstract class AccountService implements Observable {
 		changedAccountList.clear();
 	}
 
+	public Account getAccount(String accountNumber) {
+		Account account = accountDAO.loadAccount(accountNumber);
+		return account;
+	}
+
+	public Collection<Account> getAllAccounts() {
+		return accountDAO.getAccounts();
+	}
+
+	public void addInterest() {
+
+		for (String accountNumber : getAllAccountNumbers()) {
+			Account account = accountDAO.loadAccount(accountNumber);
+			// adding visitor pattern for adding interest
+			//account.accept(interestComputerVisitor);
+			account.addInterest();
+			accountDAO.updateAccount(account);
+		}
+
+	}
 
 	public List<String> getAllAccountNumbers(){
 		ArrayList<String> listOfAccountNumbers = new ArrayList<String>();
@@ -107,6 +103,8 @@ public abstract class AccountService implements Observable {
 		}
 		return listOfAccountNumbers;
 	}
+
+	//copied and the same
 	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
 		Account fromAccount = accountDAO.loadAccount(fromAccountNumber);
 		Account toAccount = accountDAO.loadAccount(toAccountNumber);
@@ -115,10 +113,12 @@ public abstract class AccountService implements Observable {
 		accountDAO.updateAccount(toAccount);
 	}
 
-	public abstract Account createAccountFactory(String accountType, Customer customer);
 
-	public AccountOperationCategory getAccountOperationCategory() {
-		return accountOperationCategory;
+
+	public abstract Account createAccountFactory(String accountNumber, String accountType, Customer customer);
+
+	public AccountOperationConstant getAccountOperationConstant() {
+		return accountOperationConstant;
 	}
 
 	@Override

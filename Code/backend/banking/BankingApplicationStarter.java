@@ -3,7 +3,7 @@ package backend.banking;
 import backend.banking.commands.AddCompanyAccountCommand;
 import backend.banking.commands.AddPersonalAccountCommand;
 import framework.ui.UIFrame;
-import ui.UIControl;
+import framework.ui.UIControl;
 
 import javax.swing.*;
 

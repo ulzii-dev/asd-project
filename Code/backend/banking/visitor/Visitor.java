@@ -1,7 +1,8 @@
 package backend.banking.visitor;
 
-import backend.banking.CheckingAccount;
-import backend.banking.SavingsAccount;
+
+import backend.banking.domain.CheckingAccount;
+import backend.banking.domain.SavingsAccount;
 import backend.creditcard.CreditCardAccount;
 
 public interface Visitor {

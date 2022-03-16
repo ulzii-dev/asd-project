@@ -13,7 +13,6 @@ import java.util.List;
 public abstract class AccountService implements Observable {
 	private final AccountDAO accountDAO;
 	private int noOfAccounts;
-	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
 	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
 
@@ -76,7 +75,6 @@ public abstract class AccountService implements Observable {
 		return listOfAccountNumbers;
 	}
 
-	//copied and the same
 	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
 		Account fromAccount = accountDAO.loadAccount(fromAccountNumber);
 		Account toAccount = accountDAO.loadAccount(toAccountNumber);

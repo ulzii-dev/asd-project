@@ -18,7 +18,7 @@ public class CreditCardAccount extends Account {
                              String accountType,
                              Customer customer,
                              CreditCardCalculator creditCardCalculator,
-                CreditCardCalculator creditCardType) {
+                CreditCardType creditCardType) {
         super(creditCardCalculator);
         setAccountNumber(accountNumber);
         setAccountType(accountType);

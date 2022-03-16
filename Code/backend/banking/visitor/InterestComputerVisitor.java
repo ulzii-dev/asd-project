@@ -1,7 +1,7 @@
 package backend.banking.visitor;
 
-import backend.banking.CheckingAccount;
-import backend.banking.SavingsAccount;
+import backend.banking.domain.CheckingAccount;
+import backend.banking.domain.SavingsAccount;
 import backend.creditcard.CreditCardAccount;
 
 import java.text.DecimalFormat;
@@ -33,7 +33,7 @@ public class InterestComputerVisitor implements Visitor {
             case "Gold" -> creditCardAccount.getTotalCredit() * 0.06;
             case "Bronze" -> creditCardAccount.getTotalCredit() * 0.1;
             case "Silver" -> creditCardAccount.getTotalCredit() * 0.08;
-
+            default -> 0;
         };
 
 

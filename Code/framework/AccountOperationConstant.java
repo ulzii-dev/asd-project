@@ -1,6 +1,6 @@
 package framework;
 
-public enum AccountOperationCategory {
+public enum AccountOperationConstant {
     ACCOUNT_CREATED,
     DEPOSITED,
     WITHDRAW,

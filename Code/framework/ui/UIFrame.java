@@ -7,7 +7,7 @@ import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
-import framework.AccountOperationCategory;
+import framework.AccountOperationConstant;
 import framework.Command;
 
 import javax.swing.*;
@@ -26,7 +26,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
 
-	protected AccountOperationCategory accountOperationCategory;
+	protected AccountOperationConstant accountOperationCategory;
 
 	private Collection<String> accountTypes;
 	private Customer customer;
@@ -198,7 +198,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void update() {
-		if (this.subject.getAccountOperationCategory() == AccountOperationCategory.REPORT) {
+		if (this.subject.getAccountOperationConstant() == AccountOperationConstant.REPORT) {
 			return;
 		}
 		// reload accounts to view
@@ -257,7 +257,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		jDialog.show();
 	}
 
-	public AccountOperationCategory getAccountOperationCategory() {
+	public AccountOperationConstant getAccountOperationCategory() {
 		return accountOperationCategory;
 	}
 }

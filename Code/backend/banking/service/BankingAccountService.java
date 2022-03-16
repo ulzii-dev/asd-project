@@ -33,25 +33,34 @@ public class BankingAccountService extends AccountService {
         return instance;
     }
 
-
     @Override
     public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
         if (customer instanceof PersonalAccount) {
             if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
-                return new CheckingAccount(accountNumber,
+                return new CheckingAccount(
+                        accountNumber,
                         accountType,
                         customer,
                         new PersonCheckingAccountComputation());
             }
-            return new SavingsAccount(accountNumber,
+            return new SavingsAccount(
+                    accountNumber,
                     accountType,
                     customer,
                     new PersonSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
             if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
-                return new CheckingAccount(accountNumber, accountType, customer, new CompanyCheckingAccountComputation());
+                return new CheckingAccount(
+                        accountNumber,
+                        accountType,
+                        customer,
+                        new CompanyCheckingAccountComputation());
             }
-            return new SavingsAccount(accountNumber, accountType, customer, new CompanySavingsAccountComputation());
+            return new SavingsAccount(
+                    accountNumber,
+                    accountType,
+                    customer,
+                    new CompanySavingsAccountComputation());
         }
         throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }

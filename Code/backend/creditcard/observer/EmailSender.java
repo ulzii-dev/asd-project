@@ -43,7 +43,8 @@ public class EmailSender implements Observer {
                     } else if((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > 500))
                     {
                         Log.getLogger().write( index + ".    PersonalAccount");
-                        Log.getLogger().write( "      Sending email to => " + account.getCustomer().getEmail() + " | " + transaction + (account.getBalance() < 0 ? " | ❌ Negative BALANCE ❌" : ""));
+                        Log.getLogger().write( "      Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
+                        Log.getLogger().write( account.getBalance() < 0 ? "      ❌ Negative BALANCE ❌" : "");
                     }
 
                     if(it.hasNext()) {
@@ -56,7 +57,6 @@ public class EmailSender implements Observer {
         }
 
         if(emailHeaderAdded) {
-            Log.getLogger().write("                                                                                         ");
             Log.getLogger().write("⎩＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ SENT ALL EMAILS ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿⎭");
         }
         accountService.clearChangedAccountList();

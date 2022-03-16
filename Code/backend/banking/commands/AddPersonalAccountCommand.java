@@ -6,12 +6,13 @@ import ui.UIControl;
 
 public class AddPersonalAccountCommand implements Command {
     @Override
-    public void execute(UIControl control) {
-        BankAccountService.getInstance()
-                .createAccount(
-                        control.getAccountNumber(),
-                        control.getCustomer(),
-                        control.getAccountType());
-    }
+    public void execute(){}
+//    public void execute(UIControl control) {
+//        BankAccountService.getInstance()
+//                .createAccount(
+//                        control.getAccountNumber(),
+//                        control.getCustomer(),
+//                        control.getAccountType());
+//    }
 
 }

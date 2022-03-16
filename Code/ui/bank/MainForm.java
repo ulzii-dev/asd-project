@@ -87,14 +87,14 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	private final ActionListener personalAccount = (ActionListener) -> {
 		openDialog(new JDialog_AddPersonalAccount(myframe));
 		if (newaccount) {
-			this.addPersonalAccountCommand.execute(this);
+			this.addPersonalAccountCommand.execute();
 		}
 	};
 
 	private final ActionListener companyAccount = (ActionListener) -> {
 		openDialog(new JDialog_AddCompanyAccount(myframe));
 		if (newaccount) {
-			this.addCompanyAccountCommand.execute(this);
+			this.addCompanyAccountCommand.execute();
 		}
 	};
 

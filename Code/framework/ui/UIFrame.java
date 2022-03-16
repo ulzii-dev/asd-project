@@ -57,7 +57,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	public static UIFrame getInstance() {
 		if (uiFrame == null) {
-			synchronized (CreditCardAccountService.class) {
+			synchronized (AccountService.class) {
 				if (uiFrame == null) {
 					uiFrame = new UIFrame();
 				}
@@ -73,7 +73,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
-		formTemplate(title,uiConfig,buttons);
+		generateFormTemplate(title,uiConfig,buttons);
 	}
 
 	public String getAmount() {
@@ -208,7 +208,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		Log.instance.write("Update table in the MainForm");
+		System.out.println("Update table in the MainForm");
 	}
 
 	public void setSubject(AccountService subject) {

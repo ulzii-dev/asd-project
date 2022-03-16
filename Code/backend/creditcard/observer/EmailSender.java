@@ -26,7 +26,7 @@ public class EmailSender implements Observer {
             List<AccountTransaction> transactions = entry.getValue();
 
             int index = 0;
-            if(account.getCustomer() instanceof CompanyAccount || (account.getCustomer() instanceof PersonalAccount)) {
+            if(account.getCustomer() instanceof CompanyAccount || account.getCustomer() instanceof PersonalAccount) {
                 if(!emailHeaderAdded) {
                     Log.getLogger().write("OBSERVER_PATTERN: Pulling changed accounts from AccountService");
                     Log.getLogger().write(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Sending transaction emails ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
@@ -39,11 +39,11 @@ public class EmailSender implements Observer {
 
                     if(account.getCustomer() instanceof CompanyAccount) {
                         Log.getLogger().write( index + ".    CompanyAccount");
-                        Log.getLogger().write( "|     Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
-                    } else if(transaction.getTranxAmount() > 500 || transaction.getTranxAmount() < 0)
+                        Log.getLogger().write( "      Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
+                    } else if((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > 500))
                     {
                         Log.getLogger().write( index + ".    PersonalAccount");
-                        Log.getLogger().write( "|     Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
+                        Log.getLogger().write( "      Sending email to => " + account.getCustomer().getEmail() + " | " + transaction + (account.getBalance() < 0 ? " | ❌ Negative BALANCE ❌" : ""));
                     }
 
                     if(it.hasNext()) {
@@ -56,7 +56,7 @@ public class EmailSender implements Observer {
         }
 
         if(emailHeaderAdded) {
-            Log.getLogger().write("|                                                                                       |");
+            Log.getLogger().write("                                                                                         ");
             Log.getLogger().write("⎩＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ SENT ALL EMAILS ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿⎭");
         }
         accountService.clearChangedAccountList();

@@ -16,6 +16,6 @@ public class Log {
     }
 
     public void write(String stringToLog) {
-        Log.getLogger().write(stringToLog);
+        System.out.println(stringToLog);
     }
 }

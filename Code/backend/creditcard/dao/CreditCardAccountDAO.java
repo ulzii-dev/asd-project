@@ -2,6 +2,7 @@ package backend.creditcard.dao;
 
 import backend.commons.Account;
 import backend.commons.AccountDAO;
+import backend.commons.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;

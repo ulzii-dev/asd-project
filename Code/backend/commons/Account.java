@@ -72,7 +72,6 @@ public abstract class Account {
 		double interestVistor = this.accept(visitor);
 		AccountEntry entry =  new AccountEntry(interestVistor,"interest added","","");
 		accountEntries.add(entry);
-
 		return interestVistor;
 	}
 	public abstract double accept(Visitor visitor);

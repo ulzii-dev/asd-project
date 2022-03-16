@@ -1,9 +1,6 @@
 package backend.creditcard;
 
-import backend.creditcard.commands.DepositCommand;
-import backend.creditcard.commands.WithdrawCommand;
-import backend.creditcard.commands.AddCompanyAccountCommand;
-import backend.creditcard.commands.AddPersonalAccountCommand;
+import backend.creditcard.commands.*;
 import framework.ui.UIFrame;
 import framework.ui.UIControl;
 
@@ -21,6 +18,8 @@ public class CreditCardApplicationStarter {
             uIControl.setAddCompanyAccountCommand(new AddCompanyAccountCommand());
             uIControl.setDepositCommand(new DepositCommand());
             uIControl.setWithdrawCommand(new WithdrawCommand());
+            uIControl.setAddInterestCommand(new AddInterestCommand());
+
             //Create a new instance of our application's frame, and make it visible.
             uIControl.setVisible(true);
         } catch (Throwable t) {

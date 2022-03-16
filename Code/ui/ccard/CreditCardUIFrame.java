@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * A basic JFC based application.
  */
-public class CardFrm extends javax.swing.JFrame {
+public class CreditCardUIFrame extends javax.swing.JFrame {
     private final DefaultTableModel model;
     private final JTable JTable1;
     private final JScrollPane JScrollPane1;
@@ -16,16 +16,16 @@ public class CardFrm extends javax.swing.JFrame {
      * init variables in the object
      ****/
     String clientName, street, city, zip, state, accountType, amountDeposit, expdate, ccnumber;
-    boolean newaccount;
-    CardFrm thisframe;
+    boolean newAccount;
+    CreditCardUIFrame creditCardUIFrame;
     javax.swing.JPanel JPanel1 = new javax.swing.JPanel();
     javax.swing.JButton JButton_NewCCAccount = new javax.swing.JButton();
     javax.swing.JButton JButton_GenBill = new javax.swing.JButton();
     javax.swing.JButton JButton_Deposit = new javax.swing.JButton();
     javax.swing.JButton JButton_Withdraw = new javax.swing.JButton();
     javax.swing.JButton JButton_Exit = new javax.swing.JButton();
-    public CardFrm() {
-        thisframe = this;
+    public CreditCardUIFrame() {
+        creditCardUIFrame = this;
 
         setTitle("Credit-card processing Application.");
         setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
@@ -49,13 +49,12 @@ public class CardFrm extends javax.swing.JFrame {
         model.addColumn("Type");
         model.addColumn("Balance");
         rowdata = new Object[7];
-        newaccount = false;
+        newAccount = false;
 
         JPanel1.add(JScrollPane1);
         JScrollPane1.setBounds(12, 92, 444, 160);
         JScrollPane1.getViewport().add(JTable1);
         JTable1.setBounds(0, 0, 420, 0);
-//        rowdata = new Object[8];
 
         JButton_NewCCAccount.setText("Add Credit-card account");
         JPanel1.add(JButton_NewCCAccount);
@@ -100,9 +99,8 @@ public class CardFrm extends javax.swing.JFrame {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception e) {
             }
-
             //Create a new instance of our application's frame, and make it visible.
-            (new CardFrm()).setVisible(true);
+            (new CreditCardUIFrame()).setVisible(true);
         } catch (Throwable t) {
             t.printStackTrace();
             //Ensure the application exits with an error condition.
@@ -145,11 +143,11 @@ public class CardFrm extends javax.swing.JFrame {
 		 set the boundaries and show it
 		*/
 
-        JDialog_AddCCAccount ccac = new JDialog_AddCCAccount(thisframe);
-        ccac.setBounds(450, 20, 300, 380);
-        ccac.show();
+        JDialog_AddCreditCardAccount creditCardAccount = new JDialog_AddCreditCardAccount(creditCardUIFrame);
+        creditCardAccount.setBounds(450, 20, 300, 380);
+        creditCardAccount.show();
 
-        if (newaccount) {
+        if (newAccount) {
             // add row to table
             rowdata[0] = clientName;
             rowdata[1] = ccnumber;
@@ -158,7 +156,7 @@ public class CardFrm extends javax.swing.JFrame {
             rowdata[4] = "0";
             model.addRow(rowdata);
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount = false;
+            newAccount = false;
         }
     }
 
@@ -175,7 +173,7 @@ public class CardFrm extends javax.swing.JFrame {
             String name = (String) model.getValueAt(selection, 0);
 
             //Show the dialog for adding deposit amount for the current mane
-            JDialog_Deposit dep = new JDialog_Deposit(thisframe, name);
+            JDialog_Deposit dep = new JDialog_Deposit(creditCardUIFrame, name);
             dep.setBounds(430, 15, 275, 140);
             dep.show();
 
@@ -195,7 +193,7 @@ public class CardFrm extends javax.swing.JFrame {
             String name = (String) model.getValueAt(selection, 0);
 
             //Show the dialog for adding withdraw amount for the current mane
-            JDialog_Withdraw wd = new JDialog_Withdraw(thisframe, name);
+            JDialog_Withdraw wd = new JDialog_Withdraw(creditCardUIFrame, name);
             wd.setBounds(430, 15, 275, 140);
             wd.show();
 
@@ -214,7 +212,7 @@ public class CardFrm extends javax.swing.JFrame {
     class SymWindow extends java.awt.event.WindowAdapter {
         public void windowClosing(java.awt.event.WindowEvent event) {
             Object object = event.getSource();
-            if (object == CardFrm.this)
+            if (object == CreditCardUIFrame.this)
                 BankFrm_windowClosing(event);
         }
     }

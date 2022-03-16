@@ -1,12 +1,13 @@
-package ui.bank;
+package framework.ui;
 
 
-import backend.banking.commands.Command;
+import backend.commons.Log;
+import backend.creditcard.service.CreditCardAccountService;
 import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
-import backend.creditcard.service.CreditCardAccountService;
+import framework.Command;
 import ui.*;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ import java.util.*;
 /**
  * A basic JFC based application.
  */
-public class MainForm extends FormTemplate implements UIControl, framework.Observer
+public class UIFrame extends FormTemplate implements UIControl, framework.Observer
 {
     /****
      * init variables in the object
@@ -25,7 +26,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
 
-	protected AccountOperationCategory operationCategory;
+	protected AccountOperationCategory accountOperationCategory;
 
 	private Collection<String> accountTypes;
 	private Customer customer;
@@ -41,35 +42,34 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	String zip;
 	String state;
 	String amount;
-    boolean newaccount;
+    boolean newAccount;
 
     private AccountService subject;
     private UIConfig uiConfig;
-    private static volatile MainForm myframe;
+    private static volatile UIFrame uiFrame;
 
 
-	private MainForm() {
+	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
-	//TODO:Why -> Why?
-	public static MainForm getInstance() {
-		if (myframe == null) {
+	public static UIFrame getInstance() {
+		if (uiFrame == null) {
 			synchronized (CreditCardAccountService.class) {
-				if (myframe == null) {
-					myframe = new MainForm();
+				if (uiFrame == null) {
+					uiFrame = new UIFrame();
 				}
 			}
 		}
-		return myframe;
+		return uiFrame;
 	}
 
 	public void init(String title, UIConfig uiConfig) {
 		Map<String,ActionListener> buttons = new HashMap<>();
-		buttons.put("Add personal account",personalAccount);
-		buttons.put("Add company account",companyAccount);
+		buttons.put("Add personal account", addPersonalAccountActionListener);
+		buttons.put("Add company account", addCompanyAccountActionListener);
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
@@ -84,16 +84,16 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 		System.exit(0);
 	};
 
-	private final ActionListener personalAccount = (ActionListener) -> {
-		openDialog(new JDialog_AddPersonalAccount(myframe));
-		if (newaccount) {
+	private final ActionListener addPersonalAccountActionListener = (ActionListener) -> {
+		openDialog(new AddPersonalAccount(uiFrame));
+		if (newAccount) {
 			this.addPersonalAccountCommand.execute(this);
 		}
 	};
 
-	private final ActionListener companyAccount = (ActionListener) -> {
-		openDialog(new JDialog_AddCompanyAccount(myframe));
-		if (newaccount) {
+	private final ActionListener addCompanyAccountActionListener = (ActionListener) -> {
+		openDialog(new AddCompanyAccount(uiFrame));
+		if (newAccount) {
 			this.addCompanyAccountCommand.execute(this);
 		}
 	};
@@ -134,7 +134,6 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 
 	@Override
 	public void setWithdrawCommand(Command withdrawCommand) {
-
 	}
 
 	@Override
@@ -209,7 +208,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		System.out.println("Updating the table on the UI.");
+		Log.instance.write("Update table in the MainForm");
 	}
 
 	public void setSubject(AccountService subject) {
@@ -226,7 +225,7 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 		public void windowClosing(WindowEvent event)
 		{
 			Object object = event.getSource();
-			if (object == MainForm.this)
+			if (object == UIFrame.this)
 				MainFrm_windowClosing(event);
 		}
 	}
@@ -247,18 +246,18 @@ public class MainForm extends FormTemplate implements UIControl, framework.Obser
 	private void tableRow(Account act){
 		model.addRow(this.uiConfig.buildRow(act));
 		JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-		newaccount = false;
+		newAccount = false;
 	}
 
 	public void openDialog(JDialog jDialog){
-		openDialog(jDialog, 450, 20, 300, 330);
+		openDialog(jDialog, 450, 20, 300, 430);
 	}
 	public void openDialog(JDialog jDialog, int x, int y, int width, int height){
 		jDialog.setBounds(x, y, width, height);
 		jDialog.show();
 	}
 
-	public AccountOperationCategory getOperationCategory() {
-		return operationCategory;
+	public AccountOperationCategory getAccountOperationCategory() {
+		return accountOperationCategory;
 	}
 }

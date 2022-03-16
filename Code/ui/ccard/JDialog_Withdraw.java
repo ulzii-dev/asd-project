@@ -2,7 +2,7 @@ package ui.ccard;
 
 public class JDialog_Withdraw extends javax.swing.JDialog {
 
-    private final CardFrm parentframe;
+    private final CreditCardUIFrame parentframe;
     private final String name;
     javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
     javax.swing.JLabel JLabel2 = new javax.swing.JLabel();
@@ -10,7 +10,7 @@ public class JDialog_Withdraw extends javax.swing.JDialog {
     javax.swing.JTextField JTextField_AMT = new javax.swing.JTextField();
     javax.swing.JButton JButton_OK = new javax.swing.JButton();
     javax.swing.JButton JButton_Calcel = new javax.swing.JButton();
-    public JDialog_Withdraw(CardFrm parent, String aname) {
+    public JDialog_Withdraw(CreditCardUIFrame parent, String aname) {
         super(parent);
         parentframe = parent;
         name = aname;

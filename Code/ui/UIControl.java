@@ -1,6 +1,6 @@
 package ui;
 
-import backend.banking.commands.Command;
+import framework.Command;
 import backend.commons.Customer;
 
 public interface UIControl {

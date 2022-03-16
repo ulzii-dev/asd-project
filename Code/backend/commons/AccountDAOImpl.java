@@ -4,23 +4,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class AccountDAOImpl implements AccountDAO {
-    Collection<Account> accountlist = new ArrayList<Account>();
+    Collection<Account> accounts;
+
+    public AccountDAOImpl(){
+        accounts = new ArrayList<Account>();
+    }
 
     public void createAccount(Account account) {
-        accountlist.add(account); // add the new
+        accounts.add(account);
     }
 
     public void updateAccount(Account account) {
-        Account accountexist = loadAccount(account.getAccountNumber());
-        if (accountexist != null) {
-            accountlist.remove(accountexist); // remove the old
-            accountlist.add(account); // add the new
+        Account isAccountExist = loadAccount(account.getAccountNumber());
+        if (isAccountExist != null) {
+            accounts.remove(isAccountExist);
+            accounts.add(account);
         }
 
     }
 
     public Account loadAccount(String accountNumber) {
-        for (Account account : accountlist) {
+        for (Account account : accounts) {
             if (account.getAccountNumber() == accountNumber) {
                 return account;
             }
@@ -29,7 +33,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     public Collection<Account> getAccounts() {
-        return accountlist;
+        return accounts;
     }
 
 }

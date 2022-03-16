@@ -1,6 +1,8 @@
 package backend.banking.service;
 
+import backend.banking.BankingAccountType;
 import backend.banking.CheckingAccount;
+import backend.banking.SavingsAccount;
 import backend.banking.dao.BankingAccountDAO;
 import backend.banking.strategy.CompanyCheckingAccountComputation;
 import backend.banking.strategy.CompanySavingsAccountComputation;
@@ -8,25 +10,22 @@ import backend.banking.strategy.PersonCheckingAccountComputation;
 import backend.banking.strategy.PersonSavingsAccountInterestComputation;
 import backend.commons.*;
 import backend.creditcard.observer.EmailSender;
-import framework.Observable;
-import framework.Observer;
+import ui.CompanyAccount;
 import ui.PersonalAccount;
 
-import java.util.Collection;
+public class BankingAccountService extends AccountService {
+    private static volatile BankingAccountService instance;
 
-public class BankAccountService extends AccountService {
-    private static volatile BankAccountService instance;
-
-    private BankAccountService() {
+    private BankingAccountService() {
         super(BankingAccountDAO.getInstance());
         this.registerObserver(new EmailSender(this));
     }
 
-    public static BankAccountService getInstance() {
+    public static BankingAccountService getInstance() {
         if (instance == null) {
-            synchronized (BankAccountService.class) {
+            synchronized (BankingAccountService.class) {
                 if (instance == null) {
-                    instance = new BankAccountService();
+                    instance = new BankingAccountService();
                 }
             }
         }
@@ -36,17 +35,19 @@ public class BankAccountService extends AccountService {
 
 
     @Override
-    public Account accountFactory(String accountType, Customer customer) {
+    public Account createAccountFactory(String accountType, Customer customer) {
         if (customer instanceof PersonalAccount) {
-            if (AccountType.valueOf(accountType) == AccountType.CHECKING) {
+            if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
                 return new CheckingAccount(new PersonCheckingAccountComputation());
             }
             return new SavingsAccount(new PersonSavingsAccountInterestComputation());
+        } else if(customer instanceof CompanyAccount) {
+            if (BankingAccountType.valueOf(accountType) == BankingAccountType.CHECKING) {
+                return new CheckingAccount(new CompanyCheckingAccountComputation());
+            }
+            return new SavingsAccount(new CompanySavingsAccountComputation());
         }
-        if (AccountType.valueOf(accountType) == AccountType.CHECKING) {
-            return new CheckingAccount(new CompanyCheckingAccountComputation());
-        }
-        return new SavingsAccount(new CompanySavingsAccountComputation());
+        return null;
     }
 
 }

@@ -1,11 +1,11 @@
 package backend.banking;
 
-import backend.banking.service.BankAccountService;
+import backend.banking.service.BankingAccountService;
 import backend.commons.*;
 
 public class Application {
     public static void main(String[] args) {
-        AccountService accountService =  BankAccountService.getInstance();
+        AccountService accountService =  BankingAccountService.getInstance();
 
         Customer renuka = new Customer(1,"Renuka Mohanraj", "1000N Fourth Street",
                 "Fairfield", "Iowa", 52557, "renuka@miu.edu");

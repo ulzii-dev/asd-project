@@ -4,7 +4,7 @@ import backend.banking.visitor.InterestComputerVisitor;
 import framework.Observable;
 import framework.Observer;
 import ui.AccountOperationCategory;
-import ui.bank.MainForm;
+import framework.ui.UIFrame;
 
 import java.util.*;
 
@@ -19,18 +19,22 @@ public abstract class AccountService implements Observable {
 	public AccountService(AccountDAO accountDAO){
 		this.accountDAO = accountDAO;
 		this.observerList = new ArrayList<Observer>();
-		this.registerObserver(MainForm.getInstance());
-		MainForm.getInstance().setSubject(this);
+		this.registerObserver(UIFrame.getInstance());
+		UIFrame.getInstance().setSubject(this);
 	}
 
 
 	public final void createAccount(String accountNumber, Customer customer, String accountType) {
-		Account account = this.accountFactory(accountType, customer);
-		account.setCustomer(customer);
-		account.setAccountNumber(accountNumber);
-		accountDAO.createAccount(account);
-		this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
-		notifyObservers();
+		try {
+			Account account = this.createAccountFactory(accountType, customer);
+			account.setCustomer(customer);
+			account.setAccountNumber(accountNumber);
+			accountDAO.createAccount(account);
+			this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
+			notifyObservers();
+		}catch (NullPointerException n){
+			n.printStackTrace();
+		}
 	}
 
 	public Account getAccount(String accountNumber) {
@@ -96,7 +100,7 @@ public abstract class AccountService implements Observable {
 	}
 
 
-    public List<String> getAllAccountNumbers(){
+	public List<String> getAllAccountNumbers(){
 		ArrayList<String> listOfAccountNumbers = new ArrayList<String>();
 		for (Account value : getAllAccounts()) {
 			listOfAccountNumbers.add(value.getAccountNumber());
@@ -111,7 +115,7 @@ public abstract class AccountService implements Observable {
 		accountDAO.updateAccount(toAccount);
 	}
 
-	public abstract Account accountFactory(String accountType, Customer customer);
+	public abstract Account createAccountFactory(String accountType, Customer customer);
 
 	public AccountOperationCategory getAccountOperationCategory() {
 		return accountOperationCategory;

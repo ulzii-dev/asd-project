@@ -2,7 +2,6 @@ package backend.banking;
 
 import backend.banking.visitor.Visitor;
 import backend.commons.Account;
-import backend.commons.AccountType;
 import backend.commons.InterestComputationStrategy;
 
 public class CheckingAccount extends Account {
@@ -17,6 +16,6 @@ public class CheckingAccount extends Account {
 
     @Override
     public String getAccountType() {
-        return AccountType.CHECKING.name();
+        return BankingAccountType.CHECKING.name();
     }
 }

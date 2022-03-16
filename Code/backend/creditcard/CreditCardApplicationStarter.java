@@ -1,5 +1,7 @@
 package backend.creditcard;
 
+import backend.banking.commands.DepositCommand;
+import backend.banking.commands.WithdrawCommand;
 import backend.creditcard.commands.AddCompanyAccountCommand;
 import backend.creditcard.commands.AddPersonalAccountCommand;
 import framework.ui.UIFrame;
@@ -11,14 +13,16 @@ public class CreditCardApplicationStarter {
     public static void main(String[] args){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIControl mainForm = UIFrame.getInstance();
-            mainForm.init("MIU CreditCard Application", new CreditCardUIConfig());
+            UIControl uIControl = UIFrame.getInstance();
+            uIControl.init("MIU CreditCard Application", new CreditCardUIConfig());
 
             //commands
-            mainForm.setAddPersonalAccountCommand(new AddPersonalAccountCommand());
-            mainForm.setAddCompanyAccountCommand(new AddCompanyAccountCommand());
+            uIControl.setAddPersonalAccountCommand(new AddPersonalAccountCommand());
+            uIControl.setAddCompanyAccountCommand(new AddCompanyAccountCommand());
+            uIControl.setDepositCommand(new DepositCommand());
+            uIControl.setWithdrawCommand(new WithdrawCommand());
             //Create a new instance of our application's frame, and make it visible.
-            mainForm.setVisible(true);
+            uIControl.setVisible(true);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);

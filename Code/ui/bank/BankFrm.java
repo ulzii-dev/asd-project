@@ -29,7 +29,6 @@ public class BankFrm extends javax.swing.JFrame {
     javax.swing.JButton JButton_Exit = new javax.swing.JButton();
     public BankFrm() {
         myframe = this;
-        Log.getLogger().write("Log instance is working here !!!");
 
         setTitle("Bank Application.");
         setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);

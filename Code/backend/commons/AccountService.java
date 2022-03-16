@@ -6,9 +6,7 @@ import framework.Observer;
 import ui.AccountOperationCategory;
 import ui.bank.MainForm;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public abstract class AccountService implements Observable {
 	private final AccountDAO accountDAO;
@@ -16,6 +14,7 @@ public abstract class AccountService implements Observable {
 	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
 	protected AccountOperationCategory accountOperationCategory;
 	private List<Observer> observerList;
+	private Map<Account, ArrayList<AccountTransaction>> changedAccountList = new HashMap<>();
 
 	public AccountService(AccountDAO accountDAO){
 		this.accountDAO = accountDAO;
@@ -32,13 +31,6 @@ public abstract class AccountService implements Observable {
 		accountDAO.createAccount(account);
 		this.accountOperationCategory = AccountOperationCategory.ACCOUNT_CREATED;
 		notifyObservers();
-	}
-
-	public void deposit(String accountNumber, double amount) {
-		Account account = accountDAO.loadAccount(accountNumber);
-		account.deposit(amount);
-
-		accountDAO.updateAccount(account);
 	}
 
 	public Account getAccount(String accountNumber) {
@@ -62,10 +54,45 @@ public abstract class AccountService implements Observable {
 
 	}
 
+	public void deposit(String accountNumber, double amount) {
+		Account account = accountDAO.loadAccount(accountNumber);
+		if(account != null) {
+			account.deposit(amount);
+			accountDAO.updateAccount(account);
+
+			addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
+		} else{
+			System.out.println("deposited");
+		}
+		notifyObservers();
+	}
+
 	public void withdraw(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.withdraw(amount);
 		accountDAO.updateAccount(account);
+
+		addToChangedAccountList(account, new AccountTransaction(Action.WITHDRAW, amount));
+		notifyObservers();
+	}
+
+	public Map<Account, ArrayList<AccountTransaction>> getAccountTransactions() {
+		return changedAccountList;
+	}
+
+	public void addToChangedAccountList(Account account, AccountTransaction accTranx) {
+		ArrayList<AccountTransaction> transactions;
+		if(changedAccountList.containsKey(account)) {
+			transactions = changedAccountList.get(account);
+		} else {
+			transactions = new ArrayList<>();
+		}
+		transactions.add(accTranx);
+		changedAccountList.put(account, transactions);
+	}
+
+	public void clearChangedAccountList(){
+		changedAccountList.clear();
 	}
 
 

@@ -26,18 +26,17 @@ public class CreditCardAccount extends Account implements Observable {
         this.observerList = new ArrayList<>();
         this.registerObserver(new EmailSender(this));
     }
+
     @Override
     public double accept(Visitor visitor) {
         return visitor.visit(this);
     }
-
 
     public double getPreviousBalance() {
         double prevBalance = 0;
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isBefore(todayDate.withDayOfMonth(1))) {
                 prevBalance += accountEntry.getAmount();
-
             }
         }
 
@@ -45,9 +44,7 @@ public class CreditCardAccount extends Account implements Observable {
     }
 
     public double getTotalCredit() {
-
         double totalCredit = 0;
-
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
                 if (accountEntry.getAmount() < 0) {
@@ -59,10 +56,8 @@ public class CreditCardAccount extends Account implements Observable {
         return totalCredit;
     }
 
-
     public double getTotalCharges() {
         double totalCharges = 0;
-
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
                 if (accountEntry.getAmount() >= 0) {
@@ -74,17 +69,15 @@ public class CreditCardAccount extends Account implements Observable {
         if(totalCharges > 400) {
             notifyObservers();
         }
-
         return totalCharges;
     }
+
     public double getNewBalance() {
-        return this.creditCardCalculator.computeBalance(getPreviousBalance(),
-                getTotalCredit(), getTotalCharges());
+        return this.creditCardCalculator.computeBalance(getPreviousBalance(), getTotalCredit(), getTotalCharges());
     }
 
     public double getTotalDue() {
-        return this.creditCardCalculator.
-                computeTotalDue(getNewBalance());
+        return this.creditCardCalculator.computeTotalDue(getNewBalance());
     }
 
     public double getMonthlyMinimumPayment() {
@@ -92,10 +85,8 @@ public class CreditCardAccount extends Account implements Observable {
     }
 
     public double getMonthlyInterest() {
-        return this.creditCardCalculator.
-                computeInterest(getTotalCredit());
+        return this.creditCardCalculator.computeInterest(getTotalCredit());
     }
-
 
     @Override
     public String getAccountType() {

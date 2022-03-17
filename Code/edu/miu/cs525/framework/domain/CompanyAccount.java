@@ -15,7 +15,6 @@ public class CompanyAccount extends Customer {
                           int numOfEmployee) {
         super(customerId, name, street, city, state, zip, email);
         this.numOfEmployee = numOfEmployee;
-
     }
 
     public int getNumOfEmployee() {

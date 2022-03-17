@@ -37,9 +37,9 @@ public class AccountData {
 
     @Override
     public String toString() {
-        return "AccountData{" +
-                "accountNumber='" + accountNumber + '\'' +
-                ", accountType='" + accountType + '\'' +
+        return "AccountData {" +
+                "accountNumber = '" + accountNumber + '\'' +
+                ", accountType = '" + accountType + '\'' +
                 ", customer=" + customer +
                 '}';
     }

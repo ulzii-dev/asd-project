@@ -19,6 +19,4 @@ public class SavingsAccount extends Account {
     public double accept(Visitor visitor) {
         return visitor.visit(this);
     }
-
-
 }

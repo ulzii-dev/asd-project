@@ -4,6 +4,6 @@ import edu.miu.cs525.framework.Command;
 import edu.miu.cs525.framework.ui.UIControl;
 
 public class NoCommand implements Command {
-    public void execute(UIControl uiControl) {
-    }
+    @Override
+    public void execute(UIControl uiControl) {}
 }

@@ -10,5 +10,3 @@ public enum BankingAccountType {
         this.name = name;
     }
 }
-
-

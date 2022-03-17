@@ -11,4 +11,3 @@ public enum CreditCardType {
         this.name = name;
     }
 }
-

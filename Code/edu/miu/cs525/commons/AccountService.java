@@ -18,6 +18,7 @@ public abstract class AccountService implements Observable {
 	public AccountService(AccountDAO accountDAO){
 		this.accountDAO = accountDAO;
 		this.observerList = new ArrayList<>();
+
 		this.registerObserver(UIFrame.getInstance());
 		UIFrame.getInstance().setSubject(this);
 	}
@@ -28,6 +29,7 @@ public abstract class AccountService implements Observable {
 		try {
 			Account account = prepareAccount(this.createAccountFactory(accountData), accountData);
 			accountDAO.create(account);
+
 			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
 		} catch (UnsupportedOperationException ex){
@@ -47,34 +49,42 @@ public abstract class AccountService implements Observable {
 			account.deposit(amount);
 			accountDAO.update(account);
 			addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
+
+			notifyObservers();
 		} else{
 			//TODO: I'm not sure about this?
 			Log.getLogger().write("deposited");
 		}
-		notifyObservers();
 	}
 
 
 	public void withdraw(String accountNumber, double amount) {
 		Account account = accountDAO.getAccountByAccountNumber(accountNumber);
-		account.withdraw(amount);
-		accountDAO.update(account);
-		addToChangedAccountList(account, new AccountTransaction(Action.WITHDRAW, amount));
-		notifyObservers();
+		if(account != null) {
+			account.withdraw(amount);
+			accountDAO.update(account);
+			addToChangedAccountList(account, new AccountTransaction(Action.WITHDRAW, amount));
+
+			notifyObservers();
+		} else{
+			//TODO: I'm not sure about this?
+			Log.getLogger().write("withdraw");
+		}
 	}
 
 	public Map<Account, ArrayList<AccountTransaction>> getAccountTransactions() {
 		return updatedAccountList;
 	}
 
-	public void addToChangedAccountList(Account account, AccountTransaction accTranx) {
+	public void addToChangedAccountList(Account account, AccountTransaction accountTransaction) {
 		ArrayList<AccountTransaction> transactions;
 		if(updatedAccountList.containsKey(account)) {
 			transactions = updatedAccountList.get(account);
 		} else {
 			transactions = new ArrayList<>();
 		}
-		transactions.add(accTranx);
+
+		transactions.add(accountTransaction);
 		updatedAccountList.put(account, transactions);
 	}
 
@@ -95,7 +105,6 @@ public abstract class AccountService implements Observable {
 			account.addInterest();
 			accountDAO.update(account);
 		});
-
 	}
 
 	public List<String> getAllAccountNumbers(){

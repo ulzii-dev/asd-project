@@ -1,6 +1,5 @@
 package edu.miu.cs525.framework.ui.pages;
 
-
 import edu.miu.cs525.commons.Log;
 import edu.miu.cs525.banking.commands.NoCommand;
 import edu.miu.cs525.commons.Account;
@@ -57,7 +56,6 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	private AccountService subject;
 	private UIConfig uiConfig;
 	private static volatile UIFrame uiFrame;
-
 
 	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
@@ -264,7 +262,6 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	public AccountService getSubject() {
 		return subject;
 	}
-
 
 	class SymWindow extends java.awt.event.WindowAdapter
 	{

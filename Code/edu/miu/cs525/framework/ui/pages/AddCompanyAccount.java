@@ -33,7 +33,6 @@ public class AddCompanyAccount extends javax.swing.JDialog {
     JLabel JLabel8 = new JLabel();
     JTextField JTextField_ACCOUNT_NUMBER = new JTextField();
 
-    //}}
     public AddCompanyAccount(UIFrame parent) {
         super(parent);
         parentframe = parent;
@@ -150,7 +149,6 @@ public class AddCompanyAccount extends javax.swing.JDialog {
 
     void JButtonCANCEL_actionPerformed(java.awt.event.ActionEvent event) {
         dispose();
-
     }
 
     class SymAction implements java.awt.event.ActionListener {

@@ -1,6 +1,5 @@
 package edu.miu.cs525.creditcard;
 
-import edu.miu.cs525.banking.constant.BankReportColumnConstant;
 import edu.miu.cs525.commons.Account;
 import edu.miu.cs525.creditcard.constant.CreditCardReportColumnConstant;
 import edu.miu.cs525.creditcard.constant.CreditCardType;
@@ -30,13 +29,13 @@ public class CreditCardUIConfig implements UIConfig {
 
     @Override
     public Object[] buildRow(Account account) {
-        Object[] rowdata = new Object[5];
-        rowdata[0] = account.getCustomer().getName();
-        rowdata[1] = account.getAccountNumber();
-        rowdata[2] = "N/A";
-        rowdata[3] = account.getAccountType();
-        rowdata[4] = String.valueOf(account.getBalance());
-        return rowdata;
+        Object[] rowData = new Object[5];
+        rowData[0] = account.getCustomer().getName();
+        rowData[1] = account.getAccountNumber();
+        rowData[2] = "N/A";
+        rowData[3] = account.getAccountType();
+        rowData[4] = String.valueOf(account.getBalance());
+        return rowData;
     }
 
     @Override

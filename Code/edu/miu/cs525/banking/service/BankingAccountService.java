@@ -56,5 +56,4 @@ public class BankingAccountService extends AccountService {
         }
         throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }
-
 }

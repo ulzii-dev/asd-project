@@ -11,6 +11,4 @@ public interface CreditCardCalculator extends InterestComputationStrategy {
     double computeBalance(double previousBalance, double totalCredit, double totalCharges);
 
     double computeTotalDue(double newBalance);
-
-
 }

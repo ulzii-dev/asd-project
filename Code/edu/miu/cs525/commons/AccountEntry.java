@@ -9,9 +9,6 @@ public class AccountEntry {
     private String fromAccountNumber;
     private String fromPersonName;
 
-    public AccountEntry() {
-    }
-
     public AccountEntry(double amount, String description, String fromAccountNumber, String fromPersonName) {
         super();
         this.date = LocalDate.now();

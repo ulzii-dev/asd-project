@@ -51,7 +51,6 @@ public abstract class FormTemplate extends JFrame {
         newAccount = false;
         JPanel1.add(JScrollPane1);
         JScrollPane1.getViewport().add(JTable1);
-
     }
 
     private void setUpButtons(Map<String, ActionListener> buttons) {
@@ -65,7 +64,6 @@ public abstract class FormTemplate extends JFrame {
             setBtnBounds(btn, y);
             y += yIncrementBy();
         }
-
     }
 
     private void initCommands(Collection<Command> commands) {

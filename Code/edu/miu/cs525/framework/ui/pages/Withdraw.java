@@ -3,7 +3,6 @@ package edu.miu.cs525.framework.ui.pages;
 		A basic implementation of the JDialog class.
 */
 
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -57,11 +56,9 @@ public class Withdraw extends JDialog {
 
         JTextField_NAME.setText(accnr);
 
-
         SymAction lSymAction = new SymAction();
         JButton_OK.addActionListener(lSymAction);
         JButton_Calcel.addActionListener(lSymAction);
-
     }
 
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {

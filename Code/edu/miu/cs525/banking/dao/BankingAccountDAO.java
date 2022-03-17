@@ -25,17 +25,15 @@ public class BankingAccountDAO implements AccountDAO {
     @Override
     public void create(Account account) {
         accountlist.add(account);
-        Log.getLogger().write("Account Created with AccountNumber: " + account.getAccountNumber() +
-                ", CustomerName: " +
-                account.getCustomer().getName());
+        Log.getLogger().write("Account Created with AccountNumber: " + account.getAccountNumber() + ", CustomerName: " + account.getCustomer().getName());
     }
 
     @Override
     public void update(Account account) {
         Account isAccountExist = getAccountByAccountNumber(account.getAccountNumber());
         if (isAccountExist != null) {
-            accountlist.remove(isAccountExist); // remove the old
-            accountlist.add(account); // add the new
+            accountlist.remove(isAccountExist);
+            accountlist.add(account);
         }
         Log.getLogger().write("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }

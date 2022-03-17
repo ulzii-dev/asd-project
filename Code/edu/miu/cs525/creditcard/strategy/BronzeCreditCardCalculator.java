@@ -1,6 +1,6 @@
 package edu.miu.cs525.creditcard.strategy;
 
-public class BronzeCreditCardCalcuclator implements CreditCardCalculator {
+public class BronzeCreditCardCalculator implements CreditCardCalculator {
 
     @Override
     public double computeInterest(double totalCredit) {
@@ -21,6 +21,4 @@ public class BronzeCreditCardCalcuclator implements CreditCardCalculator {
     public double computeTotalDue(double newBalance) {
         return newBalance * 0.14;
     }
-
-
 }

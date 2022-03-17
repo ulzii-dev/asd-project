@@ -9,10 +9,9 @@ public class AddPersonalAccountCommand implements Command {
     @Override
     public void execute(UIControl control) {
         AccountData accountData = AccountData.builder()
-                .accountNumber(control.getAccountNumber())
-                .accountType(control.getAccountType())
-                .customer(control.getCustomer()).build();
-        CreditCardAccountService.getInstance()
-                .createAccount(accountData);
+                                  .accountNumber(control.getAccountNumber())
+                                  .accountType(control.getAccountType())
+                                  .customer(control.getCustomer()).build();
+        CreditCardAccountService.getInstance().createAccount(accountData);
     }
 }

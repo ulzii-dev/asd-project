@@ -25,9 +25,7 @@ public class CreditCardAccountDAO implements AccountDAO {
     @Override
     public void create(Account account) {
         accountList.add(account);
-        Log.getLogger().write("CreditCard Account Created with Card Number: " + account.getAccountNumber() +
-                ", CustomerName: " +
-                account.getCustomer().getName());
+        Log.getLogger().write("CreditCard Account Created with Card Number: " + account.getAccountNumber() + ", CustomerName: " + account.getCustomer().getName());
     }
 
     @Override

@@ -16,14 +16,14 @@ public class Tester {
                 "West Hartford", "Connecticut", 06110, "apple@apple.com", 12323);
         // create 2 accounts;
         AccountData accountData1 = AccountData.builder()
-                .accountNumber("1263862")
-                .accountType("GOLD")
-                .customer(microsoft).build();
+                                  .accountNumber("1263862")
+                                  .accountType("GOLD")
+                                  .customer(microsoft).build();
 
         AccountData accountData2 = AccountData.builder()
-                .accountNumber("4253892")
-                .accountType("SILVER")
-                .customer(apple).build();
+                                   .accountNumber("4253892")
+                                   .accountType("SILVER")
+                                   .customer(apple).build();
 
         accountService.createAccount(accountData1);
         accountService.createAccount(accountData2);

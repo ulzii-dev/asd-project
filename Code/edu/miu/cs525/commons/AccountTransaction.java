@@ -5,22 +5,22 @@ import java.text.NumberFormat;
 import java.time.LocalDateTime;
 
 public class AccountTransaction {
-    Action tranxAction;
-    double tranxAmount = 0d;
-    LocalDateTime tranxDate;
+    Action transactionAction;
+    double transactionAmount = 0d;
+    LocalDateTime transactionDate;
 
     public AccountTransaction(Action action, double amount) {
-        tranxAction = action;
-        tranxAmount = amount;
-        tranxDate = LocalDateTime.now();
+        transactionAction = action;
+        transactionAmount = amount;
+        transactionDate = LocalDateTime.now();
     }
 
     public double getTranxAmount() {
-        return tranxAmount;
+        return transactionAmount;
     }
 
     public String toString() {
-        NumberFormat formatter = new DecimalFormat("#0.00");
-        return tranxAction + ": [" + formatter.format(tranxAmount) + "] on " + tranxDate.toString();
+        NumberFormat formatter = new DecimalFormat("#00.00");
+        return transactionAction + ": [" + formatter.format(transactionAmount) + "] on " + transactionDate.toString();
     }
 }

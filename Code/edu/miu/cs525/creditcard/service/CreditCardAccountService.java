@@ -7,7 +7,7 @@ import edu.miu.cs525.commons.observer.EmailSender;
 import edu.miu.cs525.creditcard.domain.CreditCardAccount;
 import edu.miu.cs525.creditcard.constant.CreditCardType;
 import edu.miu.cs525.creditcard.dao.CreditCardAccountDAO;
-import edu.miu.cs525.creditcard.strategy.BronzeCreditCardCalcuclator;
+import edu.miu.cs525.creditcard.strategy.BronzeCreditCardCalculator;
 import edu.miu.cs525.creditcard.strategy.GoldCreditCardCalculator;
 import edu.miu.cs525.creditcard.strategy.SilverCreditCardCalculator;
 
@@ -34,15 +34,12 @@ public class CreditCardAccountService extends AccountService {
     public Account createAccountFactory(AccountData accountData){
         System.out.println(" ---> " + accountData.getAccountType());
         CreditCardType creditCardType = CreditCardType.valueOf(accountData.getAccountType());
-        if(creditCardType.equals(CreditCardType.BRONZE)){
-            return new CreditCardAccount(new BronzeCreditCardCalcuclator(), creditCardType);
-        }else if(creditCardType.equals(CreditCardType.SILVER)){
-            return new CreditCardAccount(new SilverCreditCardCalculator(), creditCardType);
-        }else if(creditCardType.equals(CreditCardType.GOLD)){
-            return new CreditCardAccount(new GoldCreditCardCalculator(), creditCardType);
-        }else {
-            throw new UnsupportedOperationException("Invalid Credit Card Type!");
+
+        switch (creditCardType) {
+            case BRONZE: return new CreditCardAccount(new BronzeCreditCardCalculator(), creditCardType);
+            case SILVER: return new CreditCardAccount(new SilverCreditCardCalculator(), creditCardType);
+            case GOLD: return new CreditCardAccount(new GoldCreditCardCalculator(), creditCardType);
+            default: throw new UnsupportedOperationException("Invalid Credit Card Type!");
         }
     }
-
 }

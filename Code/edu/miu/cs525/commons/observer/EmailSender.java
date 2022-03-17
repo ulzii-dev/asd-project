@@ -4,7 +4,6 @@ import edu.miu.cs525.commons.Account;
 import edu.miu.cs525.commons.AccountService;
 import edu.miu.cs525.commons.AccountTransaction;
 import edu.miu.cs525.commons.Log;
-import edu.miu.cs525.creditcard.domain.CreditCardAccount;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;
@@ -24,23 +23,25 @@ public class EmailSender implements Observer {
     @Override
     public void update() {
         boolean emailHeaderAdded = false;
+        int index = 0;
+
         for (Map.Entry<Account, ArrayList<AccountTransaction>> entry : accountService.getAccountTransactions().entrySet()) {
             Account account = entry.getKey();
             List<AccountTransaction> transactions = entry.getValue();
 
-            int index = 0;
             if (account.getCustomer() instanceof CompanyAccount || account.getCustomer() instanceof PersonalAccount) {
-                if (!emailHeaderAdded) {
-                    Log.getLogger().write("");
-                    Log.getLogger().write("OBSERVER_PATTERN: Pulling changed accounts from AccountService");
-                    Log.getLogger().write(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Sending transaction emails ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
-                    Log.getLogger().write("|                                                                                       |");
-
-                    emailHeaderAdded = true;
-                }
 
                 for (Iterator<AccountTransaction> it = transactions.iterator(); it.hasNext(); ) {
                     AccountTransaction transaction = it.next();
+
+                    if (!emailHeaderAdded) {
+                        Log.getLogger().write("");
+                        Log.getLogger().write("OBSERVER_PATTERN: Pulling changed accounts from AccountService");
+                        Log.getLogger().write(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Sending transaction emails ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
+                        Log.getLogger().write("|                                                                                       |");
+
+                        emailHeaderAdded = true;
+                    }
 
                     if (account.getCustomer() instanceof CompanyAccount) {
                         Log.getLogger().write("    " + index + ". CompanyAccount" + ": " + account.getCustomer().getName() + " [AccNO: " + account.getAccountNumber() + "]");

@@ -42,7 +42,7 @@ public class CreditCardAccountService extends AccountService {
             return new CreditCardAccount(new SilverCreditCardCalculator(), type);
         }
         if(type.equals(CreditCardType.GOLD)){
-            return new CreditCardAccount(new GoldCreditCardcalculator(), type);
+            return new CreditCardAccount(new GoldCreditCardCalculator(), type);
         }
         throw new UnsupportedOperationException("Invalid Credit Card Type!");
     }

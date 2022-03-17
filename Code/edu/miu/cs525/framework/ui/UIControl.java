@@ -2,6 +2,7 @@ package edu.miu.cs525.framework.ui;
 
 import edu.miu.cs525.shared.domain.Customer;
 import edu.miu.cs525.framework.Command;
+import edu.miu.cs525.framework.ui.pages.GenerateReport;
 
 public interface UIControl {
     void init(String title, UIConfig config);
@@ -27,4 +28,7 @@ public interface UIControl {
     Customer getCustomer();
 
     String getAmount();
+
+    GenerateReport getReportUI();
+
 }

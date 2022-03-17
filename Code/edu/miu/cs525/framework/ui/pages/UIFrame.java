@@ -40,6 +40,8 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	private String accountNumber;
 	private String accountType;
 
+	private GenerateReport report;
+
 	JPanel JPanel1 = new JPanel();
 
 	/****
@@ -87,6 +89,7 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 		buttons.put("Deposit", depositActionListener);
 		buttons.put("Withdraw", withdrawActionListener);
 		buttons.put("Add Interest", addInterestActionListener);
+		buttons.put("Generate Report", generateBillActionListener);
 
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
@@ -97,6 +100,7 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	public String getAmount() {
 		return amount;
 	}
+
 
 	private final ActionListener exit = (ActionListener) -> {
 		System.exit(0);
@@ -141,6 +145,13 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 		} else {
 			Log.getLogger().write("Need to select row to WITHDRAW!");
 		}
+	};
+
+	private final ActionListener generateBillActionListener = (ActionListener) -> {
+		GenerateReport gr = new GenerateReport();
+		setReport(gr);
+		this.reportCommand.execute(this);
+		openDialog(gr,450, 20, 860, 760);
 	};
 
 	void exitApplication(){
@@ -209,6 +220,14 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	public void setReport(GenerateReport gr) {
+		report = gr;
+	}
+
+	public GenerateReport getReportUI(){
+		return report;
 	}
 
 	@Override

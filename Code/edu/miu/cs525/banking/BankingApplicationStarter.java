@@ -10,17 +10,18 @@ public class BankingApplicationStarter {
     public static void main(String[] args){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIControl uiControl = UIFrame.getInstance();
-            uiControl.init("MIU Banking Application", new BankingUIConfig());
+            UIControl uIControl = UIFrame.getInstance();
+            uIControl.init("MIU Banking Application", new BankingUIConfig());
 
-            //Commands
-            uiControl.setAddPersonalAccountCommand(new AddPersonalAccountCommand());
-            uiControl.setAddCompanyAccountCommand(new AddCompanyAccountCommand());
-            uiControl.setDepositCommand(new DepositCommand());
-            uiControl.setWithdrawCommand(new WithdrawCommand());
-            uiControl.setAddInterestCommand(new AddInterestCommand());
+            //commands
+            uIControl.setAddPersonalAccountCommand(new AddPersonalAccountCommand());
+            uIControl.setAddCompanyAccountCommand(new AddCompanyAccountCommand());
+            uIControl.setDepositCommand(new DepositCommand());
+            uIControl.setWithdrawCommand(new WithdrawCommand());
+            uIControl.setAddInterestCommand(new AddInterestCommand());
+            uIControl.setReportCommand(new ReportCommand());
             //Create a new instance of our application's frame, and make it visible.
-            uiControl.setVisible(true);
+            uIControl.setVisible(true);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);

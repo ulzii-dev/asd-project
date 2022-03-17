@@ -17,6 +17,9 @@ public abstract class Account {
 
 	private String accountType;
 
+	//For Test Purpose: Report Generate
+	private static long day = 0l;
+
 	InterestComputerVisitor visitor = new InterestComputerVisitor();
 
 	private List<AccountEntry> accountEntries;
@@ -45,11 +48,15 @@ public abstract class Account {
 	}
 
 	public void deposit(double amount) {
+//		day++;
+//		AccountEntry entry = new AccountEntry(amount, "deposit", "", "", day);
 		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
 		accountEntries.add(entry);
 	}
 
 	public void withdraw(double amount) {
+//		day++;
+//		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "", day);
 		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "");
 		accountEntries.add(entry);
 	}
@@ -59,14 +66,14 @@ public abstract class Account {
 	}
 
 	public void transferFunds(Account toAccount, double amount, String description) {
-		AccountEntry fromEntry = new AccountEntry(-amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		
-		accountEntries.add(fromEntry);
-		
-		toAccount.addEntry(toEntry);
+//		AccountEntry fromEntry = new AccountEntry(-amount, description, toAccount.getAccountNumber(),
+//				toAccount.getCustomer().getName());
+//		AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
+//				toAccount.getCustomer().getName());
+//
+//		accountEntries.add(fromEntry);
+//
+//		toAccount.addEntry(toEntry);
 	}
 
 	public double addInterest(){

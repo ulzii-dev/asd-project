@@ -1,5 +1,6 @@
 package edu.miu.cs525.banking.service;
 
+import edu.miu.cs525.framework.ui.pages.GenerateReport;
 import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.banking.constant.BankingAccountType;
 import edu.miu.cs525.banking.domain.CheckingAccount;
@@ -57,5 +58,11 @@ public class BankAccountServiceImpl extends AccountService {
         }
         throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }
+
+    public static void createReport(String accountNumber, GenerateReport generateReport) {
+        Account account = instance.getAccount(accountNumber);
+        instance.generateReport(account, generateReport, true);
+    }
+
 
 }

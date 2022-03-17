@@ -47,7 +47,7 @@ public class CreditCardAccount extends Account implements Observable {
         double totalCredit = 0;
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount() < 0) {
+                if (accountEntry.getAmount() >= 0) {
                     totalCredit += accountEntry.getAmount();
                 }
             }

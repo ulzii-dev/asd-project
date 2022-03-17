@@ -48,6 +48,7 @@ public class GenerateReport extends javax.swing.JDialog {
         }
     }
 
+
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
     {
         dispose();

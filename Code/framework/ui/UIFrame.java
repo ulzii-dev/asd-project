@@ -92,6 +92,7 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		return amount;
 	}
 
+
 	private final ActionListener exit = (ActionListener) -> {
 		System.exit(0);
 	};

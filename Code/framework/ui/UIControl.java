@@ -27,5 +27,5 @@ public interface UIControl {
     Customer getCustomer();
 
     String getAmount();
-    String generateReport(String accountNumber);
+
 }

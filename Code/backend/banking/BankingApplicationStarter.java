@@ -1,6 +1,7 @@
 package backend.banking;
 
 import backend.banking.commands.*;
+import backend.creditcard.commands.AddInterestCommand;
 import framework.ui.UIFrame;
 import framework.ui.UIControl;
 

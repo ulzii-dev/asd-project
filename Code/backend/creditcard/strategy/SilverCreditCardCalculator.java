@@ -2,8 +2,9 @@ package backend.creditcard.strategy;
 
 public class SilverCreditCardCalculator implements CreditCardCalculator {
 
+
     @Override
-    public double computeMonthlyInterest(double totalCredit) {
+    public double computeInterest(double totalCredit) {
         return totalCredit * 0.08;
     }
 

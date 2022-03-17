@@ -61,4 +61,7 @@ public class AccountEntry {
         this.fromPersonName = fromPersonName;
     }
 
+    public String report() {
+        return "";
+    }
 }

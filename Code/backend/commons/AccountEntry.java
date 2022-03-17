@@ -1,8 +1,6 @@
 package backend.commons;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.StringJoiner;
 
 public class AccountEntry {
     private LocalDate date;
@@ -63,14 +61,4 @@ public class AccountEntry {
         this.fromPersonName = fromPersonName;
     }
 
-
-    public String report() {
-        return new StringJoiner(", ", AccountEntry.class.getSimpleName() + "[", "]")
-                .add("date=" + date)
-                .add("amount=" + amount)
-                .add("description='" + description + "'")
-                .add("fromAccountNumber='" + fromAccountNumber + "'")
-                .add("fromPersonName='" + fromPersonName + "'")
-                .toString();
-    }
 }

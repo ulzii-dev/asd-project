@@ -1,19 +1,30 @@
 package backend.banking;
 
+import backend.banking.builder.AccountData;
+import backend.banking.dto.AccountDTO;
 import backend.banking.service.BankingAccountService;
 import backend.commons.*;
 
 public class Tester {
     public static void main(String[] args) {
-        AccountService accountService =  BankingAccountService.getInstance();
+        AccountService accountService = BankingAccountService.getInstance();
 
-        Customer renuka = new Customer(1,"Renuka Mohanraj", "1000N Fourth Street",
+        Customer renuka = new Customer(1, "Renuka Mohanraj", "1000N Fourth Street",
                 "Fairfield", "Iowa", 52557, "renuka@miu.edu");
-        Customer sabi = new Customer(1,"Sabi Shresthaq", "147 Hillcrest Avenue",
+        Customer sabi = new Customer(1, "Sabi Shresthaq", "147 Hillcrest Avenue",
                 "West Hartford", "Connecticut", 06110, "care.sabi@gmail.com");
         // create 2 accounts;
-        accountService.createAccount("1263862",renuka, "Savings");
-        accountService.createAccount("4253892", sabi, "Checking");
+        AccountData accountData1 = AccountData.builder()
+                .accountNumber("1263862")
+                .accountType("Savings")
+                .customer(renuka).build();
+
+        AccountData accountData2 = AccountData.builder()
+                .accountNumber("4253892")
+                .accountType("Checking")
+                .customer(sabi).build();
+        accountService.createAccount(accountData1);
+        accountService.createAccount(accountData2);
         // use account 1;
         accountService.deposit("1263862", 240);
         accountService.deposit("1263862", 529);

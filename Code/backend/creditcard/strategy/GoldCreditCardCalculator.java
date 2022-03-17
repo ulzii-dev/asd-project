@@ -1,11 +1,9 @@
 package backend.creditcard.strategy;
 
-import backend.commons.InterestComputationStrategy;
-
-public class GoldCreditCardcalculator implements CreditCardCalculator {
+public class GoldCreditCardCalculator implements CreditCardCalculator{
 
     @Override
-    public double computeMonthlyInterest(double totalCredit) {
+    public double computeInterest(double totalCredit) {
         return totalCredit * 0.06;
     }
 

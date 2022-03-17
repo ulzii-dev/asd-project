@@ -1,6 +1,8 @@
 package backend.commons;
 
-import backend.banking.visitor.InterestComputerVisitor;
+import backend.banking.builder.AccountBuilder;
+import backend.banking.builder.AccountData;
+import backend.banking.dto.AccountDTO;
 import framework.Observable;
 import framework.Observer;
 import framework.AccountOperationConstant;
@@ -11,8 +13,6 @@ import java.util.*;
 public abstract class AccountService implements Observable {
 	private final AccountDAO accountDAO;
 	private int noOfAccounts;
-
-	private final InterestComputerVisitor interestComputerVisitor =  new InterestComputerVisitor();
 	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
 	private Map<Account, ArrayList<AccountTransaction>> changedAccountList = new HashMap<>();
@@ -24,15 +24,21 @@ public abstract class AccountService implements Observable {
 		UIFrame.getInstance().setSubject(this);
 	}
 
-	public final void createAccount(String accountNumber, Customer customer, String accountType) {
+	public final void createAccount(AccountData accountData) {
 		try {
-			Account account = this.createAccountFactory(accountNumber, accountType, customer);
+			Account account = prepareAccount(this.createAccountFactory(accountData), accountData);
 			accountDAO.create(account);
 			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
-		}catch (UnsupportedOperationException ux){
-			ux.printStackTrace();
+		} catch (UnsupportedOperationException ex){
+			ex.printStackTrace();
 		}
+	}
+
+	protected final Account prepareAccount(Account account, AccountData accountData){
+		account.setAccountNumber(accountData.getAccountNumber());
+		account.setCustomer(accountData.getCustomer());
+		return account;
 	}
 
 	public void deposit(String accountNumber, double amount) {
@@ -40,7 +46,6 @@ public abstract class AccountService implements Observable {
 		if(account != null) {
 			account.deposit(amount);
 			accountDAO.updateAccount(account);
-
 			addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
 		} else{
 			Log.getLogger().write("deposited");
@@ -89,8 +94,6 @@ public abstract class AccountService implements Observable {
 
 		for (String accountNumber : getAllAccountNumbers()) {
 			Account account = accountDAO.loadAccount(accountNumber);
-			// adding visitor pattern for adding interest
-			//account.accept(interestComputerVisitor);
 			account.addInterest();
 			accountDAO.updateAccount(account);
 		}
@@ -105,7 +108,6 @@ public abstract class AccountService implements Observable {
 		return listOfAccountNumbers;
 	}
 
-	//copied and the same
 	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
 		Account fromAccount = accountDAO.loadAccount(fromAccountNumber);
 		Account toAccount = accountDAO.loadAccount(toAccountNumber);
@@ -114,13 +116,7 @@ public abstract class AccountService implements Observable {
 		accountDAO.updateAccount(toAccount);
 	}
 
-
-	public void generateReport(){
-		System.out.println("Generating Reports");
-	}
-
-
-	public abstract Account createAccountFactory(String accountNumber, String accountType, Customer customer);
+	public abstract Account createAccountFactory(AccountData accountData) throws UnsupportedOperationException;
 
 	public AccountOperationConstant getAccountOperationConstant() {
 		return accountOperationConstant;
@@ -140,9 +136,4 @@ public abstract class AccountService implements Observable {
 	public void notifyObservers() {
 		this.observerList.forEach(Observer::update);
 	}
-
-
-
-
-
 }

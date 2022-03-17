@@ -29,11 +29,11 @@ public class BankingUIConfig implements UIConfig {
     public Object[] buildRow(Account account) {
         Object[] rowData = new Object[6];
         rowData[0] = account.getAccountNumber();
-		rowData[1] = account.getCustomer().getName();
-		rowData[2] = account.getCustomer().getCity();
-		rowData[3] = account.getCustomer() instanceof PersonalAccount ? "Personal Ac" : "Company Ac";
-		rowData[4] = account.getAccountType();
-		rowData[5] = String.valueOf(account.getBalance());
+        rowData[1] = account.getCustomer().getName();
+        rowData[2] = account.getCustomer().getCity();
+        rowData[3] = account.getCustomer() instanceof PersonalAccount ? "Personal Ac" : "Company Ac";
+        rowData[4] = account.getAccountType();
+        rowData[5] = String.valueOf(account.getBalance());
         return rowData;
     }
 

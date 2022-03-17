@@ -1,14 +1,12 @@
 package framework.ui;
 
 
-import backend.banking.commands.DepositCommand;
-import backend.banking.commands.WithdrawCommand;
 import backend.commons.Log;
-import backend.creditcard.service.CreditCardAccountService;
 import backend.banking.commands.NoCommand;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
+import com.sun.source.tree.Tree;
 import framework.AccountOperationConstant;
 import framework.Command;
 
@@ -27,8 +25,10 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	 ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
+	private Command addInterestCommand;
 	private Command depositCommand;
 	private Command withdrawCommand;
+	private Command reportCommand;
 
 	protected AccountOperationConstant accountOperationCategory;
 
@@ -56,8 +56,10 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
-		this.depositCommand = new DepositCommand();
-		this.withdrawCommand = new WithdrawCommand();
+		this.addInterestCommand = new NoCommand();
+		this.depositCommand = new NoCommand();
+		this.withdrawCommand = new NoCommand();
+		this.reportCommand = new NoCommand();
 		this.accountTypes = new ArrayList<>();
 	}
 
@@ -73,11 +75,13 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 	}
 
 	public void init(String title, UIConfig uiConfig) {
-		Map<String,ActionListener> buttons = new HashMap<>();
-		buttons.put("Add personal account", addPersonalAccountActionListener);
-		buttons.put("Add company account", addCompanyAccountActionListener);
+		Map<String,ActionListener> buttons = new LinkedHashMap<>();
+		buttons.put("Add Personal Account", addPersonalAccountActionListener);
+		buttons.put("Add Company Account", addCompanyAccountActionListener);
 		buttons.put("Deposit", depositActionListener);
 		buttons.put("Withdraw", withdrawActionListener);
+		buttons.put("Add Interest", addInterestActionListener);
+
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
@@ -86,11 +90,6 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	public String getAmount() {
 		return amount;
-	}
-
-	@Override
-	public String generateReport(String accountNumber) {
-		return null;
 	}
 
 	private final ActionListener exit = (ActionListener) -> {
@@ -111,16 +110,21 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		}
 	};
 
-	private final ActionListener depositActionListener = (ActionListener) -> {
-		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-		if (selection >= 0) {
-			String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
-			openDialog(new Deposit(uiFrame, accnr));
-			this.depositCommand.execute(this);
-		} else {
-			Log.getLogger().write("Need to select row to DEPOSIT!");
-		}
+	private final ActionListener addInterestActionListener = (ActionListener) -> {
+		this.addInterestCommand.execute(this);
+		JOptionPane.showMessageDialog(null, "Added interest to all accounts", "Added interest to all accounts", JOptionPane.WARNING_MESSAGE);
 	};
+
+	private final ActionListener depositActionListener = (ActionListener) -> {
+	int selection = JTable1.getSelectionModel().getSelectedIndices()[0];
+	if (selection >= 0) {
+		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
+		openDialog(new Deposit(uiFrame, accnr));
+		this.depositCommand.execute(this);
+	} else {
+		Log.getLogger().write("Need to select row to DEPOSIT!");
+	}
+};
 
 	private final ActionListener withdrawActionListener = (ActionListener) -> {
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
@@ -154,21 +158,22 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 
 	@Override
 	public void setReportCommand(Command reportCommand) {
-
+		this.reportCommand = reportCommand;
 	}
 
 	@Override
 	public void setAddInterestCommand(Command addInterestCommand) {
-
+		this.addInterestCommand = addInterestCommand;
 	}
 
 	@Override
 	public void setDepositCommand(Command depositCommand) {
-
+		this.depositCommand = depositCommand;
 	}
 
 	@Override
 	public void setWithdrawCommand(Command withdrawCommand) {
+		this.withdrawCommand = withdrawCommand;
 	}
 
 	@Override

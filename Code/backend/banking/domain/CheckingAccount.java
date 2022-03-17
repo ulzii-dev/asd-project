@@ -8,14 +8,8 @@ import backend.commons.InterestComputationStrategy;
 
 public class CheckingAccount extends Account {
 
-    public CheckingAccount(String accountNumber,
-                           String accountType,
-                           Customer customer,
-                           InterestComputationStrategy interestComputationStrategy) {
+    public CheckingAccount(InterestComputationStrategy interestComputationStrategy) {
         super(interestComputationStrategy);
-        setAccountType(accountType);
-        setCustomer(customer);
-        setAccountNumber(accountNumber);
     }
 
     @Override

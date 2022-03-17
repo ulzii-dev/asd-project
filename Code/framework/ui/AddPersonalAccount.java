@@ -14,7 +14,7 @@ import java.util.List;
 
 public class AddPersonalAccount extends javax.swing.JDialog {
 
-    private UIFrame parentframe;
+    private final UIFrame parentframe;
     List<JRadioButton> btnAccountTyps = new ArrayList<>();
     JLabel JLabel1 = new JLabel();
     JLabel JLabel2 = new JLabel();
@@ -37,88 +37,88 @@ public class AddPersonalAccount extends javax.swing.JDialog {
 
     public AddPersonalAccount(UIFrame parent) {
         super(parent);
-        parentframe=parent;
+        parentframe = parent;
 
         //{{INIT_CONTROLS
         setTitle("Add Personal Account");
         setModal(true);
         getContentPane().setLayout(null);
         setVisible(false);
-        setSize(383,503);
+        setSize(583, 703);
         int yOffset = 0;
         SymMouse aSymMouse = new SymMouse();
-        for (String actType: parentframe.getAccountTypes()) {
+        for (String actType : parentframe.getAccountTypes()) {
             // Build account types radio buttons
             JRadioButton chk = new JRadioButton();
             chk.setText(actType);
             chk.setActionCommand(actType);
-            chk.setBounds(36, yOffset,200,24);
+            chk.setBounds(36, yOffset, 200, 24);
             getContentPane().add(chk);
             chk.addMouseListener(aSymMouse);
             btnAccountTyps.add(chk);
             yOffset += 24;
         }
         getContentPane().add(JTextField_ACCOUNT_NUMBER);
-        JTextField_ACCOUNT_NUMBER.setBounds(84,yOffset + 60,156,20);
+        JTextField_ACCOUNT_NUMBER.setBounds(84, yOffset + 60, 156, 20);
 
-        if(parentframe.getAccountTypes().contains(CreditCardType.GOLD.name())){
+        if (parentframe.getAccountTypes().contains(CreditCardType.GOLD.name())) {
             JLabel8.setText("CC No.");
-        }else{
+        } else {
             JLabel8.setText("Acc No.");
         }
         getContentPane().add(JLabel8);
         JLabel8.setForeground(Color.black);
-        JLabel8.setBounds(12,yOffset + 60,48,24);
+        JLabel8.setBounds(12, yOffset + 60, 48, 24);
         JLabel1.setText("Name");
         getContentPane().add(JLabel1);
         JLabel1.setForeground(Color.black);
-        JLabel1.setBounds(12,yOffset + 84,48,24);
+        JLabel1.setBounds(12, yOffset + 84, 48, 24);
         JLabel2.setText("Street");
         getContentPane().add(JLabel2);
         JLabel2.setForeground(Color.black);
-        JLabel2.setBounds(12,yOffset + 108,48,24);
+        JLabel2.setBounds(12, yOffset + 108, 48, 24);
         JLabel3.setText("City");
         getContentPane().add(JLabel3);
         JLabel3.setForeground(Color.black);
-        JLabel3.setBounds(12,yOffset + 132,48,24);
+        JLabel3.setBounds(12, yOffset + 132, 48, 24);
         JLabel4.setText("State");
         getContentPane().add(JLabel4);
         JLabel4.setForeground(Color.black);
-        JLabel4.setBounds(12,yOffset + 156,48,24);
+        JLabel4.setBounds(12, yOffset + 156, 48, 24);
         JLabel5.setText("Zip");
         getContentPane().add(JLabel5);
         JLabel5.setForeground(Color.black);
-        JLabel5.setBounds(12,yOffset + 180,48,24);
+        JLabel5.setBounds(12, yOffset + 180, 48, 24);
         JLabel6.setText("Birthdate");
         getContentPane().add(JLabel6);
         JLabel6.setForeground(Color.black);
-        JLabel6.setBounds(12,yOffset + 204,96,24);
+        JLabel6.setBounds(12, yOffset + 204, 96, 24);
         JLabel7.setText("Email");
         getContentPane().add(JLabel7);
         JLabel7.setForeground(Color.black);
-        JLabel7.setBounds(12,yOffset + 228,48,24);
+        JLabel7.setBounds(12, yOffset + 228, 48, 24);
         getContentPane().add(JTextField_NAME);
-        JTextField_NAME.setBounds(84,yOffset + 84,156,20);
+        JTextField_NAME.setBounds(84, yOffset + 84, 156, 20);
         getContentPane().add(JTextField_CITY);
-        JTextField_CITY.setBounds(84,yOffset + 132,156,20);
+        JTextField_CITY.setBounds(84, yOffset + 132, 156, 20);
         getContentPane().add(JTextField_STATE);
-        JTextField_STATE.setBounds(84,yOffset + 156,156,20);
+        JTextField_STATE.setBounds(84, yOffset + 156, 156, 20);
         getContentPane().add(JTextField_STREET);
-        JTextField_STREET.setBounds(84,yOffset + 108,156,20);
+        JTextField_STREET.setBounds(84, yOffset + 108, 156, 20);
         getContentPane().add(JTextField_ZIP);
-        JTextField_ZIP.setBounds(84,yOffset + 180,156,20);
+        JTextField_ZIP.setBounds(84, yOffset + 180, 156, 20);
         getContentPane().add(JTextField_BIRTH_DATE);
-        JTextField_BIRTH_DATE.setBounds(84,yOffset + 204,156,20);
+        JTextField_BIRTH_DATE.setBounds(84, yOffset + 204, 156, 20);
         getContentPane().add(JTextField_EMAIL);
-        JTextField_EMAIL.setBounds(84,yOffset + 228,156,20);
+        JTextField_EMAIL.setBounds(84, yOffset + 228, 156, 20);
         JButton_OK.setText("OK");
         JButton_OK.setActionCommand("OK");
         getContentPane().add(JButton_OK);
-        JButton_OK.setBounds(48,yOffset + 264,84,24);
+        JButton_OK.setBounds(48, yOffset + 264, 84, 24);
         JButton_CANCEL.setText("Cancel");
         JButton_CANCEL.setActionCommand("Cancel");
         getContentPane().add(JButton_CANCEL);
-        JButton_CANCEL.setBounds(156,yOffset + 264,84,24);
+        JButton_CANCEL.setBounds(156, yOffset + 264, 84, 24);
         //}}
 
         //{{REGISTER_LISTENERS
@@ -126,26 +126,6 @@ public class AddPersonalAccount extends javax.swing.JDialog {
         JButton_OK.addActionListener(lSymAction);
         JButton_CANCEL.addActionListener(lSymAction);
         //}}
-    }
-
-    class SymMouse extends java.awt.event.MouseAdapter {
-        public void mouseClicked(java.awt.event.MouseEvent event) {
-            JRadioButton selectedBtn = (JRadioButton) event.getSource();
-            for (JRadioButton btn: btnAccountTyps) {
-                btn.setSelected(btn == selectedBtn);
-            }
-        }
-    }
-
-
-    class SymAction implements java.awt.event.ActionListener {
-        public void actionPerformed(java.awt.event.ActionEvent event) {
-            Object object = event.getSource();
-            if (object == JButton_OK)
-                JButtonOK_actionPerformed(event);
-            else if (object == JButton_CANCEL)
-                JButtonCANCEL_actionPerformed(event);
-        }
     }
 
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
@@ -171,5 +151,24 @@ public class AddPersonalAccount extends javax.swing.JDialog {
     void JButtonCANCEL_actionPerformed(java.awt.event.ActionEvent event) {
         //make this frame invisible if Cancel button is clicked
         dispose();
+    }
+
+    class SymMouse extends java.awt.event.MouseAdapter {
+        public void mouseClicked(java.awt.event.MouseEvent event) {
+            JRadioButton selectedBtn = (JRadioButton) event.getSource();
+            for (JRadioButton btn : btnAccountTyps) {
+                btn.setSelected(btn == selectedBtn);
+            }
+        }
+    }
+
+    class SymAction implements java.awt.event.ActionListener {
+        public void actionPerformed(java.awt.event.ActionEvent event) {
+            Object object = event.getSource();
+            if (object == JButton_OK)
+                JButtonOK_actionPerformed(event);
+            else if (object == JButton_CANCEL)
+                JButtonCANCEL_actionPerformed(event);
+        }
     }
 }

@@ -66,14 +66,13 @@ public abstract class Account {
 		toAccount.addEntry(toEntry);
 	}
 
-	public void addInterest(){
+	public double addInterest(){
 		// will be and can be used interchangebaly with visitor pattern
-		//double interest =  interestComputationStrategy.computeInterest(getBalance());
+		//double interestStrategy =  interestComputationStrategy.computeInterest(getBalance());
 		double interestVistor = this.accept(visitor);
 		AccountEntry entry =  new AccountEntry(interestVistor,"interest added","","");
 		accountEntries.add(entry);
-
-
+		return interestVistor;
 	}
 	public abstract double accept(Visitor visitor);
 

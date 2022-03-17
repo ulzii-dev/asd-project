@@ -5,7 +5,6 @@ import backend.banking.constant.BankingAccountType;
 import backend.banking.domain.CheckingAccount;
 import backend.banking.domain.SavingsAccount;
 import backend.banking.dao.BankingAccountDAO;
-import backend.banking.dto.AccountDTO;
 import backend.banking.strategy.CompanyCheckingAccountComputation;
 import backend.banking.strategy.CompanySavingsAccountComputation;
 import backend.banking.strategy.PersonCheckingAccountComputation;
@@ -36,16 +35,20 @@ public class BankingAccountService extends AccountService {
     }
 
     @Override
-    public Account createAccountFactory(AccountData accountData) {
+    public Account createAccountFactory(AccountData accountData) throws UnsupportedOperationException {
         Customer customer = accountData.getCustomer();
         BankingAccountType bankAccountType = BankingAccountType.valueOf(accountData.getAccountType());
+        return getConcreteAccountObject(customer, bankAccountType);
+    }
+
+    private Account getConcreteAccountObject(Customer customer, BankingAccountType bankAccountType) {
         if (customer instanceof PersonalAccount) {
             if (bankAccountType == BankingAccountType.CHECKING) {
                 return new CheckingAccount(new PersonCheckingAccountComputation());
             }
             return new SavingsAccount(new PersonSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
-            if (bankAccountType== BankingAccountType.CHECKING) {
+            if (bankAccountType == BankingAccountType.CHECKING) {
                 return new CheckingAccount(new CompanyCheckingAccountComputation());
             }
             return new SavingsAccount(new CompanySavingsAccountComputation());

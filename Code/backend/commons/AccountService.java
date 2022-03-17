@@ -94,12 +94,10 @@ public abstract class AccountService implements Observable {
 
 		for (String accountNumber : getAllAccountNumbers()) {
 			Account account = accountDAO.loadAccount(accountNumber);
-			double amount = account.addInterest();
+			account.addInterest();
 			accountDAO.updateAccount(account);
-			addToChangedAccountList(account, new AccountTransaction(Action.INTEREST, amount));
 		}
 
-		notifyObservers();
 	}
 
 	public List<String> getAllAccountNumbers(){
@@ -118,7 +116,7 @@ public abstract class AccountService implements Observable {
 		accountDAO.updateAccount(toAccount);
 	}
 
-	public abstract Account createAccountFactory(AccountData accountData);
+	public abstract Account createAccountFactory(AccountData accountData) throws UnsupportedOperationException;
 
 	public AccountOperationConstant getAccountOperationConstant() {
 		return accountOperationConstant;

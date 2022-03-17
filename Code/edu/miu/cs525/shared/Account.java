@@ -1,7 +1,10 @@
-package edu.miu.cs525.commons;
+package edu.miu.cs525.shared;
 
 import edu.miu.cs525.banking.visitor.InterestComputerVisitor;
 import edu.miu.cs525.banking.visitor.Visitor;
+import edu.miu.cs525.framework.InterestComputationStrategy;
+import edu.miu.cs525.shared.domain.AccountEntry;
+import edu.miu.cs525.shared.domain.Customer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,12 +70,16 @@ public abstract class Account {
 	}
 
 	public double addInterest(){
-		// will be and can be used interchangebaly with visitor pattern
-		//double interestStrategy =  interestComputationStrategy.computeInterest(getBalance());
-		double interestVistor = this.accept(visitor);
-		AccountEntry entry =  new AccountEntry(interestVistor,"interest added","","");
+		double interest =  interestComputationStrategy.computeInterest(getBalance());
+		AccountEntry entry =  new AccountEntry(interest,"interest added","","");
+
+		/**
+		 * ALTERNATIVELY, WE CAN USE VISITOR TO ACCOMPLISH THE INTEREST CALCULATION TASK
+		 * double interestVistor = this.accept(visitor);
+		 * AccountEntry entry =  new AccountEntry(interestVistor,"interest added","","");
+		 */
 		accountEntries.add(entry);
-		return interestVistor;
+		return interest;
 	}
 	public abstract double accept(Visitor visitor);
 

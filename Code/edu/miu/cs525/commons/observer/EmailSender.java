@@ -1,9 +1,9 @@
 package edu.miu.cs525.commons.observer;
 
-import edu.miu.cs525.commons.Account;
-import edu.miu.cs525.commons.AccountService;
-import edu.miu.cs525.commons.AccountTransaction;
-import edu.miu.cs525.commons.Log;
+import edu.miu.cs525.shared.Account;
+import edu.miu.cs525.shared.AccountService;
+import edu.miu.cs525.shared.domain.AccountTransaction;
+import edu.miu.cs525.shared.log.Log;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;

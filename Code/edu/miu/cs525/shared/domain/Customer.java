@@ -1,4 +1,6 @@
-package edu.miu.cs525.commons;
+package edu.miu.cs525.shared.domain;
+
+import edu.miu.cs525.shared.Account;
 
 import java.util.Collection;
 import java.util.HashSet;

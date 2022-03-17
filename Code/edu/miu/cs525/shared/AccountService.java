@@ -1,16 +1,18 @@
-package edu.miu.cs525.commons;
+package edu.miu.cs525.shared;
 
-import edu.miu.cs525.commons.builder.AccountData;
+import edu.miu.cs525.shared.builder.AccountDTO;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.Observable;
-import edu.miu.cs525.framework.AccountOperationConstant;
+import edu.miu.cs525.framework.constant.AccountOperationConstant;
 import edu.miu.cs525.framework.ui.pages.UIFrame;
+import edu.miu.cs525.shared.dao.AccountDAO;
+import edu.miu.cs525.shared.domain.AccountTransaction;
+import edu.miu.cs525.shared.log.Log;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class AccountService implements Observable {
-	private int checkBalance = 0;
 	private final AccountDAO accountDAO;
 	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
@@ -19,56 +21,50 @@ public abstract class AccountService implements Observable {
 	public AccountService(AccountDAO accountDAO){
 		this.accountDAO = accountDAO;
 		this.observerList = new ArrayList<>();
-
 		this.registerObserver(UIFrame.getInstance());
 		UIFrame.getInstance().setSubject(this);
 	}
 
-	public abstract Account createAccountFactory(AccountData accountData);
+	public abstract Account createAccountFactory(AccountDTO accountDTO);
 
-	public final void createAccount(AccountData accountData) {
+	public final void createAccount(AccountDTO accountDTO) {
 		try {
-			Account account = prepareAccount(this.createAccountFactory(accountData), accountData);
+			Account account = prepareAccount(createAccountFactory(accountDTO), accountDTO);
 			accountDAO.create(account);
-
-			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
+			Log.getLogger().write("Account Created Successfully for Customer: " + account.getCustomer().getName());
 			notifyObservers();
 		} catch (UnsupportedOperationException ex){
 			ex.printStackTrace();
 		}
 	}
 
-	protected final Account prepareAccount(Account account, AccountData accountData){
-		account.setAccountNumber(accountData.getAccountNumber());
-		account.setCustomer(accountData.getCustomer());
+	protected final Account prepareAccount(Account account, AccountDTO accountDTO){
+		account.setAccountNumber(accountDTO.getAccountNumber());
+		account.setCustomer(accountDTO.getCustomer());
 		return account;
 	}
 
 	public void deposit(String accountNumber, double amount) {
-		Account account = accountDAO.getAccountByAccountNumber(accountNumber);
-		if(account != null) {
+		try {
+			Account account = accountDAO.getAccountByAccountNumber(accountNumber);
 			account.deposit(amount);
 			accountDAO.update(account);
-			addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
-
+			addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.DEPOSITED, amount));
 			notifyObservers();
-		} else{
-			//TODO: I'm not sure about this?
-			Log.getLogger().write("deposited");
+		}catch (NullPointerException ex){
+			ex.printStackTrace();
 		}
 	}
 
 	public void withdraw(String accountNumber, double amount) {
-		Account account = accountDAO.getAccountByAccountNumber(accountNumber);
-		if(account != null) {
+		try {
+			Account account = accountDAO.getAccountByAccountNumber(accountNumber);
 			account.withdraw(amount);
 			accountDAO.update(account);
-			addToChangedAccountList(account, new AccountTransaction(Action.WITHDRAW, amount));
-
+			addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.WITHDRAW, amount));
 			notifyObservers();
-		} else{
-			//TODO: I'm not sure about this?
-			Log.getLogger().write("withdraw");
+		}catch (NullPointerException ex){
+			ex.printStackTrace();
 		}
 	}
 
@@ -76,15 +72,14 @@ public abstract class AccountService implements Observable {
 		return updatedAccountList;
 	}
 
-	public void addToChangedAccountList(Account account, AccountTransaction accountTransaction) {
+	public void addToChangedAccountList(Account account, AccountTransaction accTranx) {
 		ArrayList<AccountTransaction> transactions;
 		if(updatedAccountList.containsKey(account)) {
 			transactions = updatedAccountList.get(account);
 		} else {
 			transactions = new ArrayList<>();
 		}
-
-		transactions.add(accountTransaction);
+		transactions.add(accTranx);
 		updatedAccountList.put(account, transactions);
 	}
 
@@ -100,16 +95,13 @@ public abstract class AccountService implements Observable {
 		return accountDAO.getAccounts();
 	}
 
-
 	public void addInterest() {
-		for (String accountNumber : getAllAccountNumbers()) {
-			Account account = accountDAO.getAccountByAccountNumber(accountNumber);
-			double amount = account.addInterest();
+		for (String s : getAllAccountNumbers()) {
+			Account account = accountDAO.getAccountByAccountNumber(s);
+			account.addInterest();
 			accountDAO.update(account);
-			addToChangedAccountList(account, new AccountTransaction(Action.INTEREST, amount));
 		}
 
-		notifyObservers();
 	}
 
 	public List<String> getAllAccountNumbers(){
@@ -126,25 +118,17 @@ public abstract class AccountService implements Observable {
 		accountDAO.update(toAccount);
 	}
 
-	public void setCheckBalance(int checkBalance) {
-		this.checkBalance = checkBalance;
-	}
-
-	public int getCheckBalance(){
-		return checkBalance;
-	}
-
 	public AccountOperationConstant getAccountOperationConstant() {
 		return accountOperationConstant;
 	}
 
 	@Override
-	public void registerObserver(Observer observer) {
+	public void registerObserver(edu.miu.cs525.framework.Observer observer) {
 		this.observerList.add(observer);
 	}
 
 	@Override
-	public void removeObserver(Observer observer) {
+	public void removeObserver(edu.miu.cs525.framework.Observer observer) {
 		this.observerList.remove(observer);
 	}
 

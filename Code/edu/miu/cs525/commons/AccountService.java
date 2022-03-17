@@ -26,7 +26,7 @@ public abstract class AccountService implements Observable {
 
 	public final void createAccount(AccountData accountData) {
 		try {
-			Account account = prepareAccount(this.createAccountFactory(accountData), accountData);
+			Account account = prepareAccount(createAccountFactory(accountData), accountData);
 			accountDAO.create(account);
 			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();

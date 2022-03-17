@@ -2,7 +2,9 @@ package edu.miu.cs525.commons.builder;
 
 import edu.miu.cs525.commons.Customer;
 
-public class AccountData {
+import java.io.Serializable;
+
+public class AccountData implements Serializable {
     private String accountNumber;
     private String accountType;
     private Customer customer;

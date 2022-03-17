@@ -13,7 +13,7 @@ public class BankingApplicationStarter {
             UIControl uIControl = UIFrame.getInstance();
             uIControl.init("MIU Banking Application", new BankingUIConfig());
 
-            //commands
+            //Commands
             uIControl.setAddPersonalAccountCommand(new AddPersonalAccountCommand());
             uIControl.setAddCompanyAccountCommand(new AddCompanyAccountCommand());
             uIControl.setDepositCommand(new DepositCommand());

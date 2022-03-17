@@ -7,7 +7,7 @@ import backend.creditcard.CreditCardAccount;
 import backend.creditcard.CreditCardType;
 import backend.creditcard.dao.CreditCardAccountDAO;
 import backend.creditcard.strategy.BronzeCreditCardCaluclator;
-import backend.creditcard.strategy.GoldCreditCardcalculator;
+import backend.creditcard.strategy.GoldCreditCardCalculator;
 import backend.creditcard.strategy.SilverCreditCardCalculator;
 import framework.observer.EmailSender;
 
@@ -40,7 +40,7 @@ public class CreditCardAccountService extends AccountService {
             return new CreditCardAccount(accountNumber, accountType, customer, new SilverCreditCardCalculator(), type);
         }
         if (type.equals(CreditCardType.GOLD)) {
-            return new CreditCardAccount(accountNumber, accountType, customer, new GoldCreditCardcalculator(), type);
+            return new CreditCardAccount(accountNumber, accountType, customer, new GoldCreditCardCalculator(), type);
         }
         throw new UnsupportedOperationException("Invalid Credit Card Type!");
     }

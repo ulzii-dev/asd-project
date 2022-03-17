@@ -1,5 +1,7 @@
 package backend.banking;
 
+import backend.banking.builder.AccountData;
+import backend.banking.dto.AccountDTO;
 import backend.banking.service.BankingAccountService;
 import backend.commons.*;
 
@@ -12,8 +14,17 @@ public class Tester {
         Customer sabi = new Customer(1,"Sabi Shresthaq", "147 Hillcrest Avenue",
                 "West Hartford", "Connecticut", 06110, "care.sabi@gmail.com");
         // create 2 accounts;
-        accountService.createAccount("1263862",renuka, "Savings");
-        accountService.createAccount("4253892", sabi, "Checking");
+        AccountData accountData1 = AccountData.builder()
+                .accountNumber("1263862")
+                .accountType("Savings")
+                .customer(renuka).build();
+
+        AccountData accountData2 = AccountData.builder()
+                .accountNumber("4253892")
+                .accountType("Checking")
+                .customer(sabi).build();
+        accountService.createAccount(accountData1);
+        accountService.createAccount(accountData2);
         // use account 1;
         accountService.deposit("1263862", 240);
         accountService.deposit("1263862", 529);

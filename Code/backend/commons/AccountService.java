@@ -1,5 +1,8 @@
 package backend.commons;
 
+import backend.banking.builder.AccountBuilder;
+import backend.banking.builder.AccountData;
+import backend.banking.dto.AccountDTO;
 import framework.Observable;
 import framework.Observer;
 import framework.AccountOperationConstant;
@@ -21,15 +24,21 @@ public abstract class AccountService implements Observable {
 		UIFrame.getInstance().setSubject(this);
 	}
 
-	public final void createAccount(String accountNumber, Customer customer, String accountType) {
+	public final void createAccount(AccountData accountData) {
 		try {
-			Account account = this.createAccountFactory(accountNumber, accountType, customer);
+			Account account = prepareAccount(this.createAccountFactory(accountData), accountData);
 			accountDAO.create(account);
 			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
 		} catch (UnsupportedOperationException ex){
 			ex.printStackTrace();
 		}
+	}
+
+	protected final Account prepareAccount(Account account, AccountData accountData){
+		account.setAccountNumber(accountData.getAccountNumber());
+		account.setCustomer(accountData.getCustomer());
+		return account;
 	}
 
 	public void deposit(String accountNumber, double amount) {
@@ -108,9 +117,7 @@ public abstract class AccountService implements Observable {
 		accountDAO.updateAccount(toAccount);
 	}
 
-
-
-	public abstract Account createAccountFactory(String accountNumber, String accountType, Customer customer);
+	public abstract Account createAccountFactory(AccountData accountData);
 
 	public AccountOperationConstant getAccountOperationConstant() {
 		return accountOperationConstant;

@@ -1,9 +1,11 @@
 package backend.banking.service;
 
+import backend.banking.builder.AccountData;
 import backend.banking.constant.BankingAccountType;
 import backend.banking.domain.CheckingAccount;
 import backend.banking.domain.SavingsAccount;
 import backend.banking.dao.BankingAccountDAO;
+import backend.banking.dto.AccountDTO;
 import backend.banking.strategy.CompanyCheckingAccountComputation;
 import backend.banking.strategy.CompanySavingsAccountComputation;
 import backend.banking.strategy.PersonCheckingAccountComputation;
@@ -34,34 +36,19 @@ public class BankingAccountService extends AccountService {
     }
 
     @Override
-    public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
-        BankingAccountType bankAccountType = BankingAccountType.valueOf(accountType);
+    public Account createAccountFactory(AccountData accountData) {
+        Customer customer = accountData.getCustomer();
+        BankingAccountType bankAccountType = BankingAccountType.valueOf(accountData.getAccountType());
         if (customer instanceof PersonalAccount) {
             if (bankAccountType == BankingAccountType.CHECKING) {
-                return new CheckingAccount(
-                        accountNumber,
-                        accountType,
-                        customer,
-                        new PersonCheckingAccountComputation());
+                return new CheckingAccount(new PersonCheckingAccountComputation());
             }
-            return new SavingsAccount(
-                    accountNumber,
-                    accountType,
-                    customer,
-                    new PersonSavingsAccountInterestComputation());
+            return new SavingsAccount(new PersonSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
             if (bankAccountType== BankingAccountType.CHECKING) {
-                return new CheckingAccount(
-                        accountNumber,
-                        accountType,
-                        customer,
-                        new CompanyCheckingAccountComputation());
+                return new CheckingAccount(new CompanyCheckingAccountComputation());
             }
-            return new SavingsAccount(
-                    accountNumber,
-                    accountType,
-                    customer,
-                    new CompanySavingsAccountComputation());
+            return new SavingsAccount(new CompanySavingsAccountComputation());
         }
         throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }

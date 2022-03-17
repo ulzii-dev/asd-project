@@ -14,15 +14,8 @@ public class CreditCardAccount extends Account {
     CreditCardCalculator creditCardCalculator;
     CreditCardType creditCardType;
 
-    public CreditCardAccount(String accountNumber,
-                             String accountType,
-                             Customer customer,
-                             CreditCardCalculator creditCardCalculator,
-                CreditCardType creditCardType) {
+    public CreditCardAccount(CreditCardCalculator creditCardCalculator, CreditCardType creditCardType) {
         super(creditCardCalculator);
-        setAccountNumber(accountNumber);
-        setAccountType(accountType);
-        setCustomer(customer);
         this.creditCardCalculator =  creditCardCalculator;
         this.creditCardType =  creditCardType;
     }

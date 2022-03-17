@@ -1,5 +1,7 @@
 package backend.creditcard.service;
 
+import backend.banking.builder.AccountData;
+import backend.banking.dto.AccountDTO;
 import backend.commons.Account;
 import backend.commons.AccountService;
 import backend.commons.Customer;
@@ -30,16 +32,16 @@ public class CreditCardAccountService extends AccountService {
         return instance;
     }
     @Override
-    public Account createAccountFactory(String accountNumber, String accountType, Customer customer) {
-        CreditCardType type = CreditCardType.valueOf(accountType);
+    public Account createAccountFactory(AccountData accountData) {
+        CreditCardType type = CreditCardType.valueOf(accountData.getAccountType());
         if(type.equals(CreditCardType.BRONZE)){
-            return new CreditCardAccount(accountNumber, accountType, customer, new BronzeCreditCardCaluclator(), type);
+            return new CreditCardAccount(new BronzeCreditCardCaluclator(), type);
         }
         if(type.equals(CreditCardType.SILVER)){
-            return new CreditCardAccount(accountNumber, accountType, customer,new SilverCreditCardCalculator(),type);
+            return new CreditCardAccount(new SilverCreditCardCalculator(), type);
         }
         if(type.equals(CreditCardType.GOLD)){
-            return new CreditCardAccount(accountNumber, accountType, customer,new GoldCreditCardcalculator(), type);
+            return new CreditCardAccount(new GoldCreditCardcalculator(), type);
         }
         throw new UnsupportedOperationException("Invalid Credit Card Type!");
     }

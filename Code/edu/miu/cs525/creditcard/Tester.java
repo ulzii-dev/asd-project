@@ -6,6 +6,7 @@ import edu.miu.cs525.creditcard.service.CreditCardAccountServiceImpl;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.shared.domain.AccountEntry;
 import edu.miu.cs525.shared.domain.Customer;
+import edu.miu.cs525.shared.log.Log;
 
 public class Tester {
     public static void main(String[] args) {

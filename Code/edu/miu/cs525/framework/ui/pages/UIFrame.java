@@ -1,7 +1,7 @@
 package edu.miu.cs525.framework.ui.pages;
 
 
-import edu.miu.cs525.shared.Log;
+import edu.miu.cs525.shared.log.Log;
 import edu.miu.cs525.banking.commands.NoCommand;
 import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.shared.AccountService;

@@ -6,6 +6,7 @@ import edu.miu.cs525.shared.*;
 import edu.miu.cs525.framework.domain.PersonalAccount;
 import edu.miu.cs525.shared.domain.AccountEntry;
 import edu.miu.cs525.shared.domain.Customer;
+import edu.miu.cs525.shared.log.Log;
 
 import java.time.LocalDate;
 

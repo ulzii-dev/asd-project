@@ -6,6 +6,8 @@ import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.constant.AccountOperationConstant;
 import edu.miu.cs525.framework.ui.pages.UIFrame;
 import edu.miu.cs525.shared.dao.AccountDAO;
+import edu.miu.cs525.shared.domain.AccountTransaction;
+import edu.miu.cs525.shared.log.Log;
 
 import java.util.*;
 import java.util.stream.Collectors;

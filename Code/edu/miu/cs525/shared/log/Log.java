@@ -1,4 +1,4 @@
-package edu.miu.cs525.shared;
+package edu.miu.cs525.shared.log;
 
 public class Log {
     public static volatile Log instance;

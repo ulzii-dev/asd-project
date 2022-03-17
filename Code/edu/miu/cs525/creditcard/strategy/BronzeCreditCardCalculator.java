@@ -8,8 +8,8 @@ public class BronzeCreditCardCalculator implements CreditCardCalculator {
     }
 
     @Override
-    public double computeMonthlyMinimumPayment(double totalCredit) {
-        return totalCredit * 0.14;
+    public double computeMonthlyMinimumPayment(double newBalance) {
+        return newBalance * 0.14;
     }
 
     @Override

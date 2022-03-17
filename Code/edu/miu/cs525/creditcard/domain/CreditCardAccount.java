@@ -8,7 +8,6 @@ import edu.miu.cs525.creditcard.constant.CreditCardType;
 import edu.miu.cs525.creditcard.strategy.CreditCardCalculator;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.Observer;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class CreditCardAccount extends Account implements Observable {
         double totalCredit = 0;
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount() < 0) {
+                if (accountEntry.getAmount() >= 0) {
                     totalCredit += accountEntry.getAmount();
                 }
             }
@@ -60,12 +59,13 @@ public class CreditCardAccount extends Account implements Observable {
         double totalCharges = 0;
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount() >= 0) {
+                if (accountEntry.getAmount() < 0) {
                     totalCharges += accountEntry.getAmount();
                 }
             }
         }
 
+        System.out.println("Total Charges:" + totalCharges);
         if(totalCharges > 400) {
             notifyObservers();
         }
@@ -81,7 +81,7 @@ public class CreditCardAccount extends Account implements Observable {
     }
 
     public double getMonthlyMinimumPayment() {
-        return this.creditCardCalculator.computeMonthlyMinimumPayment(getTotalCredit());
+        return this.creditCardCalculator.computeMonthlyMinimumPayment(getNewBalance());
     }
 
     public double getMonthlyInterest() {

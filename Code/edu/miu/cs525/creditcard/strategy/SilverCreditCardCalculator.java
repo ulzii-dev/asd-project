@@ -8,8 +8,8 @@ public class SilverCreditCardCalculator implements CreditCardCalculator {
     }
 
     @Override
-    public double computeMonthlyMinimumPayment(double totalCredit) {
-        return totalCredit * 0.12;
+    public double computeMonthlyMinimumPayment(double newBalance) {
+        return newBalance * 0.12;
     }
 
     @Override

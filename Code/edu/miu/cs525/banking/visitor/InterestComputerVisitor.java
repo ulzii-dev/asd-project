@@ -8,7 +8,7 @@ import edu.miu.cs525.creditcard.domain.CreditCardAccount;
 import java.text.DecimalFormat;
 
 public class InterestComputerVisitor implements Visitor {
-    DecimalFormat df = new DecimalFormat("##.##");
+    //DecimalFormat df = new DecimalFormat("##.##");
 
     @Override
     public double visit(SavingsAccount savingsAccount) {

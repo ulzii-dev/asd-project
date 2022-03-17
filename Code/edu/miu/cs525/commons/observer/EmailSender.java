@@ -1,6 +1,5 @@
 package edu.miu.cs525.commons.observer;
 
-import edu.miu.cs525.banking.service.BankingAccountService;
 import edu.miu.cs525.commons.Account;
 import edu.miu.cs525.commons.AccountService;
 import edu.miu.cs525.commons.AccountTransaction;

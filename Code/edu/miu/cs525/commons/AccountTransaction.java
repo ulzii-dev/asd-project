@@ -1,13 +1,15 @@
 package edu.miu.cs525.commons;
 
+import edu.miu.cs525.framework.AccountOperationConstant;
+
 import java.time.LocalDateTime;
 
 public class AccountTransaction {
-    Action tranxAction;
+    AccountOperationConstant tranxAction;
     double tranxAmount = 0d;
     LocalDateTime tranxDate;
 
-    public AccountTransaction(Action action, double amount) {
+    public AccountTransaction(AccountOperationConstant action, double amount) {
         tranxAction = action;
         tranxAmount = amount;
         tranxDate = LocalDateTime.now();

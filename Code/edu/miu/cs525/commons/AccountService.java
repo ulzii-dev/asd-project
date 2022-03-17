@@ -46,7 +46,7 @@ public abstract class AccountService implements Observable {
 		if(account != null) {
 			account.deposit(amount);
 			accountDAO.update(account);
-			addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
+			addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.DEPOSITED, amount));
 		} else{
 			//TODO: I'm not sure about this?
 			Log.getLogger().write("deposited");
@@ -54,12 +54,11 @@ public abstract class AccountService implements Observable {
 		notifyObservers();
 	}
 
-
 	public void withdraw(String accountNumber, double amount) {
 		Account account = accountDAO.getAccountByAccountNumber(accountNumber);
 		account.withdraw(amount);
 		accountDAO.update(account);
-		addToChangedAccountList(account, new AccountTransaction(Action.WITHDRAW, amount));
+		addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.WITHDRAW, amount));
 		notifyObservers();
 	}
 

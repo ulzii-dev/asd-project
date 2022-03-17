@@ -1,6 +1,6 @@
 package edu.miu.cs525.shared;
 
-import edu.miu.cs525.shared.builder.AccountDTO;
+import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.constant.AccountOperationConstant;

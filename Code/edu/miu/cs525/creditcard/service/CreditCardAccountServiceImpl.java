@@ -2,7 +2,7 @@ package edu.miu.cs525.creditcard.service;
 
 import edu.miu.cs525.creditcard.strategy.BronzeCreditCardCalculator;
 import edu.miu.cs525.framework.observer.EmailSender;
-import edu.miu.cs525.shared.builder.AccountDTO;
+import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.shared.AccountService;
 import edu.miu.cs525.creditcard.domain.CreditCardAccount;

@@ -1,6 +1,6 @@
 package edu.miu.cs525.creditcard.commands;
 
-import edu.miu.cs525.shared.builder.AccountDTO;
+import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.framework.Command;
 import edu.miu.cs525.creditcard.service.CreditCardAccountServiceImpl;
 import edu.miu.cs525.framework.ui.UIControl;

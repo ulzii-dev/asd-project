@@ -10,6 +10,7 @@ import edu.miu.cs525.creditcard.strategy.BronzeCreditCardCalcuclator;
 import edu.miu.cs525.creditcard.strategy.GoldCreditCardCalculator;
 import edu.miu.cs525.creditcard.strategy.SilverCreditCardCalculator;
 import edu.miu.cs525.framework.observer.EmailSender;
+import edu.miu.cs525.framework.ui.pages.GenerateReport;
 
 public class CreditCardAccountService extends AccountService {
     private static volatile CreditCardAccountService instance;
@@ -45,4 +46,8 @@ public class CreditCardAccountService extends AccountService {
         }
     }
 
+    public static void generateReport(String accountNumber, GenerateReport generateReport) {
+        Account account = instance.getAccount(accountNumber);
+        instance.generateReport(account, generateReport, false);
+    }
 }

@@ -66,8 +66,8 @@ public class BankingAccountService extends AccountService {
         throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }
 
-    public static void generateReport(String accountNumber, GenerateReport generateReport, boolean isBankingSystem) {
+    public static void generateReport(String accountNumber, GenerateReport generateReport) {
         Account account = instance.getAccount(accountNumber);
-        instance.generateReport(account, generateReport, isBankingSystem);
+        instance.generateReport(account, generateReport, true);
     }
 }

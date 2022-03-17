@@ -2,6 +2,7 @@ package edu.miu.cs525.commons;
 
 import edu.miu.cs525.banking.service.BankingAccountService;
 import edu.miu.cs525.commons.builder.AccountData;
+import edu.miu.cs525.creditcard.domain.CreditCardAccount;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.AccountOperationConstant;
@@ -123,35 +124,34 @@ public abstract class AccountService implements Observable {
 	public void generateReport(Account account, GenerateReport generateReport, boolean isBankingSystem) {
 		Log.getLogger().write("REPORT GENERATING HAS STARTED !!!");
 		Log.getLogger().write(account.toString());
-
-		HashMap<LocalDate, List<AccountEntry>> dailyAccountEnties = new HashMap();
 		StringBuilder sb = new StringBuilder();
 
-		for (AccountEntry accountEntry : account.getAccountEntries()) {
-			List<AccountEntry> entries = new ArrayList<>();
-			LocalDate reportDate;
+		if(isBankingSystem) {
+			HashMap<LocalDate, List<AccountEntry>> dailyAccountEnties = new HashMap();
 
-			if(isBankingSystem) {
-				// Banking System Report
-				// Daily Billing Report
+			for (AccountEntry accountEntry : account.getAccountEntries()) {
+				List<AccountEntry> entries = new ArrayList<>();
+				LocalDate reportDate;
 				reportDate = accountEntry.getDate();
-			}
-			else {
-				// Credit Card System Report
-				// Monthly Billing Report
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-				reportDate = LocalDate.parse(accountEntry.getDate().format(formatter), formatter);
+
+				if (dailyAccountEnties.containsKey(reportDate)) {
+					entries = dailyAccountEnties.get(reportDate);
+				}
+				entries.add(accountEntry);
+				dailyAccountEnties.put(reportDate, entries);
 			}
 
-			if(dailyAccountEnties.containsKey(reportDate)) {
-				entries = dailyAccountEnties.get(reportDate);
-			}
-			entries.add(accountEntry);
-			dailyAccountEnties.put(reportDate, entries);
+			sb.append(generateReportRows(dailyAccountEnties));
+			System.out.println(dailyAccountEnties);
+		} else {
+			System.out.println(account);
+			CreditCardAccount creditCardAccount = (CreditCardAccount)account;
+			sb.append("Previous balance: " + creditCardAccount.getPreviousBalance() + "\n");
+			sb.append("New balance: " + creditCardAccount.getNewBalance() + "\n");
+			sb.append("Total charges: " + creditCardAccount.getTotalCharges() + "\n");
+			sb.append("Total credits: " + creditCardAccount.getTotalCredit() + "\n");
+			sb.append("Total due: " + creditCardAccount.getTotalDue() + "\n");
 		}
-
-		sb.append(generateReportRows(dailyAccountEnties));
-		System.out.println(dailyAccountEnties);
 
 		generateReport.setReport(sb.toString());
 		Log.getLogger().write(sb.toString());

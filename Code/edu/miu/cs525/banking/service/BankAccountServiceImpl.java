@@ -1,6 +1,6 @@
 package edu.miu.cs525.banking.service;
 
-import edu.miu.cs525.shared.builder.AccountDTO;
+import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.banking.constant.BankingAccountType;
 import edu.miu.cs525.banking.domain.CheckingAccount;
 import edu.miu.cs525.banking.domain.SavingsAccount;
@@ -21,6 +21,7 @@ public class BankAccountServiceImpl extends AccountService {
 
     private BankAccountServiceImpl() {
         super(BankingAccountDAOImpl.getInstance());
+        setPersonalAccountTransferAlertBalance(500);
         this.registerObserver(new EmailSender(this));
     }
 

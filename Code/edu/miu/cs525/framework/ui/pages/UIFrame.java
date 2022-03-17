@@ -2,14 +2,14 @@ package edu.miu.cs525.framework.ui.pages;
 
 
 import edu.miu.cs525.shared.log.Log;
-import edu.miu.cs525.banking.commands.NoCommand;
+import edu.miu.cs525.shared.utils.NoCommand;
 import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.shared.AccountService;
 import edu.miu.cs525.shared.domain.Customer;
 import edu.miu.cs525.framework.constant.AccountOperationConstant;
 import edu.miu.cs525.framework.Command;
 import edu.miu.cs525.framework.Observer;
-import edu.miu.cs525.framework.ui.FormTemplate;
+import edu.miu.cs525.framework.ui.UITemplate;
 import edu.miu.cs525.framework.ui.UIConfig;
 import edu.miu.cs525.framework.ui.UIControl;
 
@@ -21,7 +21,7 @@ import java.util.*;
 /**
  * A basic JFC based application.
  */
-public class UIFrame extends FormTemplate implements UIControl, Observer
+public class UIFrame extends UITemplate implements UIControl, Observer
 {
 	/****
 	 * Declare all Commands Here
@@ -254,7 +254,7 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		Log.getLogger().write("Updating the UIFrame dataset!!");
+		Log.getLogger().write("Completed Updating the UIFrame dataset!!");
 	}
 
 	public void setSubject(AccountService subject) {

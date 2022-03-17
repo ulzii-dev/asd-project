@@ -1,5 +1,6 @@
-package edu.miu.cs525.shared.builder;
+package edu.miu.cs525.shared.utils;
 
+import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.shared.domain.Customer;
 
 public class AccountBuilder {

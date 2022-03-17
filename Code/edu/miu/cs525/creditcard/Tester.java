@@ -1,7 +1,7 @@
 package edu.miu.cs525.creditcard;
 
 import edu.miu.cs525.shared.*;
-import edu.miu.cs525.shared.builder.AccountDTO;
+import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.creditcard.service.CreditCardAccountServiceImpl;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.shared.domain.AccountEntry;

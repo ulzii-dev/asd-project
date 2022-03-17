@@ -1,6 +1,6 @@
 package edu.miu.cs525.shared;
 
-import edu.miu.cs525.shared.builder.AccountDTO;
+import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.constant.AccountOperationConstant;
@@ -13,6 +13,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class AccountService implements Observable {
+	private int personalAccountTransferAlertBalance = 400;
+	private int creditCardWithdrawAlertBalance = 400;
 	private final AccountDAO accountDAO;
 	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
@@ -117,6 +119,22 @@ public abstract class AccountService implements Observable {
 		fromAccount.transferFunds(toAccount, amount, description);
 		accountDAO.update(fromAccount);
 		accountDAO.update(toAccount);
+	}
+
+	public void setPersonalAccountTransferAlertBalance(int checkingBalance) {
+		this.personalAccountTransferAlertBalance = checkingBalance;
+	}
+
+	public int getPersonalAccountTransferAlertBalance() {
+		return personalAccountTransferAlertBalance;
+	}
+
+	public void setCreditCardWithdrawAlertBalance(int checkingBalance) {
+		this.creditCardWithdrawAlertBalance = checkingBalance;
+	}
+
+	public int getCreditCardWithdrawAlertBalance() {
+		return creditCardWithdrawAlertBalance;
 	}
 
 	public AccountOperationConstant getAccountOperationConstant() {

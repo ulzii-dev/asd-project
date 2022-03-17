@@ -1,20 +1,22 @@
 package edu.miu.cs525.framework.ui.pages;
 
-import edu.miu.cs525.banking.service.BankingAccountService;
-
+import javax.swing.*;
 import java.awt.*;
 
 public class GenerateReport extends javax.swing.JDialog {
+    protected JTextArea report;
     public GenerateReport(Frame parent) {
         super(parent);
 
+        report = new JTextArea();
+
         getContentPane().setLayout(null);
-        setSize(405,367);
+        setSize(780,560);
         setVisible(false);
         getContentPane().add(JScrollPane1);
         JScrollPane1.setBounds(24,24,780,560);
-        JScrollPane1.getViewport().add(JTextArea);
-        JTextArea.setBounds(0,0,355,237);
+        JScrollPane1.getViewport().add(report);
+        report.setBounds(0,0,355,237);
         JButton_OK.setText("OK");
         JButton_OK.setActionCommand("OK");
         getContentPane().add(JButton_OK);
@@ -25,6 +27,10 @@ public class GenerateReport extends javax.swing.JDialog {
         JButton_OK.addActionListener(lSymAction);
         //JTextArea.setText(BankingAccountService.report);
         //}}
+    }
+
+    public void setReport(String reportContent){
+        report.setText(reportContent);
     }
 
     public GenerateReport()

@@ -17,6 +17,13 @@ import edu.miu.cs525.commons.AccountEntry;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;
 import edu.miu.cs525.framework.observer.EmailSender;
+import edu.miu.cs525.framework.ui.pages.GenerateReport;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BankingAccountService extends AccountService {
     private static volatile BankingAccountService instance;
@@ -59,16 +66,8 @@ public class BankingAccountService extends AccountService {
         throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }
 
-    public static void generateReport(String accountNumber) {
-        Log.getLogger().write("REPORT GENERATING HAS STARTED !!!");
+    public static void generateReport(String accountNumber, GenerateReport generateReport, boolean isBankingSystem) {
         Account account = instance.getAccount(accountNumber);
-        Log.getLogger().write(accountNumber);
-        Log.getLogger().write(account.toString());
-
-        for (AccountEntry accountEntry : account.getAccountEntries()) {
-            Log.getLogger().write("Account entry: " + accountEntry.report());
-        }
-
-        Log.getLogger().write("REPORT GENERATION COMPLETED!");
+        instance.generateReport(account, generateReport, isBankingSystem);
     }
 }

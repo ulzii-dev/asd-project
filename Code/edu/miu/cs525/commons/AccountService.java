@@ -1,11 +1,15 @@
 package edu.miu.cs525.commons;
 
+import edu.miu.cs525.banking.service.BankingAccountService;
 import edu.miu.cs525.commons.builder.AccountData;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.AccountOperationConstant;
+import edu.miu.cs525.framework.ui.pages.GenerateReport;
 import edu.miu.cs525.framework.ui.pages.UIFrame;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -114,6 +118,63 @@ public abstract class AccountService implements Observable {
 
 	public AccountOperationConstant getAccountOperationConstant() {
 		return accountOperationConstant;
+	}
+
+	public void generateReport(Account account, GenerateReport generateReport, boolean isBankingSystem) {
+		Log.getLogger().write("REPORT GENERATING HAS STARTED !!!");
+		Log.getLogger().write(account.toString());
+
+		HashMap<LocalDate, List<AccountEntry>> dailyAccountEnties = new HashMap();
+		StringBuilder sb = new StringBuilder();
+
+		for (AccountEntry accountEntry : account.getAccountEntries()) {
+			List<AccountEntry> entries = new ArrayList<>();
+			LocalDate reportDate;
+
+			if(isBankingSystem) {
+				// Banking System Report
+				// Daily Billing Report
+				reportDate = accountEntry.getDate();
+			}
+			else {
+				// Credit Card System Report
+				// Monthly Billing Report
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+				reportDate = LocalDate.parse(accountEntry.getDate().format(formatter), formatter);
+			}
+
+			if(dailyAccountEnties.containsKey(reportDate)) {
+				entries = dailyAccountEnties.get(reportDate);
+			}
+			entries.add(accountEntry);
+			dailyAccountEnties.put(reportDate, entries);
+		}
+
+		sb.append(generateReportRows(dailyAccountEnties));
+		System.out.println(dailyAccountEnties);
+
+		generateReport.setReport(sb.toString());
+		Log.getLogger().write(sb.toString());
+		Log.getLogger().write("REPORT GENERATION COMPLETED!");
+	}
+
+	public String generateReportRows(HashMap<LocalDate, List<AccountEntry>> reportData) {
+		StringBuilder sb = new StringBuilder();
+		for(Map.Entry<LocalDate, List<AccountEntry>> entry : reportData.entrySet()) {
+			LocalDate date = entry.getKey();
+			List<AccountEntry> accountEntries = entry.getValue();
+
+			sb.append(" Date: " + date + "\n");
+			sb.append(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n");
+			sb.append("|                                                     |\n");
+
+			for(AccountEntry accountEntry : accountEntries) {
+				sb.append("         " + accountEntry.report() + "\n");
+			}
+			sb.append("|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿|\n");
+		}
+
+		return sb.toString();
 	}
 
 	@Override

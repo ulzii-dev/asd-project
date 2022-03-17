@@ -40,6 +40,8 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	private String accountNumber;
 	private String accountType;
 
+	private GenerateReport report;
+
 	JPanel JPanel1 = new JPanel();
 
 	/****
@@ -146,8 +148,10 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	};
 
 	private final ActionListener generateBillActionListener = (ActionListener) -> {
+		GenerateReport gr = new GenerateReport();
+		setReport(gr);
 		this.reportCommand.execute(this);
-		openDialog(new GenerateReport(uiFrame),450, 20, 400, 350);
+		openDialog(gr,450, 20, 860, 760);
 	};
 
 	void exitApplication(){
@@ -216,6 +220,14 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	public void setReport(GenerateReport gr) {
+		report = gr;
+	}
+
+	public GenerateReport getReportUI(){
+		return report;
 	}
 
 	@Override

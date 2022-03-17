@@ -7,6 +7,6 @@ import edu.miu.cs525.banking.service.BankingAccountService;
 public class ReportCommand implements Command {
     @Override
     public void execute(UIControl control) {
-        BankingAccountService.generateReport(control.getAccountNumber());
+        BankingAccountService.generateReport(control.getAccountNumber(), control.getReportUI(), true);
     }
 }

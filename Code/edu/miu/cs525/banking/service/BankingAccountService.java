@@ -1,5 +1,6 @@
 package edu.miu.cs525.banking.service;
 
+import edu.miu.cs525.commons.Log;
 import edu.miu.cs525.commons.builder.AccountData;
 import edu.miu.cs525.banking.constant.BankingAccountType;
 import edu.miu.cs525.banking.domain.CheckingAccount;
@@ -12,6 +13,7 @@ import edu.miu.cs525.banking.strategy.PersonSavingsAccountInterestComputation;
 import edu.miu.cs525.commons.Account;
 import edu.miu.cs525.commons.AccountService;
 import edu.miu.cs525.commons.Customer;
+import edu.miu.cs525.commons.AccountEntry;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;
 import edu.miu.cs525.framework.observer.EmailSender;
@@ -59,7 +61,6 @@ public class BankingAccountService extends AccountService {
 
     public static void generateReport(String accountNumber) {
         Log.getLogger().write("REPORT GENERATING HAS STARTED !!!");
-
         Account account = instance.getAccount(accountNumber);
         Log.getLogger().write(accountNumber);
         Log.getLogger().write(account.toString());

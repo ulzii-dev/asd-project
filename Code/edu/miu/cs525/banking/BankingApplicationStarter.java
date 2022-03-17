@@ -19,6 +19,7 @@ public class BankingApplicationStarter {
             uIControl.setDepositCommand(new DepositCommand());
             uIControl.setWithdrawCommand(new WithdrawCommand());
             uIControl.setAddInterestCommand(new AddInterestCommand());
+            uIControl.setReportCommand(new ReportCommand());
             //Create a new instance of our application's frame, and make it visible.
             uIControl.setVisible(true);
         } catch (Throwable t) {

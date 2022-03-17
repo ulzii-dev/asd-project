@@ -87,6 +87,7 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 		buttons.put("Deposit", depositActionListener);
 		buttons.put("Withdraw", withdrawActionListener);
 		buttons.put("Add Interest", addInterestActionListener);
+		buttons.put("Generate Report", generateBillActionListener);
 
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
@@ -142,6 +143,11 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 		} else {
 			Log.getLogger().write("Need to select row to WITHDRAW!");
 		}
+	};
+
+	private final ActionListener generateBillActionListener = (ActionListener) -> {
+		this.reportCommand.execute(this);
+		openDialog(new GenerateReport(uiFrame),450, 20, 400, 350);
 	};
 
 	void exitApplication(){

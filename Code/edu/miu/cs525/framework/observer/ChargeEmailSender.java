@@ -1,13 +1,13 @@
-package edu.miu.cs525.creditcard.observer;
+package edu.miu.cs525.framework.observer;
 
-import edu.miu.cs525.commons.Log;
 import edu.miu.cs525.creditcard.domain.CreditCardAccount;
 import edu.miu.cs525.framework.Observer;
+import edu.miu.cs525.shared.log.Log;
 
-public class EmailSender implements Observer {
+public class ChargeEmailSender implements Observer {
     private final CreditCardAccount account;
 
-    public EmailSender(CreditCardAccount account) {
+    public ChargeEmailSender(CreditCardAccount account) {
         this.account = account;
     }
 

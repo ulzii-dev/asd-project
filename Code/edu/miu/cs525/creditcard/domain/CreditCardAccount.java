@@ -1,10 +1,10 @@
 package edu.miu.cs525.creditcard.domain;
 
 import edu.miu.cs525.banking.visitor.Visitor;
+import edu.miu.cs525.framework.observer.ChargeEmailSender;
 import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.shared.domain.AccountEntry;
 import edu.miu.cs525.creditcard.constant.CreditCardType;
-import edu.miu.cs525.creditcard.observer.EmailSender;
 import edu.miu.cs525.creditcard.strategy.CreditCardCalculator;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.Observer;
@@ -24,7 +24,7 @@ public class CreditCardAccount extends Account implements Observable {
         this.creditCardCalculator =  creditCardCalculator;
         this.creditCardType =  creditCardType;
         this.observerList = new ArrayList<>();
-        this.registerObserver(new EmailSender(this));
+        this.registerObserver(new ChargeEmailSender(this));
     }
 
     @Override

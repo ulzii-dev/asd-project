@@ -4,4 +4,5 @@ public enum AccountOperationConstant {
     DEPOSITED,
     WITHDRAW,
     REPORT,
-}
+    INTEREST,
+};

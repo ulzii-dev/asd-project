@@ -98,10 +98,11 @@ public abstract class AccountService implements Observable {
 	public void addInterest() {
 		for (String s : getAllAccountNumbers()) {
 			Account account = accountDAO.getAccountByAccountNumber(s);
-			account.addInterest();
+			double amount = account.addInterest();
 			accountDAO.update(account);
+			addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.INTEREST, amount));
 		}
-
+		notifyObservers();
 	}
 
 	public List<String> getAllAccountNumbers(){

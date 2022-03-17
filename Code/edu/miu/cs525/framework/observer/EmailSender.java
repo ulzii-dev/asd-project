@@ -1,4 +1,4 @@
-package edu.miu.cs525.commons.observer;
+package edu.miu.cs525.framework.observer;
 
 import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.shared.AccountService;
@@ -47,7 +47,7 @@ public class EmailSender implements Observer {
                         Log.getLogger().write("    " + index + ". CompanyAccount" + ": " + account.getCustomer().getName() + " [AccNO: " + account.getAccountNumber() + "]");
                         Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
                         Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
-                    } else if ((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > accountService.getCheckBalance())) {
+                    } else if ((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() >500)) {
                         Log.getLogger().write("    " + index + ". PersonalAccount" + ": " + account.getCustomer().getName() + " [AccNo: " + account.getAccountNumber() + "]");
                         Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
                         Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");

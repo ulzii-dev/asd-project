@@ -7,11 +7,11 @@ import backend.commons.*;
 
 public class Tester {
     public static void main(String[] args) {
-        AccountService accountService =  BankingAccountService.getInstance();
+        AccountService accountService = BankingAccountService.getInstance();
 
-        Customer renuka = new Customer(1,"Renuka Mohanraj", "1000N Fourth Street",
+        Customer renuka = new Customer(1, "Renuka Mohanraj", "1000N Fourth Street",
                 "Fairfield", "Iowa", 52557, "renuka@miu.edu");
-        Customer sabi = new Customer(1,"Sabi Shresthaq", "147 Hillcrest Avenue",
+        Customer sabi = new Customer(1, "Sabi Shresthaq", "147 Hillcrest Avenue",
                 "West Hartford", "Connecticut", 06110, "care.sabi@gmail.com");
         // create 2 accounts;
         AccountData accountData1 = AccountData.builder()

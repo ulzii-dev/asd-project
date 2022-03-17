@@ -40,7 +40,7 @@ public class CreditCardAccountDAO implements AccountDAO {
     @Override
     public Account loadAccount(String accountNumber) {
         for (Account account : accountList) {
-            if (account.getAccountNumber() == accountNumber) {
+            if (account.getAccountNumber().equals(accountNumber)) {
                 return account;
             }
         }

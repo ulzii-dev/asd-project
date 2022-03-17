@@ -43,7 +43,7 @@ public class CreditCardAccount extends Account {
 
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount()<0){
+                if (accountEntry.getAmount() < 0) {
                     totalCredit += accountEntry.getAmount();
                 }
             }
@@ -58,7 +58,7 @@ public class CreditCardAccount extends Account {
 
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount()>=0){
+                if (accountEntry.getAmount() >= 0) {
                     totalCredit += accountEntry.getAmount();
                 }
             }
@@ -81,7 +81,7 @@ public class CreditCardAccount extends Account {
         return this.creditCardCalculator.computeMonthlyMinimumPayment(getTotalCredit());
     }
 
-    public double getMonthlyInterest(){
+    public double getMonthlyInterest() {
         return this.creditCardCalculator.
                 computeInterest(getTotalCredit());
     }

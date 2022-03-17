@@ -46,7 +46,6 @@ public abstract class AccountService implements Observable {
 		if(account != null) {
 			account.deposit(amount);
 			accountDAO.updateAccount(account);
-
 			addToChangedAccountList(account, new AccountTransaction(Action.DEPOSIT, amount));
 		} else{
 			Log.getLogger().write("deposited");
@@ -95,10 +94,12 @@ public abstract class AccountService implements Observable {
 
 		for (String accountNumber : getAllAccountNumbers()) {
 			Account account = accountDAO.loadAccount(accountNumber);
-			account.addInterest();
+			double amount = account.addInterest();
 			accountDAO.updateAccount(account);
+			addToChangedAccountList(account, new AccountTransaction(Action.INTEREST, amount));
 		}
 
+		notifyObservers();
 	}
 
 	public List<String> getAllAccountNumbers(){

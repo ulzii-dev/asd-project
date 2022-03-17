@@ -1,7 +1,7 @@
 package framework.ui;
 
-import framework.Command;
 import backend.banking.commands.NoCommand;
+import framework.Command;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,8 +19,8 @@ public abstract class FormTemplate extends JFrame {
     protected Object[] rowData;
 
     public final void generateFormTemplate(String title, UIConfig uiConfig,
-                                           Map<String, ActionListener> buttons){
-        setupJPanel(title,uiConfig.getReportColumnNames());
+                                           Map<String, ActionListener> buttons) {
+        setupJPanel(title, uiConfig.getReportColumnNames());
         pSetSize();
         panelBounds();
         scrollPanelBounds();
@@ -28,11 +28,12 @@ public abstract class FormTemplate extends JFrame {
         setUpButtons(buttons);
         notCommon();
     }
-    private void setupJPanel(String title, Collection<String> columns){
-        JPanel1= new JPanel();
+
+    private void setupJPanel(String title, Collection<String> columns) {
+        JPanel1 = new JPanel();
         setTitle(title);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        getContentPane().setLayout(new BorderLayout(0,0));
+        getContentPane().setLayout(new BorderLayout(0, 0));
         setVisible(false);
         JPanel1.setLayout(null);
         getContentPane().add(BorderLayout.CENTER, JPanel1);
@@ -41,45 +42,55 @@ public abstract class FormTemplate extends JFrame {
         model = new DefaultTableModel();
         JTable1 = new JTable(model);
 
-        for (String cols: columns) {
+        for (String cols : columns) {
             model.addColumn(cols);
         }
 
         rowData = new Object[columns.size()];
-        newAccount =false;
+        newAccount = false;
         JPanel1.add(JScrollPane1);
         JScrollPane1.getViewport().add(JTable1);
 
     }
-    private void setUpButtons(Map<String, ActionListener> buttons){
+
+    private void setUpButtons(Map<String, ActionListener> buttons) {
         int y = getInitialY();
-        for (Map.Entry<String,ActionListener> button : buttons.entrySet()) {
+        for (Map.Entry<String, ActionListener> button : buttons.entrySet()) {
             System.out.println("-->" + button.getKey());
             JButton btn = new JButton();
             btn.setText(button.getKey());
             JPanel1.add(btn);
             btn.addActionListener(button.getValue());
             setBtnBounds(btn, y);
-            y+=yIncrementBy();
+            y += yIncrementBy();
         }
 
     }
-    private void initCommands(Collection<Command> commands){
+
+    private void initCommands(Collection<Command> commands) {
         for (Command command :
                 commands) {
-           command = new NoCommand();
+            command = new NoCommand();
         }
     }
+
     protected abstract void notCommon();
+
     protected abstract void setBtnBounds(JButton btn, int y);
+
     protected abstract void panelBounds();
+
     protected abstract void pSetSize();
+
     protected abstract void tableBounds();
+
     protected abstract void scrollPanelBounds();
-    protected int getInitialY(){
+
+    protected int getInitialY() {
         return 24;
     }
-    protected int yIncrementBy(){
+
+    protected int yIncrementBy() {
         return 40;
     }
 }

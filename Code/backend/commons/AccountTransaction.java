@@ -1,6 +1,5 @@
 package backend.commons;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AccountTransaction {
@@ -8,17 +7,17 @@ public class AccountTransaction {
     double tranxAmount = 0d;
     LocalDateTime tranxDate;
 
-    public AccountTransaction(Action action, double amount){
+    public AccountTransaction(Action action, double amount) {
         tranxAction = action;
         tranxAmount = amount;
         tranxDate = LocalDateTime.now();
     }
 
-    public double getTranxAmount(){
+    public double getTranxAmount() {
         return tranxAmount;
     }
 
-    public String toString(){
-        return tranxAction + ": [" + tranxAmount +"] on " + tranxDate.toString();
+    public String toString() {
+        return tranxAction + ": [" + tranxAmount + "] on " + tranxDate.toString();
     }
 }

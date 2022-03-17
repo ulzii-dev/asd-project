@@ -6,7 +6,7 @@ import framework.ui.UIControl;
 
 public class DepositCommand implements Command {
     @Override
-    public void execute(UIControl uiControl){
+    public void execute(UIControl uiControl) {
         CreditCardAccountService.getInstance().deposit(uiControl.getAccountNumber(), Double.parseDouble(uiControl.getAmount()));
     }
 }

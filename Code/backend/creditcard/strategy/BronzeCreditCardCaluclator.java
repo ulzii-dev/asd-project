@@ -1,8 +1,6 @@
 package backend.creditcard.strategy;
 
-import backend.commons.InterestComputationStrategy;
-
-public class BronzeCreditCardCaluclator implements CreditCardCalculator{
+public class BronzeCreditCardCaluclator implements CreditCardCalculator {
 
     @Override
     public double computeInterest(double totalCredit) {

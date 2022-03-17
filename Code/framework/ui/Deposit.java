@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class Deposit extends JDialog {
 
+    private final UIFrame parentframe;
+    private final String accnr;
     //{{DECLARE_CONTROLS
     JLabel JLabel1 = new JLabel();
     JLabel JLabel2 = new JLabel();
@@ -15,8 +17,7 @@ public class Deposit extends JDialog {
     JButton JButton_OK = new JButton();
     JButton JButton_Cancel = new JButton();
     JTextField JTextField_Deposit = new JTextField();
-    private UIFrame parentframe;
-    private String accnr;
+
     public Deposit(UIFrame parent, String aaccnr) {
         super(parent);
         parentframe = parent;
@@ -66,10 +67,12 @@ public class Deposit extends JDialog {
 
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
         parentframe.amount = JTextField_Deposit.getText();
+        parentframe.setAccountNumber(JTextField_NAME.getText());
         dispose();
     }
 
     void JButtonCalcel_actionPerformed(java.awt.event.ActionEvent event) {
+        parentframe.amount = "0";
         dispose();
     }
 

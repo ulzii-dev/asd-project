@@ -17,7 +17,7 @@ public class CreditCardUIConfig implements UIConfig {
 
     @Override
     public Collection<String> getReportColumnNames() {
-        return Arrays.asList("Name","CC number","Exp Date","Type","Balance");
+        return Arrays.asList("Name", "CC number", "Exp Date", "Type", "Balance");
     }
 
     @Override
@@ -30,9 +30,9 @@ public class CreditCardUIConfig implements UIConfig {
         Object[] rowdata = new Object[5];
         rowdata[0] = account.getCustomer().getName();
         rowdata[1] = account.getAccountNumber();
-		rowdata[2] = "N/A";
-		rowdata[3] = account.getAccountType();
-		rowdata[4] = String.valueOf(account.getBalance());
+        rowdata[2] = "N/A";
+        rowdata[3] = account.getAccountType();
+        rowdata[4] = String.valueOf(account.getBalance());
         return rowdata;
     }
 

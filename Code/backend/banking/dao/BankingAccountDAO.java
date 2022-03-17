@@ -43,7 +43,7 @@ public class BankingAccountDAO implements AccountDAO {
     @Override
     public Account loadAccount(String accountNumber) {
         for (Account account : accountlist) {
-            if (account.getAccountNumber() == accountNumber) {
+            if (account.getAccountNumber().equals(accountNumber)) {
                 return account;
             }
         }

@@ -1,6 +1,5 @@
 package backend.creditcard.commands;
 
-import backend.creditcard.CreditCardAccount;
 import backend.creditcard.service.CreditCardAccountService;
 import framework.Command;
 import framework.ui.UIControl;

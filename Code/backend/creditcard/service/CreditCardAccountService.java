@@ -9,12 +9,12 @@ import backend.creditcard.CreditCardAccount;
 import backend.creditcard.CreditCardType;
 import backend.creditcard.dao.CreditCardAccountDAO;
 import backend.creditcard.strategy.BronzeCreditCardCaluclator;
-import backend.creditcard.strategy.GoldCreditCardcalculator;
+import backend.creditcard.strategy.GoldCreditCardCalculator;
 import backend.creditcard.strategy.SilverCreditCardCalculator;
 import framework.observer.EmailSender;
 
 public class CreditCardAccountService extends AccountService {
-    private static volatile  CreditCardAccountService instance;
+    private static volatile CreditCardAccountService instance;
 
     private CreditCardAccountService() {
         super(new CreditCardAccountDAO());
@@ -31,6 +31,7 @@ public class CreditCardAccountService extends AccountService {
         }
         return instance;
     }
+
     @Override
     public Account createAccountFactory(AccountData accountData) {
         CreditCardType type = CreditCardType.valueOf(accountData.getAccountType());

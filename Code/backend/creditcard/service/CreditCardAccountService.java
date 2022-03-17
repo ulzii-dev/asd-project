@@ -1,17 +1,15 @@
 package backend.creditcard.service;
 
 import backend.banking.builder.AccountData;
-import backend.banking.dto.AccountDTO;
 import backend.commons.Account;
 import backend.commons.AccountService;
-import backend.commons.Customer;
 import backend.creditcard.CreditCardAccount;
 import backend.creditcard.CreditCardType;
 import backend.creditcard.dao.CreditCardAccountDAO;
 import backend.creditcard.strategy.BronzeCreditCardCaluclator;
 import backend.creditcard.strategy.GoldCreditCardCalculator;
 import backend.creditcard.strategy.SilverCreditCardCalculator;
-import framework.observer.EmailSender;
+import backend.banking.observer.EmailSender;
 
 public class CreditCardAccountService extends AccountService {
     private static volatile CreditCardAccountService instance;

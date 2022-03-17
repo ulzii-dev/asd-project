@@ -1,4 +1,4 @@
-package framework.observer;
+package backend.banking.observer;
 
 import backend.commons.Account;
 import backend.commons.AccountService;
@@ -8,6 +8,8 @@ import framework.Observer;
 import framework.domain.CompanyAccount;
 import framework.domain.PersonalAccount;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

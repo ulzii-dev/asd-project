@@ -12,7 +12,7 @@ import backend.banking.strategy.PersonSavingsAccountInterestComputation;
 import backend.commons.*;
 import framework.domain.CompanyAccount;
 import framework.domain.PersonalAccount;
-import framework.observer.EmailSender;
+import backend.banking.observer.EmailSender;
 
 public class BankingAccountService extends AccountService {
     private static volatile BankingAccountService instance;

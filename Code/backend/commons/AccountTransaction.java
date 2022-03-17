@@ -1,5 +1,7 @@
 package backend.commons;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 
 public class AccountTransaction {
@@ -18,6 +20,7 @@ public class AccountTransaction {
     }
 
     public String toString() {
-        return tranxAction + ": [" + tranxAmount + "] on " + tranxDate.toString();
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        return tranxAction + ": [" + formatter.format(tranxAmount) + "] on " + tranxDate.toString();
     }
 }

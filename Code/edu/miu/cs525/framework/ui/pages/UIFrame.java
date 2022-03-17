@@ -254,7 +254,7 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 			}
 		}
 		this.subject.getAllAccounts().forEach(this::tableRow);
-		Log.getLogger().write("Updating the UIFrame dataset!!");
+		Log.getLogger().write("Completed Updating the UIFrame dataset!!");
 	}
 
 	public void setSubject(AccountService subject) {

@@ -1,7 +1,5 @@
 package backend.creditcard.strategy;
 
-import backend.commons.InterestComputationStrategy;
-
 public class GoldCreditCardCalculator implements CreditCardCalculator{
 
     @Override

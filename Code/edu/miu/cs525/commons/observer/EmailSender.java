@@ -1,19 +1,14 @@
-<<<<<<< HEAD:Code/edu/miu/cs525/commons/observer/EmailSender.java
-package backend.banking.observer;
-=======
-package edu.miu.cs525.framework.observer;
->>>>>>> CreateAccount-Bijay:Code/edu/miu/cs525/framework/observer/EmailSender.java
+package edu.miu.cs525.commons.observer;
 
 import edu.miu.cs525.commons.Account;
 import edu.miu.cs525.commons.AccountService;
 import edu.miu.cs525.commons.AccountTransaction;
 import edu.miu.cs525.commons.Log;
+import edu.miu.cs525.creditcard.domain.CreditCardAccount;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

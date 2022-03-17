@@ -12,9 +12,9 @@ import edu.miu.cs525.banking.strategy.PersonSavingsAccountInterestComputation;
 import edu.miu.cs525.commons.Account;
 import edu.miu.cs525.commons.AccountService;
 import edu.miu.cs525.commons.Customer;
+import edu.miu.cs525.commons.observer.EmailSender;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;
-import edu.miu.cs525.framework.observer.EmailSender;
 
 public class BankingAccountService extends AccountService {
     private static volatile BankingAccountService instance;

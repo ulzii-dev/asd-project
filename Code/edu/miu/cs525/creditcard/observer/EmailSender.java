@@ -1,8 +1,8 @@
-package backend.creditcard.observer;
+package edu.miu.cs525.creditcard.observer;
 
-import backend.commons.Log;
-import backend.creditcard.CreditCardAccount;
-import framework.Observer;
+import edu.miu.cs525.commons.Log;
+import edu.miu.cs525.creditcard.domain.CreditCardAccount;
+import edu.miu.cs525.framework.Observer;
 
 public class EmailSender implements Observer {
     private final CreditCardAccount account;

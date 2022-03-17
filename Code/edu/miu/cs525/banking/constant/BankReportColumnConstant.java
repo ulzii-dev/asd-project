@@ -6,7 +6,7 @@ public class BankReportColumnConstant {
                 "AccountNumber",
                 "Name",
                 "City",
-                "P/C",
+                "Personal/Company",
                 "Ch/S",
                 "Amount"
         };

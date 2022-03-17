@@ -11,19 +11,19 @@ import edu.miu.cs525.creditcard.strategy.GoldCreditCardCalculator;
 import edu.miu.cs525.creditcard.strategy.SilverCreditCardCalculator;
 import edu.miu.cs525.framework.observer.EmailSender;
 
-public class CreditCardAccountService extends AccountService {
-    private static volatile CreditCardAccountService instance;
+public class CreditCardAccountCreator extends AccountService {
+    private static volatile CreditCardAccountCreator instance;
 
-    private CreditCardAccountService() {
+    private CreditCardAccountCreator() {
         super(new CreditCardAccountDAO());
         this.registerObserver(new EmailSender(this));
     }
 
-    public static CreditCardAccountService getInstance() {
+    public static CreditCardAccountCreator getInstance() {
         if (instance == null) {
-            synchronized (CreditCardAccountService.class) {
+            synchronized (CreditCardAccountCreator.class) {
                 if (instance == null) {
-                    instance = new CreditCardAccountService();
+                    instance = new CreditCardAccountCreator();
                 }
             }
         }

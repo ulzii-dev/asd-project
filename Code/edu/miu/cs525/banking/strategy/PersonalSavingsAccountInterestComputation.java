@@ -2,7 +2,7 @@ package edu.miu.cs525.banking.strategy;
 
 import edu.miu.cs525.commons.InterestComputationStrategy;
 
-public class PersonSavingsAccountInterestComputation implements InterestComputationStrategy {
+public class PersonalSavingsAccountInterestComputation implements InterestComputationStrategy {
 
     @Override
     public double computeInterest(double accountBalance) {

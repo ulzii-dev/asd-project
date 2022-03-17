@@ -34,7 +34,7 @@ public class BankingAccountDAO implements AccountDAO {
     public void update(Account account) {
         Account isAccountExist = getAccountByAccountNumber(account.getAccountNumber());
         if (isAccountExist != null) {
-            accountlist.remove(isAccountExist); // remove the old
+            accountlist.remove(isAccountExist); // REMOVES THE OLD
             accountlist.add(account); // add the new
         }
         Log.getLogger().write("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());

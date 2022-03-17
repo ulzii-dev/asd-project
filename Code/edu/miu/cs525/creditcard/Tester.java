@@ -2,13 +2,12 @@ package edu.miu.cs525.creditcard;
 
 import edu.miu.cs525.commons.*;
 import edu.miu.cs525.commons.builder.AccountData;
-import edu.miu.cs525.creditcard.service.CreditCardAccountService;
+import edu.miu.cs525.creditcard.service.CreditCardAccountCreator;
 import edu.miu.cs525.framework.domain.CompanyAccount;
-import edu.miu.cs525.framework.domain.PersonalAccount;
 
 public class Tester {
     public static void main(String[] args) {
-        AccountService accountService = CreditCardAccountService.getInstance();
+        AccountService accountService = CreditCardAccountCreator.getInstance();
 
         Customer microsoft = new CompanyAccount(1, "Microsoft", "1000N Fourth Street",
                 "Fairfield", "Iowa", 52557, "microsoft@microsoft.com", 11134);

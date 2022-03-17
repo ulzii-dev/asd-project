@@ -28,7 +28,6 @@ public abstract class AccountService implements Observable {
 		try {
 			Account account = prepareAccount(createAccountFactory(accountData), accountData);
 			accountDAO.create(account);
-			this.accountOperationConstant = AccountOperationConstant.ACCOUNT_CREATED;
 			notifyObservers();
 		} catch (UnsupportedOperationException ex){
 			ex.printStackTrace();
@@ -93,10 +92,11 @@ public abstract class AccountService implements Observable {
 	}
 
 	public void addInterest() {
-		getAllAccountNumbers().stream().map(accountDAO::getAccountByAccountNumber).forEach(account -> {
+		for (String s : getAllAccountNumbers()) {
+			Account account = accountDAO.getAccountByAccountNumber(s);
 			account.addInterest();
 			accountDAO.update(account);
-		});
+		}
 
 	}
 

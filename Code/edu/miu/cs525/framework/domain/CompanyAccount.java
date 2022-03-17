@@ -3,7 +3,7 @@ package edu.miu.cs525.framework.domain;
 import edu.miu.cs525.commons.Customer;
 
 public class CompanyAccount extends Customer {
-    int numOfEmployee;
+    private int numOfEmployee;
 
     public CompanyAccount(int customerId,
                           String name,

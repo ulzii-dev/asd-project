@@ -1,4 +1,4 @@
-package edu.miu.cs525.framework.ui;
+package edu.miu.cs525.framework.ui.pages;
 /*
 		A basic implementation of the JDialog class.
 */

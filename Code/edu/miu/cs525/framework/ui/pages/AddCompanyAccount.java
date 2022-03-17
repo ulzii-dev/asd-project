@@ -1,4 +1,4 @@
-package edu.miu.cs525.framework.ui;
+package edu.miu.cs525.framework.ui.pages;
 
 import edu.miu.cs525.framework.domain.CompanyAccount;
 

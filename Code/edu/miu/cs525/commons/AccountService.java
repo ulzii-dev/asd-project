@@ -4,7 +4,7 @@ import edu.miu.cs525.commons.builder.AccountData;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.AccountOperationConstant;
-import edu.miu.cs525.framework.ui.UIFrame;
+import edu.miu.cs525.framework.ui.pages.UIFrame;
 
 import java.util.*;
 import java.util.stream.Collectors;

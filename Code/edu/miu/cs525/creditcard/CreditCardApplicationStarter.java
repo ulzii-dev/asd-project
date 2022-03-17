@@ -1,6 +1,6 @@
 package edu.miu.cs525.creditcard;
 
-import edu.miu.cs525.framework.ui.UIFrame;
+import edu.miu.cs525.framework.ui.pages.UIFrame;
 import edu.miu.cs525.framework.ui.UIControl;
 import edu.miu.cs525.creditcard.commands.*;
 

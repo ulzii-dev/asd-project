@@ -1,4 +1,4 @@
-package edu.miu.cs525.framework.ui;
+package edu.miu.cs525.framework.ui.pages;
 
 
 import edu.miu.cs525.commons.Log;
@@ -9,6 +9,9 @@ import edu.miu.cs525.commons.Customer;
 import edu.miu.cs525.framework.AccountOperationConstant;
 import edu.miu.cs525.framework.Command;
 import edu.miu.cs525.framework.Observer;
+import edu.miu.cs525.framework.ui.FormTemplate;
+import edu.miu.cs525.framework.ui.UIConfig;
+import edu.miu.cs525.framework.ui.UIControl;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -21,7 +24,7 @@ import java.util.*;
 public class UIFrame extends FormTemplate implements UIControl, Observer
 {
 	/****
-	 * init variables in the object
+	 * Declare all Commands Here
 	 ****/
 	private Command addPersonalAccountCommand;
 	private Command addCompanyAccountCommand;
@@ -39,6 +42,9 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 
 	JPanel JPanel1 = new JPanel();
 
+	/****
+	 * init variables in the object
+	 ****/
 	String accountnr;
 	String clientName;
 	String street;

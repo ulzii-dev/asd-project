@@ -42,24 +42,27 @@ public abstract class AccountService implements Observable {
 	}
 
 	public void deposit(String accountNumber, double amount) {
-		Account account = accountDAO.getAccountByAccountNumber(accountNumber);
-		if(account != null) {
+		try {
+			Account account = accountDAO.getAccountByAccountNumber(accountNumber);
 			account.deposit(amount);
 			accountDAO.update(account);
 			addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.DEPOSITED, amount));
-		} else{
-			//TODO: I'm not sure about this?
-			Log.getLogger().write("deposited");
+			notifyObservers();
+		}catch (NullPointerException ex){
+			ex.printStackTrace();
 		}
-		notifyObservers();
 	}
 
 	public void withdraw(String accountNumber, double amount) {
-		Account account = accountDAO.getAccountByAccountNumber(accountNumber);
-		account.withdraw(amount);
-		accountDAO.update(account);
-		addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.WITHDRAW, amount));
-		notifyObservers();
+		try {
+			Account account = accountDAO.getAccountByAccountNumber(accountNumber);
+			account.withdraw(amount);
+			accountDAO.update(account);
+			addToChangedAccountList(account, new AccountTransaction(AccountOperationConstant.WITHDRAW, amount));
+			notifyObservers();
+		}catch (NullPointerException ex){
+			ex.printStackTrace();
+		}
 	}
 
 	public Map<Account, ArrayList<AccountTransaction>> getAccountTransactions() {

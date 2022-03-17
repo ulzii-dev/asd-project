@@ -47,7 +47,6 @@ public class BankingAccountDAO implements AccountDAO {
                 return account;
             }
         }
-
         return null;
     }
 

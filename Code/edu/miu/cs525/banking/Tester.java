@@ -1,15 +1,16 @@
 package edu.miu.cs525.banking;
 
-import edu.miu.cs525.commons.builder.AccountData;
-import edu.miu.cs525.banking.service.BankAccountCreator;
-import edu.miu.cs525.commons.*;
+import edu.miu.cs525.shared.builder.AccountData;
+import edu.miu.cs525.banking.service.BankAccountServiceImpl;
+import edu.miu.cs525.shared.*;
 import edu.miu.cs525.framework.domain.PersonalAccount;
+import edu.miu.cs525.shared.domain.Customer;
 
 import java.time.LocalDate;
 
 public class Tester {
     public static void main(String[] args) {
-        AccountService accountService = BankAccountCreator.getInstance();
+        AccountService accountService = BankAccountServiceImpl.getInstance();
 
         Customer renuka = new PersonalAccount(1, "Renuka Mohanraj", "1000N Fourth Street",
                 "Fairfield", "Iowa", 52557, "renuka@miu.edu", LocalDate.of(2020, 10, 10));

@@ -1,34 +1,34 @@
 package edu.miu.cs525.banking.service;
 
-import edu.miu.cs525.commons.builder.AccountData;
+import edu.miu.cs525.shared.builder.AccountData;
 import edu.miu.cs525.banking.constant.BankingAccountType;
 import edu.miu.cs525.banking.domain.CheckingAccount;
 import edu.miu.cs525.banking.domain.SavingsAccount;
-import edu.miu.cs525.banking.dao.BankingAccountDAO;
+import edu.miu.cs525.banking.dao.BankingAccountDAOImpl;
 import edu.miu.cs525.banking.strategy.CompanyCheckingAccountInterestComputation;
 import edu.miu.cs525.banking.strategy.CompanySavingsAccountInterestComputation;
 import edu.miu.cs525.banking.strategy.PersonalCheckingAccountInterestComputation;
 import edu.miu.cs525.banking.strategy.PersonalSavingsAccountInterestComputation;
-import edu.miu.cs525.commons.Account;
-import edu.miu.cs525.commons.AccountService;
-import edu.miu.cs525.commons.Customer;
+import edu.miu.cs525.shared.Account;
+import edu.miu.cs525.shared.AccountService;
+import edu.miu.cs525.shared.domain.Customer;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;
 import edu.miu.cs525.framework.observer.EmailSender;
 
-public class BankAccountCreator extends AccountService {
-    private static volatile BankAccountCreator instance;
+public class BankAccountServiceImpl extends AccountService {
+    private static volatile BankAccountServiceImpl instance;
 
-    private BankAccountCreator() {
-        super(BankingAccountDAO.getInstance());
+    private BankAccountServiceImpl() {
+        super(BankingAccountDAOImpl.getInstance());
         this.registerObserver(new EmailSender(this));
     }
 
-    public static BankAccountCreator getInstance() {
+    public static BankAccountServiceImpl getInstance() {
         if (instance == null) {
-            synchronized (BankAccountCreator.class) {
+            synchronized (BankAccountServiceImpl.class) {
                 if (instance == null) {
-                    instance = new BankAccountCreator();
+                    instance = new BankAccountServiceImpl();
                 }
             }
         }

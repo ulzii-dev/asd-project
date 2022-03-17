@@ -1,7 +1,8 @@
-package edu.miu.cs525.commons;
+package edu.miu.cs525.shared;
 
 import edu.miu.cs525.banking.visitor.InterestComputerVisitor;
 import edu.miu.cs525.banking.visitor.Visitor;
+import edu.miu.cs525.shared.domain.Customer;
 
 import java.util.ArrayList;
 import java.util.Collection;

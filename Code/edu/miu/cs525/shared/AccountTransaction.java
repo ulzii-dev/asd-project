@@ -1,6 +1,6 @@
-package edu.miu.cs525.commons;
+package edu.miu.cs525.shared;
 
-import edu.miu.cs525.framework.AccountOperationConstant;
+import edu.miu.cs525.framework.constant.AccountOperationConstant;
 
 import java.time.LocalDateTime;
 

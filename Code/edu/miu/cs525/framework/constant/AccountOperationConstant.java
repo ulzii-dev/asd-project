@@ -1,9 +1,7 @@
-package edu.miu.cs525.framework;
+package edu.miu.cs525.framework.constant;
 
 public enum AccountOperationConstant {
-    ACCOUNT_CREATED,
     DEPOSITED,
     WITHDRAW,
-    INTEREST,
     REPORT,
 }

@@ -1,6 +1,6 @@
-package edu.miu.cs525.commons.builder;
+package edu.miu.cs525.shared.builder;
 
-import edu.miu.cs525.commons.Customer;
+import edu.miu.cs525.shared.domain.Customer;
 
 import java.io.Serializable;
 

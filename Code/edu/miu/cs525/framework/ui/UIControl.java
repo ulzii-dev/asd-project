@@ -1,6 +1,6 @@
 package edu.miu.cs525.framework.ui;
 
-import edu.miu.cs525.commons.Customer;
+import edu.miu.cs525.shared.domain.Customer;
 import edu.miu.cs525.framework.Command;
 
 public interface UIControl {

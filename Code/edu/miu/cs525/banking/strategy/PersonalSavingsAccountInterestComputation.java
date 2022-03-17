@@ -1,6 +1,6 @@
 package edu.miu.cs525.banking.strategy;
 
-import edu.miu.cs525.commons.InterestComputationStrategy;
+import edu.miu.cs525.shared.InterestComputationStrategy;
 
 public class PersonalSavingsAccountInterestComputation implements InterestComputationStrategy {
 

@@ -1,6 +1,6 @@
 package edu.miu.cs525.creditcard.strategy;
 
-import edu.miu.cs525.commons.InterestComputationStrategy;
+import edu.miu.cs525.shared.InterestComputationStrategy;
 
 public interface CreditCardCalculator extends InterestComputationStrategy {
 

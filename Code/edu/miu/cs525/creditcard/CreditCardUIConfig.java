@@ -1,7 +1,6 @@
 package edu.miu.cs525.creditcard;
 
-import edu.miu.cs525.banking.constant.BankReportColumnConstant;
-import edu.miu.cs525.commons.Account;
+import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.creditcard.constant.CreditCardReportColumnConstant;
 import edu.miu.cs525.creditcard.constant.CreditCardType;
 import edu.miu.cs525.framework.ui.UIConfig;

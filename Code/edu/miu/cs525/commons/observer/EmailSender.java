@@ -1,9 +1,7 @@
 package edu.miu.cs525.commons.observer;
 
-import edu.miu.cs525.commons.Account;
-import edu.miu.cs525.commons.AccountService;
-import edu.miu.cs525.commons.AccountTransaction;
-import edu.miu.cs525.commons.Log;
+import edu.miu.cs525.commons.*;
+import edu.miu.cs525.creditcard.service.CreditCardAccountService;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.domain.CompanyAccount;
 import edu.miu.cs525.framework.domain.PersonalAccount;
@@ -23,7 +21,7 @@ public class EmailSender implements Observer {
     @Override
     public void update() {
         boolean emailHeaderAdded = false;
-        int index = 0;
+        StringBuilder sb = new StringBuilder();
 
         for (Map.Entry<Account, ArrayList<AccountTransaction>> entry : accountService.getAccountTransactions().entrySet()) {
             Account account = entry.getKey();
@@ -34,37 +32,53 @@ public class EmailSender implements Observer {
                 for (Iterator<AccountTransaction> it = transactions.iterator(); it.hasNext(); ) {
                     AccountTransaction transaction = it.next();
 
+                    if(!transaction.getTransactionAction().equals(Action.WITHDRAW) && !transaction.getTransactionAction().equals(Action.DEPOSIT)){
+                        continue;
+                    }
+
                     if (!emailHeaderAdded) {
-                        Log.getLogger().write("");
-                        Log.getLogger().write("OBSERVER_PATTERN: Pulling changed accounts from AccountService");
-                        Log.getLogger().write(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Sending transaction emails ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
-                        Log.getLogger().write("|                                                                                       |");
+                        sb.append("\n");
+                        sb.append("OBSERVER_PATTERN: Pulling changed accounts from AccountService\n");
+                        sb.append(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Sending transaction emails ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n");
+                        sb.append("|                                                                                       |\n");
 
                         emailHeaderAdded = true;
                     }
 
-                    if (account.getCustomer() instanceof CompanyAccount) {
-                        Log.getLogger().write("    " + index + ". CompanyAccount" + ": " + account.getCustomer().getName() + " [AccNO: " + account.getAccountNumber() + "]");
-                        Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
-                        Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
-                    } else if ((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > accountService.getCheckBalance())) {
-                        Log.getLogger().write("    " + index + ". PersonalAccount" + ": " + account.getCustomer().getName() + " [AccNo: " + account.getAccountNumber() + "]");
-                        Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
-                        Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
+                    if(accountService instanceof CreditCardAccountService && transaction.getTransactionAction().equals(Action.WITHDRAW) && transaction.getTranxAmount() > 400) {
+                        sb.append("       More than $400 withdraw amount!\n");
+                        sb.append(generateEmailBody(account, transaction));
+                    } else {
+                        if (account.getCustomer() instanceof CompanyAccount) {
+                            sb.append("       CompanyAccount\n");
+                            sb.append(generateEmailBody(account, transaction));
+                        } else if ((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > accountService.getCheckBalance())) {
+                            sb.append("       PersonalAccount\n");
+                            sb.append(generateEmailBody(account, transaction));
+                        }
                     }
 
                     if (it.hasNext()) {
-                        Log.getLogger().write("|       ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿       |");
+                        sb.append("|       ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿       |\n");
                     }
-
-                    index++;
                 }
             }
         }
 
         if (emailHeaderAdded) {
-            Log.getLogger().write("⎩＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ SENT ALL EMAILS ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿⎭");
+            sb.append("⎩＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ SENT ALL EMAILS ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿⎭\n");
         }
+        Log.getLogger().write(sb.toString());
         accountService.clearChangedAccountList();
+    }
+
+    public String generateEmailBody(Account account, AccountTransaction accountTransaction) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("       " + account.getCustomer().getName() + " [AccNO: " + account.getAccountNumber() + "]\n");
+        sb.append("       Sending email to => " + account.getCustomer().getEmail() + " | " + accountTransaction + "\n");
+        sb.append(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌\n" : "\n");
+
+        return sb.toString();
     }
 }

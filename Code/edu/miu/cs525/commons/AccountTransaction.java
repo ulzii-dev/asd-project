@@ -3,6 +3,7 @@ package edu.miu.cs525.commons;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AccountTransaction {
     Action transactionAction;
@@ -19,8 +20,13 @@ public class AccountTransaction {
         return transactionAmount;
     }
 
+    public Action getTransactionAction(){
+        return transactionAction;
+    }
+
     public String toString() {
         NumberFormat formatter = new DecimalFormat("#00.00");
-        return transactionAction + ": [" + formatter.format(transactionAmount) + "] on " + transactionDate.toString();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        return transactionAction + ": [" + formatter.format(transactionAmount) + "] on " + dateTimeFormatter.format(transactionDate);
     }
 }

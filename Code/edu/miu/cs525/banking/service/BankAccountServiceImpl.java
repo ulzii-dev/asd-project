@@ -1,6 +1,6 @@
 package edu.miu.cs525.banking.service;
 
-import edu.miu.cs525.shared.builder.AccountData;
+import edu.miu.cs525.shared.builder.AccountDTO;
 import edu.miu.cs525.banking.constant.BankingAccountType;
 import edu.miu.cs525.banking.domain.CheckingAccount;
 import edu.miu.cs525.banking.domain.SavingsAccount;
@@ -36,9 +36,9 @@ public class BankAccountServiceImpl extends AccountService {
     }
 
     @Override
-    public Account createAccountFactory(AccountData accountData) throws UnsupportedOperationException {
-        Customer customer = accountData.getCustomer();
-        BankingAccountType bankAccountType = BankingAccountType.valueOf(accountData.getAccountType());
+    public Account createAccountFactory(AccountDTO accountDTO) throws UnsupportedOperationException {
+        Customer customer = accountDTO.getCustomer();
+        BankingAccountType bankAccountType = BankingAccountType.valueOf(accountDTO.getAccountType());
         return getConcreteAccountObject(customer, bankAccountType);
     }
 

@@ -1,6 +1,6 @@
 package edu.miu.cs525.creditcard.service;
 
-import edu.miu.cs525.shared.builder.AccountData;
+import edu.miu.cs525.shared.builder.AccountDTO;
 import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.shared.AccountService;
 import edu.miu.cs525.creditcard.domain.CreditCardAccount;
@@ -31,8 +31,8 @@ public class CreditCardAccountServiceImpl extends AccountService {
     }
 
     @Override
-    public Account createAccountFactory(AccountData accountData){
-        CreditCardType creditCardType = CreditCardType.valueOf(accountData.getAccountType());
+    public Account createAccountFactory(AccountDTO accountDTO){
+        CreditCardType creditCardType = CreditCardType.valueOf(accountDTO.getAccountType());
         if(creditCardType.equals(CreditCardType.BRONZE)){
             return new CreditCardAccount(new BronzeCreditCardCalcuclator(), creditCardType);
         }else if(creditCardType.equals(CreditCardType.SILVER)){

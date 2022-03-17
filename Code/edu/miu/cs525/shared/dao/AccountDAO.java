@@ -1,4 +1,6 @@
-package edu.miu.cs525.shared;
+package edu.miu.cs525.shared.dao;
+
+import edu.miu.cs525.shared.Account;
 
 import java.util.Collection;
 

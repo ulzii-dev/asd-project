@@ -1,10 +1,11 @@
 package edu.miu.cs525.shared;
 
-import edu.miu.cs525.shared.builder.AccountData;
+import edu.miu.cs525.shared.builder.AccountDTO;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.Observable;
 import edu.miu.cs525.framework.constant.AccountOperationConstant;
 import edu.miu.cs525.framework.ui.pages.UIFrame;
+import edu.miu.cs525.shared.dao.AccountDAO;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,21 +23,22 @@ public abstract class AccountService implements Observable {
 		UIFrame.getInstance().setSubject(this);
 	}
 
-	public abstract Account createAccountFactory(AccountData accountData);
+	public abstract Account createAccountFactory(AccountDTO accountDTO);
 
-	public final void createAccount(AccountData accountData) {
+	public final void createAccount(AccountDTO accountDTO) {
 		try {
-			Account account = prepareAccount(createAccountFactory(accountData), accountData);
+			Account account = prepareAccount(createAccountFactory(accountDTO), accountDTO);
 			accountDAO.create(account);
+			Log.getLogger().write("Account Created Successfully for Customer: " + account.getCustomer().getName());
 			notifyObservers();
 		} catch (UnsupportedOperationException ex){
 			ex.printStackTrace();
 		}
 	}
 
-	protected final Account prepareAccount(Account account, AccountData accountData){
-		account.setAccountNumber(accountData.getAccountNumber());
-		account.setCustomer(accountData.getCustomer());
+	protected final Account prepareAccount(Account account, AccountDTO accountDTO){
+		account.setAccountNumber(accountDTO.getAccountNumber());
+		account.setCustomer(accountDTO.getCustomer());
 		return account;
 	}
 

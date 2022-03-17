@@ -1,4 +1,4 @@
-package edu.miu.cs525.shared;
+package edu.miu.cs525.shared.domain;
 
 import java.time.LocalDate;
 

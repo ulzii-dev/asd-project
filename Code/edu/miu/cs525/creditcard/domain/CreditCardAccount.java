@@ -2,7 +2,7 @@ package edu.miu.cs525.creditcard.domain;
 
 import edu.miu.cs525.banking.visitor.Visitor;
 import edu.miu.cs525.shared.Account;
-import edu.miu.cs525.shared.AccountEntry;
+import edu.miu.cs525.shared.domain.AccountEntry;
 import edu.miu.cs525.creditcard.constant.CreditCardType;
 import edu.miu.cs525.creditcard.strategy.CreditCardCalculator;
 

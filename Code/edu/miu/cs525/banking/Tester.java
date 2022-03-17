@@ -1,9 +1,10 @@
 package edu.miu.cs525.banking;
 
-import edu.miu.cs525.shared.builder.AccountData;
+import edu.miu.cs525.shared.builder.AccountDTO;
 import edu.miu.cs525.banking.service.BankAccountServiceImpl;
 import edu.miu.cs525.shared.*;
 import edu.miu.cs525.framework.domain.PersonalAccount;
+import edu.miu.cs525.shared.domain.AccountEntry;
 import edu.miu.cs525.shared.domain.Customer;
 
 import java.time.LocalDate;
@@ -17,17 +18,17 @@ public class Tester {
         Customer sabi = new PersonalAccount(2, "Sabi Shresthaq", "147 Hillcrest Avenue",
                 "West Hartford", "Connecticut", 06110, "care.sabi@gmail.com", LocalDate.of(2020, 10, 10));
         // create 2 accounts;
-        AccountData accountData1 = AccountData.builder()
+        AccountDTO accountDTO1 = AccountDTO.builder()
                 .accountNumber("1263862")
                 .accountType("SAVINGS")
                 .customer(renuka).build();
 
-        AccountData accountData2 = AccountData.builder()
+        AccountDTO accountDTO2 = AccountDTO.builder()
                 .accountNumber("4253892")
                 .accountType("CHECKING")
                 .customer(sabi).build();
-        accountService.createAccount(accountData1);
-        accountService.createAccount(accountData2);
+        accountService.createAccount(accountDTO1);
+        accountService.createAccount(accountDTO2);
         // use account 1;
         accountService.deposit("1263862", 240);
         accountService.deposit("1263862", 529);

@@ -9,10 +9,10 @@ public class AccountBuilder {
 
     public AccountBuilder(){}
 
-    public AccountBuilder(AccountData accountData){
-        this.accountNumber = accountData.getAccountNumber();
-        this.accountType = accountData.getAccountType();
-        this.customer = accountData.getCustomer();
+    public AccountBuilder(AccountDTO accountDTO){
+        this.accountNumber = accountDTO.getAccountNumber();
+        this.accountType = accountDTO.getAccountType();
+        this.customer = accountDTO.getCustomer();
     }
 
     public AccountBuilder accountNumber(String accountNumber){
@@ -30,11 +30,11 @@ public class AccountBuilder {
         return this;
     }
 
-    public AccountData build(){
-        AccountData accountData = new AccountData();
-        accountData.setAccountType(accountType);
-        accountData.setAccountNumber(accountNumber);
-        accountData.setCustomer(customer);
-        return accountData;
+    public AccountDTO build(){
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setAccountType(accountType);
+        accountDTO.setAccountNumber(accountNumber);
+        accountDTO.setCustomer(customer);
+        return accountDTO;
     }
 }

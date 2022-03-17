@@ -4,7 +4,7 @@ import edu.miu.cs525.shared.domain.Customer;
 
 import java.io.Serializable;
 
-public class AccountData implements Serializable {
+public class AccountDTO implements Serializable {
     private String accountNumber;
     private String accountType;
     private Customer customer;

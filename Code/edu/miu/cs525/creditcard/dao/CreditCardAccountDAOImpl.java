@@ -1,7 +1,7 @@
 package edu.miu.cs525.creditcard.dao;
 
 import edu.miu.cs525.shared.Account;
-import edu.miu.cs525.shared.AccountDAO;
+import edu.miu.cs525.shared.dao.AccountDAO;
 import edu.miu.cs525.shared.Log;
 
 import java.util.ArrayList;

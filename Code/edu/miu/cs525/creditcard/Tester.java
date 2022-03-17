@@ -1,9 +1,10 @@
 package edu.miu.cs525.creditcard;
 
 import edu.miu.cs525.shared.*;
-import edu.miu.cs525.shared.builder.AccountData;
+import edu.miu.cs525.shared.builder.AccountDTO;
 import edu.miu.cs525.creditcard.service.CreditCardAccountServiceImpl;
 import edu.miu.cs525.framework.domain.CompanyAccount;
+import edu.miu.cs525.shared.domain.AccountEntry;
 import edu.miu.cs525.shared.domain.Customer;
 
 public class Tester {
@@ -15,18 +16,18 @@ public class Tester {
         Customer apple = new CompanyAccount(2, "Apple", "147 Hillcrest Avenue",
                 "West Hartford", "Connecticut", 06110, "apple@apple.com", 12323);
         // create 2 accounts;
-        AccountData accountData1 = AccountData.builder()
+        AccountDTO accountDTO1 = AccountDTO.builder()
                 .accountNumber("1263862")
                 .accountType("GOLD")
                 .customer(microsoft).build();
 
-        AccountData accountData2 = AccountData.builder()
+        AccountDTO accountDTO2 = AccountDTO.builder()
                 .accountNumber("4253892")
                 .accountType("SILVER")
                 .customer(apple).build();
 
-        accountService.createAccount(accountData1);
-        accountService.createAccount(accountData2);
+        accountService.createAccount(accountDTO1);
+        accountService.createAccount(accountDTO2);
         // use account 1;
         accountService.deposit("1263862", 240);
         accountService.deposit("1263862", 529);

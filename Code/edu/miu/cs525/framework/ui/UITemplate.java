@@ -1,6 +1,6 @@
 package edu.miu.cs525.framework.ui;
 
-import edu.miu.cs525.banking.commands.NoCommand;
+import edu.miu.cs525.shared.utils.NoCommand;
 import edu.miu.cs525.framework.Command;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.Map;
 
-public abstract class FormTemplate extends JFrame {
+public abstract class UITemplate extends JFrame {
     protected boolean newAccount;
     protected DefaultTableModel model;
     protected JTable JTable1;

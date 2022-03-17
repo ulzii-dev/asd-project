@@ -1,4 +1,4 @@
-package edu.miu.cs525.banking.commands;
+package edu.miu.cs525.shared.utils;
 
 import edu.miu.cs525.framework.Command;
 import edu.miu.cs525.framework.ui.UIControl;

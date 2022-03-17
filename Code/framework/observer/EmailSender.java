@@ -42,11 +42,11 @@ public class EmailSender implements Observer {
                     AccountTransaction transaction = it.next();
 
                     if (account.getCustomer() instanceof CompanyAccount) {
-                        Log.getLogger().write("    " + index + ". CompanyAccount" + ": " + account.getCustomer().getName() + " [" + account.getAccountNumber() + "]");
+                        Log.getLogger().write("    " + index + ". CompanyAccount" + ": " + account.getCustomer().getName() + " [AccNO: " + account.getAccountNumber() + "]");
                         Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
                         Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
                     } else if ((account.getCustomer() instanceof PersonalAccount && account.getBalance() < 0) || (account.getCustomer() instanceof PersonalAccount && transaction.getTranxAmount() > 500)) {
-                        Log.getLogger().write("    " + index + ". PersonalAccount" + ": " + account.getCustomer().getName() + " [" + account.getAccountNumber() + "]");
+                        Log.getLogger().write("    " + index + ". PersonalAccount" + ": " + account.getCustomer().getName() + " [AccNo: " + account.getAccountNumber() + "]");
                         Log.getLogger().write("       Sending email to => " + account.getCustomer().getEmail() + " | " + transaction);
                         Log.getLogger().write(account.getBalance() < 0 ? "       ❌ Negative BALANCE ❌" : "");
                     }

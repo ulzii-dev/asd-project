@@ -88,6 +88,11 @@ public class UIFrame extends FormTemplate implements UIControl, framework.Observ
 		return amount;
 	}
 
+	@Override
+	public String generateReport(String accountNumber) {
+		return null;
+	}
+
 	private final ActionListener exit = (ActionListener) -> {
 		System.exit(0);
 	};

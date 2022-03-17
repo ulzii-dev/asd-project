@@ -21,6 +21,7 @@ public class BankingAccountService extends AccountService {
 
     private BankingAccountService() {
         super(BankingAccountDAO.getInstance());
+        setCheckBalance(500);
         this.registerObserver(new EmailSender(this));
     }
 

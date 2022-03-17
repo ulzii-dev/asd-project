@@ -16,6 +16,7 @@ public class CreditCardAccountService extends AccountService {
 
     private CreditCardAccountService() {
         super(new CreditCardAccountDAO());
+        setCheckBalance(400);
         this.registerObserver(new EmailSender(this));
     }
 

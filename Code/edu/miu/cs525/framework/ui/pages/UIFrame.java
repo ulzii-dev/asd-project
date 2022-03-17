@@ -120,7 +120,7 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	};
 
 	private final ActionListener depositActionListener = (ActionListener) -> {
-	int selection = JTable1.getSelectionModel().getSelectedIndices()[0];
+	int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 	if (selection >= 0) {
 		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
 		openDialog(new Deposit(uiFrame, accnr));

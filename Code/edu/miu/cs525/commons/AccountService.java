@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class AccountService implements Observable {
+	private int checkBalance = 0;
 	private final AccountDAO accountDAO;
 	protected AccountOperationConstant accountOperationConstant;
 	private List<Observer> observerList;
@@ -56,7 +57,6 @@ public abstract class AccountService implements Observable {
 			Log.getLogger().write("deposited");
 		}
 	}
-
 
 	public void withdraw(String accountNumber, double amount) {
 		Account account = accountDAO.getAccountByAccountNumber(accountNumber);
@@ -121,17 +121,25 @@ public abstract class AccountService implements Observable {
 		accountDAO.update(toAccount);
 	}
 
+	public void setCheckBalance(int checkBalance) {
+		this.checkBalance = checkBalance;
+	}
+
+	public int getCheckBalance(){
+		return checkBalance;
+	}
+
 	public AccountOperationConstant getAccountOperationConstant() {
 		return accountOperationConstant;
 	}
 
 	@Override
-	public void registerObserver(edu.miu.cs525.framework.Observer observer) {
+	public void registerObserver(Observer observer) {
 		this.observerList.add(observer);
 	}
 
 	@Override
-	public void removeObserver(edu.miu.cs525.framework.Observer observer) {
+	public void removeObserver(Observer observer) {
 		this.observerList.remove(observer);
 	}
 

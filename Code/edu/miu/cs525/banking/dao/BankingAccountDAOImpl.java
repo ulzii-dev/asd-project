@@ -1,21 +1,21 @@
 package edu.miu.cs525.banking.dao;
 
-import edu.miu.cs525.commons.Account;
-import edu.miu.cs525.commons.AccountDAO;
-import edu.miu.cs525.commons.Log;
+import edu.miu.cs525.shared.Account;
+import edu.miu.cs525.shared.dao.AccountDAO;
+import edu.miu.cs525.shared.log.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BankingAccountDAO implements AccountDAO {
-    private static volatile BankingAccountDAO instance;
+public class BankingAccountDAOImpl implements AccountDAO {
+    private static volatile BankingAccountDAOImpl instance;
     Collection<Account> accountlist = new ArrayList<>();
 
-    public static BankingAccountDAO getInstance() {
+    public static BankingAccountDAOImpl getInstance() {
         if (instance == null) {
-            synchronized (BankingAccountDAO.class) {
+            synchronized (BankingAccountDAOImpl.class) {
                 if (instance == null) {
-                    instance = new BankingAccountDAO();
+                    instance = new BankingAccountDAOImpl();
                 }
             }
         }
@@ -25,15 +25,17 @@ public class BankingAccountDAO implements AccountDAO {
     @Override
     public void create(Account account) {
         accountlist.add(account);
-        Log.getLogger().write("Account Created with AccountNumber: " + account.getAccountNumber() + ", CustomerName: " + account.getCustomer().getName());
+        Log.getLogger().write("Account Created with AccountNumber: " + account.getAccountNumber() +
+                ", CustomerName: " +
+                account.getCustomer().getName());
     }
 
     @Override
     public void update(Account account) {
         Account isAccountExist = getAccountByAccountNumber(account.getAccountNumber());
         if (isAccountExist != null) {
-            accountlist.remove(isAccountExist);
-            accountlist.add(account);
+            accountlist.remove(isAccountExist); // REMOVES THE OLD
+            accountlist.add(account); // add the new
         }
         Log.getLogger().write("Updating account " + account.getAccountNumber() + " for customer " + account.getCustomer().getName());
     }
@@ -45,7 +47,6 @@ public class BankingAccountDAO implements AccountDAO {
                 return account;
             }
         }
-
         return null;
     }
 

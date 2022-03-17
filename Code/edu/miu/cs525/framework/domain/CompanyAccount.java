@@ -1,6 +1,6 @@
 package edu.miu.cs525.framework.domain;
 
-import edu.miu.cs525.commons.Customer;
+import edu.miu.cs525.shared.domain.Customer;
 
 public class CompanyAccount extends Customer {
     private int numOfEmployee;

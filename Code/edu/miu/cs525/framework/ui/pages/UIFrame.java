@@ -1,11 +1,12 @@
 package edu.miu.cs525.framework.ui.pages;
 
-import edu.miu.cs525.commons.Log;
+
+import edu.miu.cs525.shared.log.Log;
 import edu.miu.cs525.banking.commands.NoCommand;
-import edu.miu.cs525.commons.Account;
-import edu.miu.cs525.commons.AccountService;
-import edu.miu.cs525.commons.Customer;
-import edu.miu.cs525.framework.AccountOperationConstant;
+import edu.miu.cs525.shared.Account;
+import edu.miu.cs525.shared.AccountService;
+import edu.miu.cs525.shared.domain.Customer;
+import edu.miu.cs525.framework.constant.AccountOperationConstant;
 import edu.miu.cs525.framework.Command;
 import edu.miu.cs525.framework.Observer;
 import edu.miu.cs525.framework.ui.FormTemplate;
@@ -57,6 +58,7 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	private UIConfig uiConfig;
 	private static volatile UIFrame uiFrame;
 
+
 	private UIFrame() {
 		this.addPersonalAccountCommand = new NoCommand();
 		this.addCompanyAccountCommand = new NoCommand();
@@ -69,7 +71,7 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 
 	public static UIFrame getInstance() {
 		if (uiFrame == null) {
-			synchronized (AccountService.class) {
+			synchronized (UIFrame.class) {
 				if (uiFrame == null) {
 					uiFrame = new UIFrame();
 				}
@@ -120,7 +122,7 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	};
 
 	private final ActionListener depositActionListener = (ActionListener) -> {
-	int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+	int selection = JTable1.getSelectionModel().getSelectedIndices()[0];
 	if (selection >= 0) {
 		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
 		openDialog(new Deposit(uiFrame, accnr));
@@ -262,6 +264,7 @@ public class UIFrame extends FormTemplate implements UIControl, Observer
 	public AccountService getSubject() {
 		return subject;
 	}
+
 
 	class SymWindow extends java.awt.event.WindowAdapter
 	{

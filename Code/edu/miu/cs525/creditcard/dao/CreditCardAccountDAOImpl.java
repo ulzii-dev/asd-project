@@ -1,21 +1,21 @@
 package edu.miu.cs525.creditcard.dao;
 
-import edu.miu.cs525.commons.Account;
-import edu.miu.cs525.commons.AccountDAO;
-import edu.miu.cs525.commons.Log;
+import edu.miu.cs525.shared.Account;
+import edu.miu.cs525.shared.dao.AccountDAO;
+import edu.miu.cs525.shared.log.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CreditCardAccountDAO implements AccountDAO {
-    private static volatile CreditCardAccountDAO instance;
+public class CreditCardAccountDAOImpl implements AccountDAO {
+    private static volatile CreditCardAccountDAOImpl instance;
     Collection<Account> accountList = new ArrayList<>();
 
-    public static CreditCardAccountDAO getInstance() {
+    public static CreditCardAccountDAOImpl getInstance() {
         if (instance == null) {
-            synchronized (CreditCardAccountDAO.class) {
+            synchronized (CreditCardAccountDAOImpl.class) {
                 if (instance == null) {
-                    instance = new CreditCardAccountDAO();
+                    instance = new CreditCardAccountDAOImpl();
                 }
             }
         }

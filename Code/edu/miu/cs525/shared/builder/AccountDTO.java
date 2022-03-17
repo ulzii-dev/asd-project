@@ -1,8 +1,10 @@
-package edu.miu.cs525.commons.builder;
+package edu.miu.cs525.shared.builder;
 
-import edu.miu.cs525.commons.Customer;
+import edu.miu.cs525.shared.domain.Customer;
 
-public class AccountData {
+import java.io.Serializable;
+
+public class AccountDTO implements Serializable {
     private String accountNumber;
     private String accountType;
     private Customer customer;

@@ -11,6 +11,9 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.RandomAccess;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.random.RandomGenerator;
 
 public class AddPersonalAccount extends javax.swing.JDialog {
 
@@ -130,7 +133,7 @@ public class AddPersonalAccount extends javax.swing.JDialog {
 
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
         PersonalAccount person = new PersonalAccount(
-                1,
+                ThreadLocalRandom.current().nextInt(),
                 JTextField_NAME.getText(),
                 JTextField_STREET.getText(),
                 JTextField_CITY.getText(),

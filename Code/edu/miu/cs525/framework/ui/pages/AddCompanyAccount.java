@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class AddCompanyAccount extends javax.swing.JDialog {
     private final UIFrame parentframe;
@@ -129,7 +130,7 @@ public class AddCompanyAccount extends javax.swing.JDialog {
         parentframe.zip = JTextField_ZIP.getText();
         parentframe.state = JTextField_STATE.getText();
         CompanyAccount company = new CompanyAccount(
-                1,
+                ThreadLocalRandom.current().nextInt(),
                 JTextField_NAME.getText(),
                 JTextField_STREET.getText(),
                 JTextField_CITY.getText(),

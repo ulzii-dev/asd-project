@@ -2,7 +2,7 @@ package edu.miu.cs525.banking;
 
 import edu.miu.cs525.banking.constant.BankReportColumnConstant;
 import edu.miu.cs525.banking.constant.BankingAccountType;
-import edu.miu.cs525.commons.Account;
+import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.framework.domain.PersonalAccount;
 import edu.miu.cs525.framework.ui.UIConfig;
 

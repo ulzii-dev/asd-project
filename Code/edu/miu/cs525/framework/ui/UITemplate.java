@@ -1,8 +1,5 @@
 package edu.miu.cs525.framework.ui;
 
-import edu.miu.cs525.shared.utils.NoCommand;
-import edu.miu.cs525.framework.Command;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -21,7 +18,7 @@ public abstract class UITemplate extends JFrame {
     public final void generateFormTemplate(String title,
                                            UIConfig uIConfig,
                                            Map<String, ActionListener> buttons) {
-        setupJPanel(title, uIConfig.getReportColumnNames());
+        setUpJPanel(title, uIConfig.getReportColumnNames());
         pSetSize();
         panelBounds();
         scrollPanelBounds();
@@ -30,7 +27,7 @@ public abstract class UITemplate extends JFrame {
         notCommon();
     }
 
-    private void setupJPanel(String title, Collection<String> columns) {
+    private void setUpJPanel(String title, Collection<String> columns) {
         JPanel1 = new JPanel();
         setTitle(title);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -62,13 +59,6 @@ public abstract class UITemplate extends JFrame {
             btn.addActionListener(button.getValue());
             setBtnBounds(btn, y);
             y += yIncrementBy();
-        }
-    }
-
-    private void initCommands(Collection<Command> commands) {
-        for (Command command :
-                commands) {
-            command = new NoCommand();
         }
     }
 

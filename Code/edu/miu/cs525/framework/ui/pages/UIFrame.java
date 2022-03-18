@@ -40,6 +40,8 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	private String accountNumber;
 	private String accountType;
 
+	private GenerateReport report;
+
 	JPanel JPanel1 = new JPanel();
 
 	/****
@@ -87,15 +89,12 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 		buttons.put("Deposit", depositActionListener);
 		buttons.put("Withdraw", withdrawActionListener);
 		buttons.put("Add Interest", addInterestActionListener);
+		buttons.put("Generate Report", generateBillActionListener);
 
 		buttons.put("Exit",exit);
 		this.uiConfig = uiConfig;
 		this.accountTypes = this.uiConfig.getAccountTypes();
 		generateFormTemplate(title,uiConfig,buttons);
-	}
-
-	public String getAmount() {
-		return amount;
 	}
 
 	private final ActionListener exit = (ActionListener) -> {
@@ -122,7 +121,7 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	};
 
 	private final ActionListener depositActionListener = (ActionListener) -> {
-	int selection = JTable1.getSelectionModel().getSelectedIndices()[0];
+	int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 	if (selection >= 0) {
 		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
 		openDialog(new Deposit(uiFrame, accnr));
@@ -140,6 +139,20 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 			this.withdrawCommand.execute(this);
 		} else {
 			Log.getLogger().write("Need to select row to WITHDRAW!");
+		}
+	};
+
+	private final ActionListener generateBillActionListener = (ActionListener) -> {
+		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+		if (selection >= 0) {
+			String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
+			GenerateReport gr = new GenerateReport();
+			setReport(gr);
+			setAccountNumber(accnr);
+			this.reportCommand.execute(this);
+			openDialog(gr,450, 20, 860, 760);
+		} else {
+			Log.getLogger().write("Need to select row to GENERATE REPORT!");
 		}
 	};
 
@@ -209,6 +222,14 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	public void setReport(GenerateReport gr) {
+		report = gr;
+	}
+
+	public GenerateReport getReportUI(){
+		return report;
 	}
 
 	@Override
@@ -306,4 +327,10 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	public AccountOperationConstant getAccountOperationCategory() {
 		return accountOperationCategory;
 	}
+
+	public String getAmount() {
+		return amount;
+	}
+
+
 }

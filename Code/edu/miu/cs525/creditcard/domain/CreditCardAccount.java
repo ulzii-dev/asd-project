@@ -1,29 +1,22 @@
 package edu.miu.cs525.creditcard.domain;
 
 import edu.miu.cs525.banking.visitor.Visitor;
-import edu.miu.cs525.framework.observer.ChargeEmailSender;
 import edu.miu.cs525.shared.Account;
 import edu.miu.cs525.shared.domain.AccountEntry;
 import edu.miu.cs525.creditcard.constant.CreditCardType;
 import edu.miu.cs525.creditcard.strategy.CreditCardCalculator;
-import edu.miu.cs525.framework.Observable;
-import edu.miu.cs525.framework.Observer;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-public class CreditCardAccount extends Account implements Observable {
+import java.time.LocalDate;
+
+public class CreditCardAccount extends Account {
     LocalDate todayDate = LocalDate.now();
     CreditCardCalculator creditCardCalculator;
     CreditCardType creditCardType;
-    private List<Observer> observerList;
 
     public CreditCardAccount(CreditCardCalculator creditCardCalculator, CreditCardType creditCardType) {
         super(creditCardCalculator);
         this.creditCardCalculator =  creditCardCalculator;
         this.creditCardType =  creditCardType;
-        this.observerList = new ArrayList<>();
-        this.registerObserver(new ChargeEmailSender(this));
     }
 
     @Override
@@ -59,16 +52,12 @@ public class CreditCardAccount extends Account implements Observable {
         double totalCharges = 0;
         for (AccountEntry accountEntry : getAccountEntries()) {
             if (accountEntry.getDate().isAfter(todayDate.withDayOfMonth(1))) {
-                if (accountEntry.getAmount() < 0) {
+                if (accountEntry.getAmount() >= 0) {
                     totalCharges += accountEntry.getAmount();
                 }
             }
         }
 
-        System.out.println("Total Charges:" + totalCharges);
-        if(totalCharges > 400) {
-            notifyObservers();
-        }
         return totalCharges;
     }
 
@@ -81,7 +70,7 @@ public class CreditCardAccount extends Account implements Observable {
     }
 
     public double getMonthlyMinimumPayment() {
-        return this.creditCardCalculator.computeMonthlyMinimumPayment(getNewBalance());
+        return this.creditCardCalculator.computeMonthlyMinimumPayment(getTotalCredit());
     }
 
     public double getMonthlyInterest() {
@@ -91,20 +80,5 @@ public class CreditCardAccount extends Account implements Observable {
     @Override
     public String getAccountType() {
         return creditCardType.name();
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observerList.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observerList.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        observerList.forEach(Observer::update);
     }
 }

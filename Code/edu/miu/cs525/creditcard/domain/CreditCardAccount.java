@@ -13,18 +13,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreditCardAccount extends Account implements Observable {
+public class CreditCardAccount extends Account {
     LocalDate todayDate = LocalDate.now();
     CreditCardCalculator creditCardCalculator;
     CreditCardType creditCardType;
-    private List<Observer> observerList;
 
     public CreditCardAccount(CreditCardCalculator creditCardCalculator, CreditCardType creditCardType) {
         super(creditCardCalculator);
         this.creditCardCalculator =  creditCardCalculator;
         this.creditCardType =  creditCardType;
-        this.observerList = new ArrayList<>();
-        this.registerObserver(new ChargeEmailSender(this));
     }
 
     @Override
@@ -66,9 +63,6 @@ public class CreditCardAccount extends Account implements Observable {
             }
         }
 
-        if(totalCharges > 400) {
-            notifyObservers();
-        }
         return totalCharges;
     }
 
@@ -91,20 +85,5 @@ public class CreditCardAccount extends Account implements Observable {
     @Override
     public String getAccountType() {
         return creditCardType.name();
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observerList.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observerList.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        observerList.forEach(Observer::update);
     }
 }

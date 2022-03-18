@@ -160,9 +160,7 @@ public abstract class AccountService implements Observable {
 			}
 
 			sb.append(generateReportRows(dailyAccountEntities));
-			System.out.println(dailyAccountEntities);
 		} else {
-			System.out.println(account);
 			CreditCardAccount creditCardAccount = (CreditCardAccount)account;
 			sb.append("Previous balance: " + creditCardAccount.getPreviousBalance() + "\n");
 			sb.append("New balance: " + creditCardAccount.getNewBalance() + "\n");

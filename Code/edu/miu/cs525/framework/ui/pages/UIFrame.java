@@ -143,10 +143,17 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	};
 
 	private final ActionListener generateBillActionListener = (ActionListener) -> {
-		GenerateReport gr = new GenerateReport();
-		setReport(gr);
-		this.reportCommand.execute(this);
-		openDialog(gr,450, 20, 860, 760);
+		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+		if (selection >= 0) {
+			String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
+			GenerateReport gr = new GenerateReport();
+			setReport(gr);
+			setAccountNumber(accnr);
+			this.reportCommand.execute(this);
+			openDialog(gr,450, 20, 860, 760);
+		} else {
+			Log.getLogger().write("Need to select row to GENERATE REPORT!");
+		}
 	};
 
 	void exitApplication(){

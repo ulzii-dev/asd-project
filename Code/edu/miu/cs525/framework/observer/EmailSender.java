@@ -25,6 +25,9 @@ public class EmailSender implements Observer {
 
     @Override
     public void update() {
+        Map<Account, ArrayList<AccountTransaction>> accountTransactions = accountService.getAccountTransactions();
+        if(accountTransactions.size() == 0) return;
+
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
@@ -32,7 +35,7 @@ public class EmailSender implements Observer {
         sb.append(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Sending transaction emails ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n");
         sb.append("|                                                                                       |\n");
 
-        for (Map.Entry<Account, ArrayList<AccountTransaction>> entry : accountService.getAccountTransactions().entrySet()) {
+        for (Map.Entry<Account, ArrayList<AccountTransaction>> entry : accountTransactions.entrySet()) {
             Account account = entry.getKey();
             List<AccountTransaction> transactions = entry.getValue();
 

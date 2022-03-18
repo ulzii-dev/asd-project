@@ -48,15 +48,11 @@ public abstract class Account {
 	}
 
 	public void deposit(double amount) {
-//		day++;
-//		AccountEntry entry = new AccountEntry(amount, "deposit", "", "", day);
 		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
 		accountEntries.add(entry);
 	}
 
 	public void withdraw(double amount) {
-//		day++;
-//		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "", day);
 		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "");
 		accountEntries.add(entry);
 	}

@@ -1,6 +1,7 @@
 package edu.miu.cs525.banking.service;
 
 import edu.miu.cs525.framework.ui.pages.GenerateReport;
+import edu.miu.cs525.shared.ApplicationMessageConstant;
 import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.banking.constant.BankingAccountType;
 import edu.miu.cs525.banking.domain.CheckingAccount;
@@ -46,17 +47,20 @@ public class BankAccountServiceImpl extends AccountService {
 
     private Account getConcreteAccountObject(Customer customer, BankingAccountType bankAccountType) {
         if (customer instanceof PersonalAccount) {
-            return (bankAccountType == BankingAccountType.CHECKING) ? new CheckingAccount(new PersonalCheckingAccountInterestComputation()) : new SavingsAccount(new PersonalSavingsAccountInterestComputation());
+            return (bankAccountType == BankingAccountType.CHECKING) ?
+                    new CheckingAccount(new PersonalCheckingAccountInterestComputation()) :
+                    new SavingsAccount(new PersonalSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
-            return (bankAccountType == BankingAccountType.CHECKING) ? new CheckingAccount(new CompanyCheckingAccountInterestComputation()) : new SavingsAccount(new CompanySavingsAccountInterestComputation());
+            return (bankAccountType == BankingAccountType.CHECKING) ?
+                    new CheckingAccount(new CompanyCheckingAccountInterestComputation()) :
+                    new SavingsAccount(new CompanySavingsAccountInterestComputation());
         }
-        throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
+        throw new UnsupportedOperationException(ApplicationMessageConstant.ExceptionMessage.INVALID_ACCOUNT_TYPE);
     }
 
     public static void createReport(String accountNumber, GenerateReport generateReport) {
         Account account = instance.getAccount(accountNumber);
         instance.generateReport(account, generateReport, true);
     }
-
 
 }

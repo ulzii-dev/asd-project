@@ -37,7 +37,6 @@ public abstract class AccountService implements Observable {
 		try {
 			Account account = prepareAccount(createAccountFactory(accountDTO), accountDTO);
 			accountDAO.create(account);
-			Log.getLogger().write("Account Created Successfully for Customer: " + account.getCustomer().getName());
 			notifyObservers();
 		} catch (UnsupportedOperationException ex){
 			ex.printStackTrace();
@@ -94,9 +93,6 @@ public abstract class AccountService implements Observable {
 	}
 
 	public Account getAccount(String accountNumber) {
-		System.out.println("dao :: " + accountDAO);
-		System.out.println("----------");
-		Account account =  accountDAO.getAccountByAccountNumber(accountNumber);
 		return accountDAO.getAccountByAccountNumber(accountNumber);
 	}
 

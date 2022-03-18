@@ -17,7 +17,7 @@ public class ChargeEmailSender implements Observer {
             Log.getLogger().write(" ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ Charge the Account ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ ");
             Log.getLogger().write("|                                                                                       |");
             Log.getLogger().write(account.getCustomer().getName() + " [AccNo: " + account.getAccountNumber() + "]");
-            Log.getLogger().write("Balance: " + account.getNewBalance());
+            Log.getLogger().write("Balance: " + account.getBalance());
             Log.getLogger().write("|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ End of Charge the Account ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿|");
         }
     }

@@ -87,10 +87,6 @@ public abstract class AccountService implements Observable {
 		updatedAccountList.clear();
 	}
 
-	public Account getAccount(String accountNumber) {
-		return accountDAO.getAccountByAccountNumber(accountNumber);
-	}
-
 	public Collection<Account> getAllAccounts() {
 		return accountDAO.getAccounts();
 	}
@@ -109,14 +105,6 @@ public abstract class AccountService implements Observable {
 		return getAllAccounts().stream()
 				.map(Account::getAccountNumber)
 				.collect(Collectors.toCollection(ArrayList::new));
-	}
-
-	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
-		Account fromAccount = accountDAO.getAccountByAccountNumber(fromAccountNumber);
-		Account toAccount = accountDAO.getAccountByAccountNumber(toAccountNumber);
-		fromAccount.transferFunds(toAccount, amount, description);
-		accountDAO.update(fromAccount);
-		accountDAO.update(toAccount);
 	}
 
 	public AccountOperationConstant getAccountOperationConstant() {

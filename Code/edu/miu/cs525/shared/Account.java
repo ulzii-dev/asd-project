@@ -36,6 +36,14 @@ public abstract class Account {
 		this.accountNumber = accountNumber;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	public double getBalance() {
 		double balance = 0;
 		for (AccountEntry entry : accountEntries) {
@@ -58,17 +66,6 @@ public abstract class Account {
 		accountEntries.add(entry);
 	}
 
-	public void transferFunds(Account toAccount, double amount, String description) {
-		AccountEntry fromEntry = new AccountEntry(-amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		
-		accountEntries.add(fromEntry);
-		
-		toAccount.addEntry(toEntry);
-	}
-
 	public double addInterest(){
 		double interest =  interestComputationStrategy.computeInterest(getBalance());
 		AccountEntry entry =  new AccountEntry(interest,"interest added","","");
@@ -81,24 +78,11 @@ public abstract class Account {
 		accountEntries.add(entry);
 		return interest;
 	}
-	public abstract double accept(Visitor visitor);
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 
 	public Collection<AccountEntry> getAccountEntries() {
 		return accountEntries;
 	}
 
 	public abstract String getAccountType();
-
-	public void setAccountType(String accountType){
-		this.accountType = accountType;
-	}
 
 }

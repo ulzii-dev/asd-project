@@ -35,9 +35,7 @@ public class Tester {
         accountService.withdraw("1263862", 230);
         // use account 2;
         accountService.deposit("4253892", 12450);
-        accountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
         // show balances
-
         for (Account account : accountService.getAllAccounts()) {
             Customer customer = account.getCustomer();
             Log.getLogger().write("Statement for Account: " + account.getAccountNumber());

@@ -46,15 +46,9 @@ public class BankAccountServiceImpl extends AccountService {
 
     private Account getConcreteAccountObject(Customer customer, BankingAccountType bankAccountType) {
         if (customer instanceof PersonalAccount) {
-            if (bankAccountType == BankingAccountType.CHECKING) {
-                return new CheckingAccount(new PersonalCheckingAccountInterestComputation());
-            }
-            return new SavingsAccount(new PersonalSavingsAccountInterestComputation());
+            return (bankAccountType == BankingAccountType.CHECKING) ? new CheckingAccount(new PersonalCheckingAccountInterestComputation()) : new SavingsAccount(new PersonalSavingsAccountInterestComputation());
         } else if(customer instanceof CompanyAccount) {
-            if (bankAccountType == BankingAccountType.CHECKING) {
-                return new CheckingAccount(new CompanyCheckingAccountInterestComputation());
-            }
-            return new SavingsAccount(new CompanySavingsAccountInterestComputation());
+            return (bankAccountType == BankingAccountType.CHECKING) ? new CheckingAccount(new CompanyCheckingAccountInterestComputation()) : new SavingsAccount(new CompanySavingsAccountInterestComputation());
         }
         throw new UnsupportedOperationException("Invalid Account Type! Please Insert valid Account Type");
     }

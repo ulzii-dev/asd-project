@@ -120,14 +120,6 @@ public abstract class AccountService implements Observable {
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	public void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description) {
-		Account fromAccount = accountDAO.getAccountByAccountNumber(fromAccountNumber);
-		Account toAccount = accountDAO.getAccountByAccountNumber(toAccountNumber);
-		fromAccount.transferFunds(toAccount, amount, description);
-		accountDAO.update(fromAccount);
-		accountDAO.update(toAccount);
-	}
-
 	public void setPersonalAccountTransferAlertBalance(int checkingBalance) {
 		this.personalAccountTransferAlertBalance = checkingBalance;
 	}
@@ -154,6 +146,7 @@ public abstract class AccountService implements Observable {
 		Log.getLogger().write("REPORT GENERATING HAS STARTED !!!");
 		Log.getLogger().write(account.toString());
 		StringBuilder sb = new StringBuilder();
+		sb.append("Account: " + account.getCustomer().getName());
 
 		if(isBankingSystem) {
 			HashMap<LocalDate, List<AccountEntry>> dailyAccountEntities = new HashMap();
@@ -207,12 +200,12 @@ public abstract class AccountService implements Observable {
 	}
 
 	@Override
-	public void registerObserver(edu.miu.cs525.framework.Observer observer) {
+	public void registerObserver(Observer observer) {
 		this.observerList.add(observer);
 	}
 
 	@Override
-	public void removeObserver(edu.miu.cs525.framework.Observer observer) {
+	public void removeObserver(Observer observer) {
 		this.observerList.remove(observer);
 	}
 

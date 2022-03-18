@@ -65,17 +65,6 @@ public abstract class Account {
 		accountEntries.add(entry);
 	}
 
-	public void transferFunds(Account toAccount, double amount, String description) {
-//		AccountEntry fromEntry = new AccountEntry(-amount, description, toAccount.getAccountNumber(),
-//				toAccount.getCustomer().getName());
-//		AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
-//				toAccount.getCustomer().getName());
-//
-//		accountEntries.add(fromEntry);
-//
-//		toAccount.addEntry(toEntry);
-	}
-
 	public double addInterest(){
 		double interest =  interestComputationStrategy.computeInterest(getBalance());
 		AccountEntry entry =  new AccountEntry(interest,"interest added","","");

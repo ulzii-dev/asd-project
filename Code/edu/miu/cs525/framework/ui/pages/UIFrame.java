@@ -97,11 +97,6 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 		generateFormTemplate(title,uiConfig,buttons);
 	}
 
-	public String getAmount() {
-		return amount;
-	}
-
-
 	private final ActionListener exit = (ActionListener) -> {
 		System.exit(0);
 	};
@@ -126,7 +121,7 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	};
 
 	private final ActionListener depositActionListener = (ActionListener) -> {
-	int selection = JTable1.getSelectionModel().getSelectedIndices()[0];
+	int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 	if (selection >= 0) {
 		String accnr = (String) model.getValueAt(selection, uiConfig.getIdColumnIndex());
 		openDialog(new Deposit(uiFrame, accnr));
@@ -325,4 +320,10 @@ public class UIFrame extends UITemplate implements UIControl, Observer
 	public AccountOperationConstant getAccountOperationCategory() {
 		return accountOperationCategory;
 	}
+
+	public String getAmount() {
+		return amount;
+	}
+
+
 }

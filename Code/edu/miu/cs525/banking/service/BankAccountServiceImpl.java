@@ -1,7 +1,7 @@
 package edu.miu.cs525.banking.service;
 
 import edu.miu.cs525.framework.ui.pages.GenerateReport;
-import edu.miu.cs525.shared.ApplicationMessageConstant;
+import edu.miu.cs525.shared.utils.ApplicationMessageConstant;
 import edu.miu.cs525.shared.dto.AccountDTO;
 import edu.miu.cs525.banking.constant.BankingAccountType;
 import edu.miu.cs525.banking.domain.CheckingAccount;

@@ -83,3 +83,10 @@ Cs525: Project 2
    - Each command in the UI is a command and will execute the service: AddNewPersonalCommand, AddNewCompanyCommand, DepositCommand, WithdrawCommand, AddIntersestCommand, ReportCommand
    - Main Form is the Invoker, the AccounService is the receiver to implement the action of the execute command.
 
+
+# Collaborators
+1. Saruul-Ulzii Sampilnorov
+2. Bijay Shrestha
+3. Hussein Mazaar
+4. Yohannes Woldemichael
+5. Suraphel
